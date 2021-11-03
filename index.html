@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html ng-app="listaTelefonica">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lista telefônica</title>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+  <style>
+    .jumbotron {
+      width: 800px;
+      margin-top: 30px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .table {
+      margin-top: 20px;
+    }
+
+    h2 {
+      margin-bottom: 70px;
+      text-align: center;
+    }
+
+    .form-control {
+      margin-bottom: 10px;
+    }
+
+    button {
+      height: 40px;
+    }
+
+    .selecionado {
+      background-color: rgb(231, 231, 44);
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+  </style>
+  <script src="/lib/angular/angular.js"></script>
+  <script>
+    const app = angular.module('listaTelefonica', [])
+    app.controller('listaTelefonicaCtrl', function ($scope, $http) {
+      $scope.app = 'Lista Telefonica'
+      const loadContacts = () => {
+        $http.get("http://127.0.0.1:5500/data.js").then((data) => {
+          $scope.contacts = data.data
+        })
+      }
+      const loadOps = () => {
+        $http.get("http://127.0.0.1:5500/operators.js").then((data) => {
+          $scope.ops = data.data
+        })
+      }
+      $scope.contacts = [];
+      $scope.addContact = (contact) => {
+        contact.date = new Date()
+        $http.post("http://127.0.0.1:5500/data.js", contact).then((data) => {
+          console.log(data)
+          delete $scope.contact;
+          $scope.contactForm.$setPristine();
+        })
+      }
+      $scope.deleteContact = (contact) => {
+        $scope.contacts = $scope.contacts.filter((contact) => {
+          if (!contact.select) return contact
+        })
+      }
+      $scope.isContactSelected = (contacts) => {
+        return contacts.some(contact => {
+          return contact.select
+        })
+      }
+      $scope.alertMsg = () => {
+        alert('Olá, undefined!')
+      }
+      $scope.addUser = () => {
+        alert('Add some users!')
+      }
+      $scope.orderBy = (field) => {
+        $scope.orderFilter = field
+        $scope.direction = !$scope.direction
+      }
+      $scope.ops = []
+
+      loadContacts();
+      loadOps();
+    })
+
+  </script>
+</head>
+
+<body ng-controller='listaTelefonicaCtrl'>
+  <div class="jumbotron">
+    <h2 ng-bind="app"></h2>
+    <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
+    <table class="table" ng-show="contacts.length">
+      <tr>
+        <th></th>
+        <th><a href="" ng-click="orderBy('name')">Name</a></th>
+        <th><a href="" ng-click="orderBy('phone')">Phone</a></th>
+        <th>Operator</th>
+        <th>Color</th>
+        <th>Date</th>
+      </tr>
+      <tr ng-repeat="contact in contacts | filter:filterText | orderBy:orderFilter: direction"
+        ng-class="{ 'selecionado negrito': contact.select }">
+        <!--                               filter: {name: filterText}
+         dessa forma o filtro so iria ser aplicado para a chave nome                       
+        -->
+        <!-- <td ng-repeat="(key, value) in contact">
+          {{value}}
+        </td> -->
+        <td> <input type="checkbox" ng-model="contact.select"></td>
+        <td>{{contact.name}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.op | lowercase}}</td>
+        <td>
+          <div style="width: 20px; height: 20px;" ng-style="{'background-color': contact.color}"></div>
+        </td>
+        <td>{{contact.date | date:'dd/MM/yyyy HH:mm'}}</td>
+      </tr>
+    </table>
+    <!-- {{contacts}} -->
+    <form name="contactForm">
+      <hr>
+      <input class="form-control" type="text" ng-model="contact.name" name="name" placeholder="Name" ng-minlength="10"
+        ng-required="true">
+      <input class="form-control" type="text" ng-model="contact.phone" name="phone" placeholder="Phone"
+        ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
+      <input class="form-control" ng-model="contact.color" name="color" placeholder="Color" ng-required="true">
+      <select class="form-control" ng-model="contact.op" name="op"
+        ng-options="op.name + ' (' + (op.price | currency) + ')' for op in ops | orderBy: 'name'" ng-required="true">
+        <option value="">Select one operator </option>
+      </select>
+    </form>
+    <button ng-click="addContact(contact)" ng-disabled="contactForm.$invalid" type="submit"
+      class="btn btn-primary btn-block">Add contact</button>
+    <button ng-click="deleteContact(contact)" ng-show="isContactSelected(contacts)" type="submit"
+      class="btn btn-danger btn-block"> Delete contact</button>
+    <button ng-click="alertMsg()" ng-hide="!contacts.length" class="btn btn-primary btn-block"
+      style="margin-top: 20px;"> Message </button>
+    <button ng-click="addUser()" ng-if="!contacts.length" class="btn btn-primary btn-block"
+      style="margin-top: 20px;">Try me</button>
+    <!-- 
+        O ng-hide e o ng-show apenas removem da tela mas não do código,
+        já o ng-if retira e coloca do código.
+      -->
+    <div ng-show="contactForm.name.$error.required && contactForm.name.$dirty" class="alert alert-danger">
+      Please, fill the name field!
+    </div>
+    <div ng-show="contactForm.name.$error.minlength" class="alert alert-danger">
+      The field name must have at least 10 caracters.
+    </div>
+    <div ng-show="contactForm.color.$error.required && contactForm.color.$dirty" class="alert alert-danger">
+      Please, fill the color field!
+    </div>
+    <!-- 
+      Regex para validar o formato do telefone
+      /^\d{4,5}-\d{4}$/
+     -->
+    <!-- 
+      $pristine é boolean que retorna true ou false, indicando se o campo ja foi alterado,
+      retorna true caso não tenha sido, e o $dirty retorna true caso já tenha sido alterado.  
+     -->
+    <!-- $invalid também poderia ter sido usado -->
+    <div ng-show="contactForm.phone.$error.required && contactForm.phone.$dirty" class="alert alert-danger">
+      Please, fill the phone field!
+    </div>
+    <div ng-show="contactForm.phone.$error.pattern" class="alert alert-danger">
+      The field phone must be at the format DDDDD-DDDD.
+    </div>
+    <div ng-include="'footer.html'"></div>
+</body>
+
+</html>
