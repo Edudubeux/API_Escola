@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
   <style>
     .jumbotron {
-      width: 800px;
+      width: 900px;
       margin-top: 30px;
       margin-left: auto;
       margin-right: auto;
@@ -44,22 +44,22 @@
     app.controller('listaTelefonicaCtrl', function ($scope, $http) {
       $scope.app = 'Lista Telefonica'
       const loadContacts = () => {
-        $http.get("http://127.0.0.1:5500/data.js").then((data) => {
+        $http.get("http://localhost:3412/contatos").then((data) => {
           $scope.contacts = data.data
         })
       }
       const loadOps = () => {
-        $http.get("http://127.0.0.1:5500/operators.js").then((data) => {
+        $http.get("http://localhost:3412/operadoras").then((data) => {
           $scope.ops = data.data
         })
       }
       $scope.contacts = [];
-      $scope.addContact = (contact) => {
+      $scope.addContact = contact => {
         contact.date = new Date()
-        $http.post("http://127.0.0.1:5500/data.js", contact).then((data) => {
-          console.log(data)
+        $http.post("http://localhost:3412/contatos", contact).then((data) => {
           delete $scope.contact;
           $scope.contactForm.$setPristine();
+          loadContacts();
         })
       }
       $scope.deleteContact = (contact) => {
@@ -115,7 +115,7 @@
         <td> <input type="checkbox" ng-model="contact.select"></td>
         <td>{{contact.name}}</td>
         <td>{{contact.phone}}</td>
-        <td>{{contact.op | lowercase}}</td>
+        <td>{{contact.op.name | lowercase}}</td>
         <td>
           <div style="width: 20px; height: 20px;" ng-style="{'background-color': contact.color}"></div>
         </td>
