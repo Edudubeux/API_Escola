@@ -1,0 +1,25 @@
+.container{
+  width: 900px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.container h4{
+  margin-top: 20px;
+}
+
+.container button{
+  margin-top: 40px;
+}
+
+.container button:hover{
+  background-color: rgb(0, 0, 141)
+}

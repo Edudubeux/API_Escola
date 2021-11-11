@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" ng-app="loginPage">
+
+<head>
+  <title>Página de Login</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="/frontend/lib/angular/angular.js"></script>
+  <script type="text/javascript" src="/frontend/js/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/frontend/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/frontend/lib/css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="myCss/style.css">
+</head>
+
+<body ng-controller='loginPageCtrl'>
+  <section class="container">
+    <h1 style="text-align: center;">Login</h1>
+    <form class="userForm">
+      <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
+        aria-describedby="basic-addon1" ng-model="user.name">
+      <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email"
+        aria-describedby="basic-addon1" ng-model="user.email">
+      {{userForm.email}}
+      <h4>Password</h4><input type="text" class="form-control" placeholder="password" aria-label="password"
+        aria-describedby="basic-addon1" ng-model="user.password">
+    </form>
+    <button type="submit" class="btn btn-primary btn-block" ng-disable="userForm.$invalid"
+      ng-click="addUser(user)">Send</button>
+      <button type="submit" class="btn btn-primary btn-block" ng-disable="userForm.$invalid"
+      ng-click="">Show</button>
+  </section>
+</body>
+
+</html>
