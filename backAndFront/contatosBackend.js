@@ -26,7 +26,6 @@ app.get('/contatos', function(req, res) {
 });
 
 app.post('/contatos', function(req, res) {
-  console.log(req.body);
   contatos.push(req.body);
   res.json(true);
 });
@@ -34,3 +33,4 @@ app.post('/contatos', function(req, res) {
 app.get('/operadoras', function(req, res) {
   res.json(operadoras);
 });
+

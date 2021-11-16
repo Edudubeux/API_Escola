@@ -1,4 +1,4 @@
-angular.module("listaTelefonica").factory("contatosAPI", ($http, config) => {
+angular.module("listaTelefonica").factory("contatosAPI", function ($http, config) {
   var _getContatos =  () => {
     return $http.get(config.baseURL + "/contatos")
   }

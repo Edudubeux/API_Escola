@@ -1,4 +1,4 @@
-angular.module('listaTelefonica', []).controller('listaTelefonicaCtrl', function ($scope, contatosAPI, operatorsAPI) {
+angular.module("listaTelefonica", []).controller('listaTelefonicaCtrl', function ($scope, contatosAPI, operatorsAPI, serialGenerator) {
   $scope.app = 'Lista Telefonica'
   $scope.contacts = [];
   $scope.ops = []
@@ -6,15 +6,16 @@ angular.module('listaTelefonica', []).controller('listaTelefonicaCtrl', function
   const loadContacts = () => {
     contatosAPI.getContatos().then((data) => {
       $scope.contacts = data.data
-      console.log(data.data.length)
     })
   }
   const loadOps = () => {
     operatorsAPI.getOps().then((data) => {
-      $scope.ops = data.data
+      $scope.ops = data.data;
     })
   }
   $scope.addContact = contact => {
+    
+    contact.serial = serialGenerator.generate()
     contact.date = new Date()
     contatosAPI.saveContatos(contact).then(() => {
       delete $scope.contact;

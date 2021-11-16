@@ -5,22 +5,25 @@
   <meta charset="UTF-8">
   <title>Lista telefônica</title>
   <link rel="stylesheet" type="text/css" href="/lib/bootstrap/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <script src="/lib/angular/angular.js"></script>
-  <script src="/backend/app.js"></script>
-  <script src="/backend/controller/listaTelefonicaCTRL.js"></script>
-  <script src="/backend/services/contatosAPIService.js"></script>
-  <script src="/backend/services/operatorsAPIService.js"></script>
-  <script src="/backend/baseURL.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/backAndFront/app.js"></script>
+    <script src="/backAndFront/controller/listaTelefonicaCTRL.js"></script>
+    <script src="/backAndFront/services/contatosAPIService.js"></script>
+    <script src="/backAndFront/services/operatorsAPIService.js"></script>
+    <script src="/backAndFront/services/serialService.js"></script> 
+    <script src="/backAndFront/filters/nameFilter.js"></script>
+    <script src="/backAndFront/config/baseURL.js"></script>
 </head>
 
-<body ng-controller='listaTelefonicaCtrl'>
+<body ng-controller="listaTelefonicaCtrl">
   <div class="jumbotron">
-    <h2 ng-bind="app"></h2>
+    <h2>{{app}}</h2>
     <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
     <table class="table" ng-show="contacts.length">
       <tr>
         <th></th>
+        <th>Serial</th>
         <th><a href="" ng-click="orderBy('name')">Name</a></th>
         <th><a href="" ng-click="orderBy('phone')">Phone</a></th>
         <th>Operator</th>
@@ -36,7 +39,8 @@
           {{value}}
         </td> -->
         <td> <input type="checkbox" ng-model="contact.select"></td>
-        <td>{{contact.name}}</td>
+        <td>{{contact.serial}}</td>
+        <td>{{contact.name | name}}</td>
         <td>{{contact.phone}}</td>
         <td>{{contact.op.name | lowercase}}</td>
         <td>
