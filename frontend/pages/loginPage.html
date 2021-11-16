@@ -4,13 +4,16 @@
 <head>
   <title>Página de Login</title>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="/frontend/lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="app.js"></script>
   <script type="text/javascript" src="/frontend/js/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="/frontend/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/frontend/lib/css/bootstrap.min.css" type="text/css">
-  <link rel="stylesheet" href="myCss/style.css">
+  <link rel="stylesheet" href="/frontend/myCss/style.css">
+
+  <script src="controllers/loginPageCtrl.js"></script>
 </head>
 
 <body ng-controller='loginPageCtrl'>
@@ -26,7 +29,7 @@
         aria-describedby="basic-addon1" ng-model="user.password">
     </form>
     <button type="submit" class="btn btn-primary btn-block" ng-disable="userForm.$invalid"
-      ng-click="addUser(user)">Send</button>
+      ng-click="addUsers(user)">Send</button>
       <button type="submit" class="btn btn-primary btn-block" ng-disable="userForm.$invalid"
       ng-click="">Show</button>
   </section>

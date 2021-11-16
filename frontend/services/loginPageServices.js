@@ -1,4 +1,4 @@
-angular.module('loginPage').fatory('userServices', ($http, config) => {
+angular.module('escolinha').fatory('userServices', ($http, config) => {
   var _getUsers = () => {
     return $http.get(config.baseUrl + '/users')
   }
