@@ -5,7 +5,12 @@ angular.module("listaTelefonica", []).controller('listaTelefonicaCtrl', function
   
   const loadContacts = () => {
     contatosAPI.getContatos().then((data) => {
+      data.forEach(function (item) {
+        item.serial = serialGenerator.generate();
+      })
       $scope.contacts = data.data
+    }).error(function (data, status) {
+      $scope.error = "Não foi possível carregar os dados!"
     })
   }
   const loadOps = () => {

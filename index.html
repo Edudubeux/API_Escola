@@ -5,20 +5,34 @@
   <meta charset="UTF-8">
   <title>Lista telefônica</title>
   <link rel="stylesheet" type="text/css" href="/lib/bootstrap/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <script src="/lib/angular/angular.js"></script>
-    <script src="/backAndFront/app.js"></script>
-    <script src="/backAndFront/controller/listaTelefonicaCTRL.js"></script>
-    <script src="/backAndFront/services/contatosAPIService.js"></script>
-    <script src="/backAndFront/services/operatorsAPIService.js"></script>
-    <script src="/backAndFront/services/serialService.js"></script> 
-    <script src="/backAndFront/filters/nameFilter.js"></script>
-    <script src="/backAndFront/config/baseURL.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/ui.css">
+  <script src="/lib/angular/angular.js"></script>
+  <script src="/backAndFront/app.js"></script>
+  <script src="/backAndFront/controller/listaTelefonicaCTRL.js"></script>
+  <script src="/backAndFront/services/contatosAPIService.js"></script>
+  <script src="/backAndFront/services/operatorsAPIService.js"></script>
+  <script src="/backAndFront/services/serialService.js"></script>
+  <script src="/backAndFront/filters/nameFilter.js"></script>
+  <script src="/backAndFront/config/baseURL.js"></script>
+  <script src="/backAndFront/directives/uiAlertDirective.js"></script>
 </head>
 
 <body ng-controller="listaTelefonicaCtrl">
   <div class="jumbotron">
     <h2>{{app}}</h2>
+
+    <div ui-alert></div>
+
+    <div class="ui-alert">
+      <div class="ui-alert-title">
+        Ops, aconteceu um problema!
+      </div>
+      <div class="ui-alert-message">
+        {{error}}
+      </div>
+    </div>
+    
     <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
     <table class="table" ng-show="contacts.length">
       <tr>
@@ -99,6 +113,7 @@
       The field phone must be at the format DDDDD-DDDD.
     </div>
     <div ng-include="'view/footer.html'"></div>
+  </div>
 </body>
 
 </html>
