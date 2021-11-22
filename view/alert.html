@@ -1,8 +1,8 @@
 <div class="ui-alert">
     <div class="ui-alert-title">
-        Ops, aconteceu um problema!
+        {{title}}
     </div>
-    <div class="ui-alert-message">
-        {{error}}
+    <div class="ui-alert-message" ng-transclude>
+        {{message}}
     </div>
 </div>

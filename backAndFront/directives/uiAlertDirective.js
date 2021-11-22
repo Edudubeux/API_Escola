@@ -1,6 +1,6 @@
 angular.module("listaTelefonica").directive("uiAlert", function () {
     return {
-        templateUrl: "../views/alert.html",
+        templateUrl: "../../view/alert.html",
         replace: true,
         restrict: "",
         //existem 4 tipos de restrict: 
@@ -8,5 +8,9 @@ angular.module("listaTelefonica").directive("uiAlert", function () {
         // E- diretiva restrita ao elemento 
         // C- diretiva restrita a classe do elemento 
         // M - diretiva restrita ao comentario do elemento
+        scope: {
+            title: "@"
+        },
+        transclude: true
     }
-})
+}) 

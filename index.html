@@ -16,13 +16,16 @@
   <script src="/backAndFront/filters/nameFilter.js"></script>
   <script src="/backAndFront/config/baseURL.js"></script>
   <script src="/backAndFront/directives/uiAlertDirective.js"></script>
+  <script src="/backAndFront/directives/uiDateDirective.js"></script>
 </head>
 
 <body ng-controller="listaTelefonicaCtrl">
   <div class="jumbotron">
     <h2>{{app}}</h2>
 
-    <div ui-alert></div>
+    <div ui-alert title="Ops, aconteceu um problema!" ng-hide="!error">
+      Não foi possível carregar os dados.
+    </div>
     
     <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
     <table class="table" ng-show="contacts.length">
@@ -33,7 +36,7 @@
         <th><a href="" ng-click="orderBy('phone')">Phone</a></th>
         <th>Operator</th>
         <th>Color</th>
-        <th>Date</th>
+        <th>Date</th> 
       </tr>
       <tr ng-repeat="contact in contacts | filter:filterText | orderBy:orderFilter: direction"
         ng-class="{ 'selecionado negrito': contact.select }">
@@ -62,6 +65,7 @@
       <input class="form-control" type="text" ng-model="contact.phone" name="phone" placeholder="Phone"
         ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
       <input class="form-control" ng-model="contact.color" name="color" placeholder="Color" ng-required="true">
+      <input class="form-control" type="text" ng-model="contact.data" name="data" placeholder="Data" ui-date/> 
       <select class="form-control" ng-model="contact.op" name="op"
         ng-options="op.name + ' (' + (op.price | currency) + ')' for op in ops | orderBy: 'name'" ng-required="true">
         <option value="">Select one operator </option>
