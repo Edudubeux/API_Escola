@@ -1,7 +1,7 @@
-angular.module("listaTelefonica", []).controller('listaTelefonicaCtrl', function ($scope, contatosAPI, operatorsAPI, serialGenerator) {
+angular.module("listaTelefonica").controller('listaTelefonicaCtrl', function ($scope, contatosAPI, operatorsAPI, serialGenerator) {
   $scope.app = 'Lista Telefonica'
   $scope.contacts = [];
-  $scope.ops = []
+  $scope.ops = [];
   
   const loadContacts = () => {
     contatosAPI.getContatos().then((data) => {
