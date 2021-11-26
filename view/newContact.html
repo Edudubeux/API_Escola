@@ -1,0 +1,47 @@
+<div class="jumbotron">
+    <form name="contactForm">
+        <hr>
+        <input class="form-control" type="text" ng-model="contact.name" name="name" placeholder="Name" ng-minlength="10"
+            ng-required="true">
+        <input class="form-control" type="text" ng-model="contact.phone" name="phone" placeholder="Phone" ng-required="true"
+            ng-pattern="/^\d{4,5}-\d{4}$/">
+        <input class="form-control" ng-model="contact.color" name="color" placeholder="Color" ng-required="true">
+        {{contact.date}}
+        <input class="form-control" type="text" ng-model="contact.data" name="data" placeholder="Data" maxlength="10"
+            ui-date />
+        <select class="form-control" ng-model="contact.op" name="op"
+            ng-options="op.name + ' (' + (op.price | currency) + ')' for op in ops | orderBy: 'name'" ng-required="true">
+            <option value="">Select one operator </option>
+        </select>
+    </form>
+    <div ng-show="contactForm.name.$error.required && contactForm.name.$dirty" class="alert alert-danger">
+        Please, fill the name field!
+    </div>
+    <div ng-show="contactForm.name.$error.minlength" class="alert alert-danger">
+        The field name must have at least 10 caracters.
+    </div>
+    <div ng-show="contactForm.color.$error.required && contactForm.color.$dirty" class="alert alert-danger">
+        Please, fill the color field!
+    </div>
+    <!-- 
+          Regex para validar o formato do telefone
+          /^\d{4,5}-\d{4}$/
+         -->
+    <!-- 
+          $pristine é boolean que retorna true ou false, indicando se o campo ja foi alterado,
+          retorna true caso não tenha sido, e o $dirty retorna true caso já tenha sido alterado.  
+         -->
+    <!-- $invalid também poderia ter sido usado -->
+    <div ng-show="contactForm.phone.$error.required && contactForm.phone.$dirty" class="alert alert-danger">
+        Please, fill the phone field!
+    </div>
+    <div ng-show="contactForm.phone.$error.pattern" class="alert alert-danger">
+        The field phone must be at the format DDDDD-DDDD.
+    </div>
+    <button ng-click="addContact(contact)" ng-disabled="contactForm.$invalid" type="submit"
+        class="btn btn-primary btn-block">Add contact</button>
+      <!-- 
+            O ng-hide e o ng-show apenas removem da tela mas não do código,
+            já o ng-if retira e coloca do código.
+        -->
+</div>

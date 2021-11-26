@@ -1,97 +1,57 @@
-<div class="jumbotron" ng-controller="listaTelefonicaCtrl">
-    <h2>{{app}}</h2>
+<div class="jumbotron" >
+  <h2>{{app}}</h2>
 
-    <ui-accordions title="Accordions">
-      <ui-accordion title="Accordion 1">
-        Olá, full, aqui é dubeux falando diretamente da amigo
-      </ui-accordion>
-      <ui-accordion title="Accordion 2">
-        Olá,undefined
-      </ui-accordion> <br>
-    </ui-accordions>
+  <ui-accordions title="Accordions">
+    <ui-accordion title="Accordion 1">
+      Olá, full, aqui é dubeux falando diretamente da amigo
+    </ui-accordion>
+    <ui-accordion title="Accordion 2">
+      Olá,undefined
+    </ui-accordion> <br>
+  </ui-accordions>
 
-    <div ui-alert title="Ops, aconteceu um problema!" ng-if="error">
-      Não foi possível carregar os dados.
-    </div>
-    
-    <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
-    <table class="table" ng-show="contacts.length">
-      <tr>
-        <th></th>
-        <th>Serial</th>
-        <th><a href="" ng-click="orderBy('name')">Name</a></th>
-        <th><a href="" ng-click="orderBy('phone')">Phone</a></th>
-        <th>Operator</th>
-        <th>Color</th>
-        <th>Date</th> 
-      </tr>
-      <tr ng-repeat="contact in contacts | filter:filterText | orderBy:orderFilter: direction"
-        ng-class="{ 'selecionado negrito': contact.select }">
-        <!--                               filter: {name: filterText}
+  <div ui-alert title="Ops, aconteceu um problema!" ng-if="error">
+    Não foi possível carregar os dados.
+  </div>
+
+  <input class="form-control" type="text" ng-model="filterText" placeholder="Searching">
+  <table class="table" ng-show="contacts.length">
+    <tr>
+      <th></th>
+      <th>Serial</th>
+      <th><a href="" ng-click="orderBy('name')">Name</a></th>
+      <th><a href="" ng-click="orderBy('phone')">Phone</a></th>
+      <th>Operator</th>
+      <th>Color</th>
+      <th>Date</th>
+    </tr>
+    <tr ng-repeat="contact in contacts | filter:filterText | orderBy:orderFilter: direction"
+      ng-class="{ 'selecionado negrito': contact.select }">
+      <!--                               filter: {name: filterText}
          dessa forma o filtro so iria ser aplicado para a chave nome                       
         -->
-        <!-- <td ng-repeat="(key, value) in contact">
+      <!-- <td ng-repeat="(key, value) in contact">
           {{value}}
         </td> -->
-        <td> <input type="checkbox" ng-model="contact.select"></td>
-        <td>{{contact.serial}}</td>
-        <td>{{contact.name | name}}</td>
-        <td>{{contact.phone}}</td>
-        <td>{{contact.op.name | lowercase}}</td>
-        <td>
-          <div style="width: 20px; height: 20px;" ng-style="{'background-color': contact.color}"></div>
-        </td>
-        <td>{{contact.date | date:'dd/MM/yyyy HH:mm'}}</td>
-      </tr>
-    </table>
-    <!-- {{contacts}} -->
-    <form name="contactForm">
-      <hr>
-      <input class="form-control" type="text" ng-model="contact.name" name="name" placeholder="Name" ng-minlength="10"
-        ng-required="true">
-      <input class="form-control" type="text" ng-model="contact.phone" name="phone" placeholder="Phone"
-        ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
-      <input class="form-control" ng-model="contact.color" name="color" placeholder="Color" ng-required="true">
-      {{contact.date}}
-      <input class="form-control" type="text" ng-model="contact.data" name="data" placeholder="Data" maxlength="10" ui-date/> 
-      <select class="form-control" ng-model="contact.op" name="op"
-        ng-options="op.name + ' (' + (op.price | currency) + ')' for op in ops | orderBy: 'name'" ng-required="true">
-        <option value="">Select one operator </option>
-      </select>
-    </form>
-    <button ng-click="addContact(contact)" ng-disabled="contactForm.$invalid" type="submit"
-      class="btn btn-primary btn-block">Add contact</button>
-    <button ng-click="deleteContact(contact)" ng-show="isContactSelected(contacts)" type="submit"
-      class="btn btn-danger btn-block"> Delete contact</button>
-    <button ng-click="alertMsg()" ng-hide="!contacts.length" class="btn btn-primary btn-block"
-      style="margin-top: 20px;"> Message </button>
-    <button ng-click="addUser()" ng-if="!contacts.length" class="btn btn-primary btn-block"
-      style="margin-top: 20px;">Try me</button>
-    <!-- 
-        O ng-hide e o ng-show apenas removem da tela mas não do código,
-        já o ng-if retira e coloca do código.
-      -->
-    <div ng-show="contactForm.name.$error.required && contactForm.name.$dirty" class="alert alert-danger">
-      Please, fill the name field!
-    </div>
-    <div ng-show="contactForm.name.$error.minlength" class="alert alert-danger">
-      The field name must have at least 10 caracters.
-    </div>
-    <div ng-show="contactForm.color.$error.required && contactForm.color.$dirty" class="alert alert-danger">
-      Please, fill the color field!
-    </div>
-    <!-- 
-      Regex para validar o formato do telefone
-      /^\d{4,5}-\d{4}$/
-     -->
-    <!-- 
-      $pristine é boolean que retorna true ou false, indicando se o campo ja foi alterado,
-      retorna true caso não tenha sido, e o $dirty retorna true caso já tenha sido alterado.  
-     -->
-    <!-- $invalid também poderia ter sido usado -->
-    <div ng-show="contactForm.phone.$error.required && contactForm.phone.$dirty" class="alert alert-danger">
-      Please, fill the phone field!
-    </div>
-    <div ng-show="contactForm.phone.$error.pattern" class="alert alert-danger">
-      The field phone must be at the format DDDDD-DDDD.
-    </div>
+      <td> <input type="checkbox" ng-model="contact.select"></td>
+      <td>{{contact.serial}}</td>
+      <td>{{contact.name | name}}</td>
+      <td>{{contact.phone}}</td>
+      <td>{{contact.op.name | lowercase}}</td>
+      <td>
+        <div style="width: 20px; height: 20px;" ng-style="{'background-color': contact.color}"></div>
+      </td>
+      <td>{{contact.date | date:'dd/MM/yyyy HH:mm'}}</td>
+    </tr>
+  </table> <br>
+  <a class="btn btn-primary btn-block" href="http://127.0.0.1:5501/#/novoContato" >Adicionar contato</a>
+  <button ng-click="deleteContact(contact)" ng-show="isContactSelected(contacts)" type="submit"
+        class="btn btn-danger btn-block"> Delete contact</button>
+      <button ng-click="alertMsg()" ng-hide="!contacts.length" class="btn btn-primary btn-block" style="margin-top: 20px;">
+        Message </button>
+      <button ng-click="addUser()" ng-if="!contacts.length" class="btn btn-primary btn-block" style="margin-top: 20px;">Try
+        me</button>
+</div>
+<div style="text-align: center; font-size: 20px; margin-bottom: 20px;">
+  Criado por Eduardo Dubeux
+</div>

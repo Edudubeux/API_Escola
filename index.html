@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="listaTelefonica">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -9,11 +9,12 @@
   <link rel="stylesheet" type="text/css" href="/css/ui.css">
   <link rel="stylesheet" type="text/css" href="lib/css/ui.css">
   <script src="/lib/angular/angular.js"></script>
-  <script src="/lib/angular/angular-routes.js"></script>
+  <script src="/lib/angular/angular-route.js"></script>
   <script src="/lib/serialGenerator/serialGenerator.js"></script>
   <script src="/lib/ui/ui.js"></script>
   <script src="/backAndFront/app.js"></script>
   <script src="/backAndFront/controller/listaTelefonicaCTRL.js"></script>
+  <script src="/backAndFront/controller/novoContatoCtrl.js"></script>
   <script src="/backAndFront/services/contatosAPIService.js"></script>
   <script src="/backAndFront/services/operatorsAPIService.js"></script>
   <script src="/backAndFront/config/serialGeneratorConfig.js"></script>
@@ -23,7 +24,7 @@
   <script src="/backAndFront/directives/uiAlertDirective.js"></script>
   <script src="/backAndFront/directives/uiDateDirective.js"></script>
 </head>
-<body>
-    <div ng-include="view/footer.html"></div>
+<body ng-app="listaTelefonica">
+  <div ng-view></div>
 </body>
 </html>
