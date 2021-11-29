@@ -1,1 +1,1 @@
-angular.module('escolinha', ['ngRoute'])
+angular.module("escolinha", ["ngRoute"]);

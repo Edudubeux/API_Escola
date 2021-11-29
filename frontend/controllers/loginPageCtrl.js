@@ -1,11 +1,12 @@
-angular.module("escolinha", []).controller('loginPageCtrl', function ($scope, usersServices) {
+angular.module("escolinha").controller("loginPageCtrl", function ($scope, userServices) {
   $scope.app = 'LoginPage'
   $scope.users = []
 
-  const addUsers = (user) => {
-    usersServices.addUsers(user).then((data) => {
+  $scope.addUser = function (user) {
+    userServices.addUsers(user).then(function (data) {
       console.log('cheguei aqui')
       console.log(data.data);
     })
   }
 })
+
