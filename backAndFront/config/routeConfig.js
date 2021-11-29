@@ -12,15 +12,10 @@ angular.module("listaTelefonica").config(function ($routeProvider, $locationProv
 
     $routeProvider.when("/novoContato",  {
         templateUrl: "../../view/newContact.html",
-        controller: "novoContatoCtrl",
-        resolve: {
-            operadoras: function (operadoras) {
-                return operadoras.loadOps();
-            }
-        }
+        controller: "novoContatoCtrl"
     });
 
     $routeProvider.otherwise({
-        redirectTo: "/"
+        redirectTo: "/contatos"
     });
 });

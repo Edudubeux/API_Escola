@@ -6,7 +6,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
-const contatos = [
+let contatos = [
 	{name: "Bruno", phone: "9999-2222", date: new Date(), color: 'green' ,op: {name: "Oi", code: 14, category: "Celular"}},
 	{name: "Sandra", phone: "9999-3333", date: new Date(), color: 'blue' ,op: {name: "Vivo", code: 15, category: "Celular"}},
 	{name: "Mariana", phone: "9999-9999", date: new Date(), color: 'purple', op: {name: "Tim", code: 41, category: "Celular"}}
@@ -23,6 +23,23 @@ app.listen(process.env.PORT || 3412);
 
 app.get('/contatos', function(req, res) {
   res.json(contatos);
+});
+
+app.delete('/contatos', (req, res) => {
+	const indexes = req.query.indexes || [];
+
+	if (!indexes.length) {
+		return res.status(401).json({
+			error: true,
+			message: 'There must be indexes'
+		});
+	}
+
+	contatos = contatos.filter((item, index) => !indexes.includes(index));
+
+	return res.json({
+		contatos
+	});
 });
 
 app.post('/contatos', function(req, res) {
