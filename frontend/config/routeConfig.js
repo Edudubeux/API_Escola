@@ -6,6 +6,11 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     controller: "loginPageCtrl"
   })
 
+  $routeProvider.when("/menu", {
+    templateUrl: "views/menuPage.html",
+    controller: "menuPageCtrl"
+  })
+
   $routeProvider.otherwise({
     redirectTo: "/loginPage"
   })
