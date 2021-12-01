@@ -8,7 +8,12 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
 
   $routeProvider.when("/menu", {
     templateUrl: "views/menuPage.html",
-    controller: "menuPageCtrl"
+    controller: "menuCtrl"
+  })
+
+  $routeProvider.when("/login", {
+    templateUrl: "views/loginPage.html",
+    controller: "loginCtrl"
   })
 
   $routeProvider.otherwise({

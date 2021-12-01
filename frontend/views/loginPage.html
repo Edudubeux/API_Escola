@@ -8,21 +8,24 @@
     <section class="container">
         <h1 style="text-align: center;">{{app}}</h1><br>
         <form name="userForm">
-          <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
-           name="name" ng-model="user.name" ng-minlength="10" ng-required="true" maxlength="45">
+          <h4>Email</h4> <input type="text" class="form-control" placeholder="Email" aria-label="Email"
+           name="email" ng-model="user.email" ng-minlength="10" ng-required="true" maxlength="45">
           <h4>Password</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
-           name="password" ng-model="user.password" ng-required="true" ng-minlength="6" maxlength="10">
+           name="password" ng-model="user.password" ng-required="true" ng-minlength="6">
         </form>
 
-        <div ng-show="userForm.name.$error.required && userForm.name.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Please, fill the name field!
-        </div>
         <div ng-show="userForm.email.$error.required && userForm.email.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
           Please, fill the email field!
         </div>
+        <div ng-show="userForm.password.$error.required && userForm.password.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
+          Please, fill the password field!
+        </div>
+        <div ng-if="error" class="alert alert-danger" style="font-weight: bold;">
+          {{error}}
+        </div>
 
-        <a href="http://127.0.0.1:5500/frontend/index.html#/menu" style="text-decoration: none;"><button type="submit" class="btn btn-primary btn-block" ng-disabled="userForm.$invalid"
-          ng-click="addUser(user)"></button>Sign-in</a>
+        <button type="submit" class="btn btn-primary btn-block" ng-disabled="userForm.$invalid"
+          ng-click="login(user)">Sign-in</button>
       </section>
 </body>
 </html>

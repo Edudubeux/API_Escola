@@ -3,7 +3,7 @@ import Token from '../services/Token';
 
 class TokenController {
   async store(req, res) {
-    const { email = '', password = '' } = req.body;
+    const { email , password  } = req.body;
 
     if(!email || !password) {
       res.status(401).json({ error: 'Invalid passoword or email .'})
