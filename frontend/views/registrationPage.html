@@ -2,27 +2,35 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>RegistrationPage</title>
 </head>
 <body>
     <section class="container">
         <h1 style="text-align: center;">{{app}}</h1><br>
+        <h2 style="color: #007bff; margin-bottom: 40px;">{{msg}}</h2>
         <form name="userForm">
           <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
            name="name" ng-model="user.name" ng-minlength="10" ng-required="true" maxlength="45">
+          <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email"
+           name="email" ng-model="user.email" ng-required="true">
           <h4>Password</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
            name="password" ng-model="user.password" ng-required="true" ng-minlength="6" maxlength="10">
         </form>
-
+       
+        <div ng-show="userForm.name.$error.minlength"class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
+          The name field must have at least 10 caracters
+        </div>
         <div ng-show="userForm.name.$error.required && userForm.name.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
           Please, fill the name field!
         </div>
         <div ng-show="userForm.email.$error.required && userForm.email.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
           Please, fill the email field!
         </div>
-
+        <div ng-show="userForm.password.$error.minlength && userForm.password.$dirty"class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
+          Your password must have at least 6 caracters
+        </div>
         <a href="http://127.0.0.1:5500/frontend/index.html#/menu" style="text-decoration: none;"><button type="submit" class="btn btn-primary btn-block" ng-disabled="userForm.$invalid"
-          ng-click="addUser(user)"></button>Sign-in</a>
+          ng-click="addUser(user)">Send</button></a>
       </section>
 </body>
 </html>

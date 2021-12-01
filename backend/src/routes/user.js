@@ -7,12 +7,9 @@ import Validate from '../schemas/Validate'
 
 const routes = new Router();
 
-routes.post('/', (req, res, next) => {
-    console.log(req.body, 'bodfy');
-    return next()
-}, Validate(Schema.store), UserController.store);
+routes.post('/', Validate(Schema.store), UserController.store);
 
-// routes.use(loginRequired);
+routes.use(loginRequired);
 
 routes.get('/', UserController.index);
 routes.put('/', Validate(Schema.update), UserController.update);
