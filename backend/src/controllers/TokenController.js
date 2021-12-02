@@ -5,18 +5,16 @@ class TokenController {
   async store(req, res) {
     const { email , password  } = req.body;
 
-    if(!email || !password) {
-      res.status(401).json({ error: 'Invalid passoword or email .'})
-    }
-
-    const user = await Token.store(email);
+    const user = await Token.find(email);
 
     if(!user) {
-      res.status(400).json({ error: "This user doesn't exists ." })
+      res.status(400).json({ error: "Invalid password or email, try again later." })
+      return;
     }
 
     if(!(await user.checkPassword(password))){
-      res.status(400).json({ error: 'Invalid password.'})
+      res.status(400).json({ error: 'Invalid password or email, try again later.'});
+      return;
     }
 
     const { id } = user;

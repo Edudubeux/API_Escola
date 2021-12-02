@@ -14,17 +14,11 @@
            name="password" ng-model="user.password" ng-required="true" ng-minlength="6">
         </form>
 
-        <div ng-show="userForm.email.$error.required && userForm.email.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Please, fill the email field!
-        </div>
-        <div ng-show="userForm.password.$error.required && userForm.password.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Please, fill the password field!
-        </div>
-        <div ng-if="error" class="alert alert-danger" style="font-weight: bold;">
+        <div ng-if="error" class="alert alert-danger" style="font-weight: bold; margin-top: 20px;">
           {{error}}
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block" ng-disabled="userForm.$invalid"
+        <button type="submit" class="btn btn-primary btn-block"
           ng-click="login(user)">Sign-in</button>
       </section>
 </body>

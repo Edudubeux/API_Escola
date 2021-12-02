@@ -2,18 +2,28 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
     $scope.app = "Login";
     $scope.error = "";
 
+    const dataValidate = user => {
+        if (!user.email) {
+            $scope.error = "Please, fill the email field."
+            return;
+        } else if (!user.password) {
+            $scope.error = "Please, fill the password field."
+            return;
+        }
+        else return true;
+    }
+
     const login = user => {
-        return loginServices.login(user)
-            .then(res => {
-                $scope.userForm.$setPristine();
-                loginServices.getToken(res.data.token)
-                $location.path("/menu");
-            })
-            .catch(error => {
-                $scope.userForm.$setPristine();
-                $scope.error = JSON.parse(error.data).error
-                console.log(error);
-            })
+        if (dataValidate(user)) {
+            return loginServices.login(user)
+                .then(res => {
+                    loginServices.getToken(res.data.token)
+                    $location.path("/menu");
+                })
+                .catch(error => {
+                    $scope.error = error.data.error
+                })
+        }
     };
 
     $scope.login = login;

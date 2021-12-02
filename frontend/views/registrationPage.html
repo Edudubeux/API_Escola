@@ -15,20 +15,7 @@
           <h4>Password</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
            name="password" ng-model="user.password" ng-required="true" ng-minlength="6" maxlength="10">
         </form>
-       
-        <div ng-show="userForm.name.$error.minlength"class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          The name field must have at least 10 caracters
-        </div>
-        <div ng-show="userForm.name.$error.required && userForm.name.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Please, fill the name field!
-        </div>
-        <div ng-show="userForm.email.$error.required && userForm.email.$dirty" class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Please, fill the email field!
-        </div>
-        <div ng-show="userForm.password.$error.minlength && userForm.password.$dirty"class="alert alert-danger" style="margin-top: 15px; font-weight: bold;">
-          Your password must have at least 6 caracters
-        </div>
-        <button type="submit" class="btn btn-primary btn-block" ng-disabled="userForm.$invalid"
+        <button type="submit" class="btn btn-primary btn-block"
           ng-click="addUser(user)">Send</button><br>
         <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
         <div style="font-weight: bold;">{{msg}}<a href="http://127.0.0.1:5500/frontend/index.html#/login" style="font-weight: bold; ">here</a></div>

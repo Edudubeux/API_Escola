@@ -13,7 +13,7 @@ angular.module("escolinha").factory("userServices", ($http, config) => {
   // localStorage.clear
 
   
-  const getUsers = () => {
+  const getUser = () => {
     return $http.get(config.baseUrl + '/users')
   }
   
@@ -22,7 +22,7 @@ angular.module("escolinha").factory("userServices", ($http, config) => {
   }
 
   return{
-    getUsers,
+    getUser,
     addUsers
   }
 });

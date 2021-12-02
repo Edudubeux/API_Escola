@@ -9,7 +9,7 @@ export default {
         }
       })
       if (user) {
-        throw new Error('This email already exists.')
+        throw ('This email already exists.')
       }
 
       const userCreated = await User.create(req.data);
@@ -22,7 +22,6 @@ export default {
   index: async (req) => {
     try {
       const user = await User.findByPk(req.userId)
-      console.log(req.userId)
       if (!user) {
         throw new Error("This user doesn't exists.")
       }

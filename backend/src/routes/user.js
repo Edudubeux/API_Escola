@@ -3,7 +3,7 @@ import { Router } from 'express';
 import UserController from '../controllers/UserController';
 import loginRequired from '../middlewares/loginRequired';
 import Schema from '../schemas/User';
-import Validate from '../schemas/Validate'
+import Validate from '../schemas/Validate' 
 
 const routes = new Router();
 
