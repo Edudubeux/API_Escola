@@ -3,13 +3,13 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 export default async (req, res, next) => {
-  const { authorization } = (req.headers);
+  const { Authorization } = (req.headers);
 
-  if(!authorization) {
+  if(!Authorization) {
     res.status(400).json({ error: 'Login required'})
   }
 
-  const [, token ] = await authorization.split(' ');
+  const [, token ] = await Authorization.split(' ');
 
   try {
     const data = await jwt.verify(token, 'admin');

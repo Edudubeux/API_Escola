@@ -2,14 +2,19 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
     $scope.app = "Login";
     $scope.error = "";
 
-    const dataValidate = user => {
-        if (!user.email) {
+    const dataValidate = (user = {}) => {
+
+        if (!user.password && !user.email) {
+            $scope.error = "Please, fill fields."
+            return;
+        } 
+        else if (!user.email) {
             $scope.error = "Please, fill the email field."
             return;
         } else if (!user.password) {
             $scope.error = "Please, fill the password field."
             return;
-        }
+        } 
         else return true;
     }
 
@@ -20,7 +25,7 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
                     loginServices.getToken(res.data.token)
                     $location.path("/menu");
                 })
-                .catch(error => {
+                .catch( error => {
                     $scope.error = error.data.error
                 })
         }
