@@ -22,3 +22,8 @@
 .container button:hover{
   background-color: rgb(0, 0, 141)
 }
+
+li:hover{
+  background-color:cornflowerblue
+}
+

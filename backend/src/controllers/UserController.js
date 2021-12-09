@@ -21,6 +21,11 @@ class UserController {
 
   async update(req, res) {
     try{
+      if(!req.data) {
+        console.log('oi');
+        return res.status(400).json({ error: "REQUIRED_FIELDS" })
+      };
+
       const updatedUser = await User.update({ data: req.data, userId: req.userId })
       res.json(updatedUser);
     } catch(error) {

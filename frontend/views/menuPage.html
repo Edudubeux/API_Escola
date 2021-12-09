@@ -7,11 +7,27 @@
 <body>    
     <div class="container">
         <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
-
-        <div>
-            
+    </div>
+    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px;">
+        <div class="card-header" style="font-weight: bold;">
+            {{msg}}
         </div>
-
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name: {{name}}</li>
+            <li class="list-group-item">Email: {{email}}</li>
+          </ul>
+    </div>
+    <div style="margin-top: 130px; font-size: 20px;">
+        <ul class="list-group" style="margin-right: 54%; margin-left: 25rem; width: 34%;">
+            <li class="list-group-item active" aria-current="true">What are you wishing?</li>
+            <a href="http://127.0.0.1:5500/frontend/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Chage your profile</li></a>
+            <a href="http://127.0.0.1:5500/frontend/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
+            <a href="http://127.0.0.1:5500/frontend/index.html#/updateStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Change Students profile</li></a>
+        </ul>
+    </div>
+    
+    <div ng-if="error" class="alert alert-danger" style="font-weight: bold; margin-top: 20px;">
+        {{error}}
     </div>
     
 </body>

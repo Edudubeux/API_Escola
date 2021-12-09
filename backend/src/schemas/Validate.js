@@ -9,7 +9,7 @@ const Validate = schema => {
       } : null;
       return next();
     } catch (error) {
-      res.status(401).json({ error: error.message })
+      res.status(401).json({ error: "Validation failed." })
     }
   }
 }

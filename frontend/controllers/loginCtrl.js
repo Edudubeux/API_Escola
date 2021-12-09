@@ -1,8 +1,9 @@
 angular.module("escolinha").controller("loginCtrl", function ($scope, loginServices, $location) {
     $scope.app = "Login";
     $scope.error = "";
+    $scope.msg = "Hello teacher, haven't create an account yet, create one "
 
-    const dataValidate = (user = {}) => {
+    const dataValidate = user => {
 
         if (!user.password && !user.email) {
             $scope.error = "Please, fill fields."
@@ -18,18 +19,19 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
         else return true;
     }
 
-    const login = user => {
+    $scope.login = user => {
         if (dataValidate(user)) {
             return loginServices.login(user)
                 .then(res => {
                     loginServices.getToken(res.data.token)
                     $location.path("/menu");
                 })
-                .catch( error => {
-                    $scope.error = error.data.error
+                .catch(error => {
+                    console.log(error);
+                    if (error && error.data) {
+                        // $scope.error = error.data.error
+                    }
                 })
         }
     };
-
-    $scope.login = login;
 });

@@ -12,17 +12,21 @@ angular.module("escolinha").factory("userServices", ($http, config) => {
   // localStorage.getItem
   // localStorage.clear
 
-  
   const getUser = () => {
     return $http.get(config.baseUrl + '/users')
-  }
+  };
   
   const addUsers = user => {
     return $http.post(config.baseUrl + '/users', user)
-  }
+  };
+
+  const updateUser = user => {
+    return $http.put(config.baseUrl + '/users', user)
+  };
 
   return{
     getUser,
-    addUsers
+    addUsers,
+    updateUser
   }
 });
