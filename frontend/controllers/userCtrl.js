@@ -2,7 +2,7 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
   $scope.app = "School Full";
   $scope.msg = "Hello teacher, if you already have an account, sign-in up ";
   $scope.error = "";
-  const teste = 'teste';
+  const teste = 'Your profile has been updated! Now you are FULL!';
 
   const userValidate = user => {
     if (!user) {
@@ -66,6 +66,5 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
       $scope.error = error.data.error
     });
   };
-
 });
 

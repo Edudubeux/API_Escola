@@ -6,7 +6,7 @@ class StudentController {
       const newStudent = await StudentService.store({ data: req.data, userId: req.userId });
       return res.json(newStudent);
     } catch(error) {
-      return res.status(400).json({ error: error.message })
+      return res.status(400).json({ error: "REQUIRED_FIELDS" })
     }
   }
 

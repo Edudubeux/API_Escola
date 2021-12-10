@@ -20,8 +20,17 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     templateUrl: "views/updateUsersPage.html",
     controller: "userCtrl"
   });
+  
+  $routeProvider.when("/addStudents", {
+    templateUrl: "views/addStudentsPage.html",
+    controller: "studentCtrl"
+  });
+
+  $routeProvider.when("/error", {
+    templateUrl: "views/sorryPage.html",
+  });
 
   $routeProvider.otherwise({
-    redirectTo: "/registration"
+    redirectTo: "/error"
   });
 });

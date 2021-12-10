@@ -29,7 +29,7 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
                 .catch(error => {
                     console.log(error);
                     if (error && error.data) {
-                        // $scope.error = error.data.error
+                        $scope.error = error.data.error
                     }
                 })
         }
