@@ -22,12 +22,12 @@ export default {
       height: Yup.number(),
     }),
     params: Yup.object().shape({
-      id: Yup.number().required()
-    })
+      id: Yup.number().required(),
+    }),
   },
   destroy: {
     params: Yup.object().shape({
-      id: Yup.number().required()
-    })
-  }
-}
+      id: Yup.number().required(),
+    }),
+  },
+};

@@ -22,12 +22,12 @@ export default {
   index: async (req) => {
     try {
       const students = await Student.findAll({
-        attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
+        attributes: ['id', 'name', 'surname', 'email', 'age', 'weight', 'height'],
         order: [['id', 'DESC']],
         include: [{
           model: Photo,
           as: 'photos',
-          attributes: ['file_name']
+          attributes: ['file_name'],
         }, {
           model: User,
           as: 'user',

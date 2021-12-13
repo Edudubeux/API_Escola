@@ -1,9 +1,10 @@
-angular.module("escolinha").controller("menuCtrl", function ($scope, userServices) {
+angular.module("escolinha").controller("menuCtrl", function ($scope, userServices, studentServices, $location) {
     $scope.app = "School Full"
     $scope.msg = "Hello teacher!"
     $scope.name = ""
     $scope.email = ""
     $scope.error = ""
+    $scope.students = []
 
     const showUser = () => {
         userServices.getUser()
@@ -15,7 +16,27 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
         .catch((error) => {
             $scope.error = error
         });
-    }
-    
-    showUser()
+    };
+
+    const openPatient = id => {
+        $location.path(`updateStudents/${id}`);
+    };
+
+    const showStudents = () => {
+        studentServices.showStudents()
+        .then(res => {
+            console.log(res.data);
+            $scope.students = res.data
+        })
+        .catch( error => {
+            if (error && error.data) {
+                $scope.error = error.data.error;
+                return;
+            }
+        });
+    };
+
+    showUser(),
+    showStudents()
+    $scope.openPatient = openPatient;
 });

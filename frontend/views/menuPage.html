@@ -8,7 +8,7 @@
     <div class="container">
         <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
     </div>
-    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px;">
+    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
         <div class="card-header" style="font-weight: bold;">
             {{msg}}
         </div>
@@ -17,13 +17,28 @@
             <li class="list-group-item">Email: {{email}}</li>
           </ul>
     </div>
-    <div style="margin-top: 130px; font-size: 20px;">
-        <ul class="list-group" style="margin-right: 54%; margin-left: 25rem; width: 34%;">
+    <div style="margin-top: 130px; font-size: 20px; display: flex;">
+        <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
             <li class="list-group-item active" aria-current="true">What are you wishing?</li>
             <a href="http://127.0.0.1:5501/frontend/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Chage your profile</li></a>
             <a href="http://127.0.0.1:5501/frontend/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
-            <a href="http://127.0.0.1:5501/frontend/index.html#/updateStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Change Students profile</li></a>
         </ul>
+    </div>
+    
+    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
+        <div class="card-header" style="font-weight: bold;">
+            Your Students
+        </div>
+        <ul class="list-group list-group-flush" ng-repeat="student in students">
+            <li class="list-group-item">
+                Name: {{student.name}} {{student.surname}}
+                <a ng-click="openPatient(student.id)" style="text-decoration: none; float: right">
+                    Edit
+                </a>
+                <span style="float: right; margin-right: 15px;">
+                    Age: {{student.age}}
+                </span>
+            </li>
     </div>
     
     <div ng-if="error" class="alert alert-danger" style="font-weight: bold; margin-top: 20px;">

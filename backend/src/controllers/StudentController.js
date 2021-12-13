@@ -14,9 +14,9 @@ class StudentController {
     try{
       const students = await StudentService.index({ data: req.data, userId: req.userId });
       return res.json(students)
-    } catch(error){
-      return res.status(400).json({ error: error.message })
-    }
+    } catch(error) {
+      return res.status(400).json({ error: "REQUIRED_FIELDS" });
+    };
 
   }
 
@@ -25,7 +25,7 @@ class StudentController {
       const updatedStudent = await StudentService.update({ data: req.data, filter: req.filter, userId: req.userId });
       return res.json(updatedStudent);
     } catch(error) {
-      res.status(400).json({ error: error.message })
+      res.status(400).json({ error: "REQUIRED_FIELDS" })
     }
   }
 
@@ -34,7 +34,7 @@ class StudentController {
       await StudentService.destroy({ data: req.data, filter: req.filter, userId: req.userId })
       return res.json({ message: "Student deleted." });
     } catch(error) {
-      res.status(400).json({ error: error.message })
+      res.status(400).json({ error: "REQUIRED_FIELDS" })
     }
   }
 }

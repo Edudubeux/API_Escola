@@ -2,7 +2,7 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
   $scope.app = "School Full";
   $scope.msg = "Hello teacher, if you already have an account, sign-in up ";
   $scope.error = "";
-  const teste = 'Your profile has been updated! Now you are FULL!';
+  const msg = 'Your profile has been updated! Now you are FULL!';
 
   const userValidate = user => {
     if (!user) {
@@ -52,7 +52,7 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
   $scope.updateUser = user => {
     userServices.updateUser(user)
     .then(() => {
-      $scope.mensagem = teste;
+      $scope.mensagem = msg;
       delete $scope.error;
       $timeout(() => {
         $location.path("/menu");
