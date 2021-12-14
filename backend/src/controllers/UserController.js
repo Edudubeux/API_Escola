@@ -22,7 +22,6 @@ class UserController {
   async update(req, res) {
     try{
       if(!req.data) {
-        console.log('oi');
         return res.status(400).json({ error: "REQUIRED_FIELDS" })
       };
 

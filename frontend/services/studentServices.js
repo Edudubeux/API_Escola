@@ -5,7 +5,7 @@ angular.module("escolinha").factory("studentServices", function ($http, config) 
     };
 
     const showStudents = () => {
-        return $http.get(config.baseUrl + "/students")
+        return $http.get(config.baseUrl + "/students/:id?")
     };
 
     const updateStudents = student => {

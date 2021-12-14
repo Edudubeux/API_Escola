@@ -10,10 +10,9 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
 
     const id = $routeParams.id;
 
-    console.log($routeParams, 'ROUTE PARAMS');
+    // console.log($routeParams, 'ROUTE PARAMS');
 
     const init = () => {
-        console.log('init full');
         if (!$scope.isEdit) {
             return;
         }
@@ -27,22 +26,28 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
     // ver as coisas que mateus botou 
 
     const getStudent = () => {
-        const data = {
-            id
-        };
+        const data = { id };
 
         $scope.loading = true;
 
-        studentServices.updateStudents(data).then(resp => $scope.user = resp).catch(() => alert('erro full')).finally(() => $scope.loading = false);
+        studentServices.showStudents(data)
+        .then(resp => $scope.user = resp)
+        .catch( error => {
+            if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
+                $scope.error = "Please, fill the fields.";
+                return;
+            };
+        })
+        .finally(() => $scope.loading = false);
     };
 
     $scope.addStudents = student => {
         studentServices.addStudents(student)
-            .then( () => {
+            .then(() => {
                 $scope.isValid = true;
                 $scope.mensagem = msg("added")
                 $scope.error = null
-                $timeout( () => {
+                $timeout(() => {
                     $location.path("/menu");
                 }, 4000);
             })
@@ -57,16 +62,16 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
 
     $scope.updateStudents = student => {
         studentServices.updateStudents(student)
-            .then( () => {
+            .then(() => {
                 $scope.isValid = true;
                 $scope.mensagem = msg("updated")
                 $scope.error = null;
-                $timeout( () => {
+                $timeout(() => {
                     $location.path("/menu")
                 }, 4000);
-            }) 
-            .catch( error => {
-                if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
+            })
+            .catch(error => {
+                if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS OLA") {
                     $scope.error = "Please, fill the fields.";
                     return;
                 };

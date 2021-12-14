@@ -6,7 +6,7 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     controller: "userCtrl"
   });
 
-  $routeProvider.when("/menu", {
+  $routeProvider.when("/menu/:id?", {
     templateUrl: "views/menuPage.html",
     controller: "menuCtrl"
   });
