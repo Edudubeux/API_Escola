@@ -20,19 +20,19 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
         });
     };
 
-    $scope.openPatient = id => {
+    $scope.editStudent = id => {
         $location.path(`/updateStudents/${id}`);
     };
 
     const showStudents = () => {
         studentServices.showStudents()
-        .then((req, res) => {
-            $scope.students = res.data
+        .then( req => {
+            $scope.students = req
+            .data
         })
         .catch( error => {
-            if (error && error.data) {
-                return;
-            }
+            console.log(error);
+            return
         });
     };
 

@@ -10,7 +10,8 @@ const routes = new Router();
 routes.use(loginRequired);
 
 routes.post('/', Validate(StudentSchema.store), StudentController.store);
-routes.get('/:id?', StudentController.index);
+routes.get('/', StudentController.index);
+routes.get('/:id', Validate(StudentSchema.find), StudentController.find);
 routes.delete('/:id', Validate(StudentSchema.destroy), StudentController.destroy);
 routes.put('/:id', Validate(StudentSchema.update), StudentController.update);
 

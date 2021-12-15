@@ -8,6 +8,9 @@
     <div class="container">
         <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
     </div>
+    <div ng-show="loading" style="display: flex; justify-content: center;">
+        <img src="../../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+    </div> <!-- div do reload -->
     <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
         <div class="card-header" style="font-weight: bold;">
             {{msg}}
@@ -32,7 +35,7 @@
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
                 Name: {{student.name}} {{student.surname}}
-                <a ng-click="openPatient(student.id)" style="text-decoration: none; float: right">
+                <a id="edit" ng-click="editStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold;">
                     Edit
                 </a>
                 <span style="float: right; margin-right: 15px;">

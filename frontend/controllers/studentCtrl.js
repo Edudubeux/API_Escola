@@ -9,29 +9,25 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
     $scope.isEdit = !!$routeParams.id;
 
     const id = $routeParams.id;
-
-    // console.log($routeParams, 'ROUTE PARAMS');
-
     const init = () => {
         if (!$scope.isEdit) {
             return;
-        }
+        };
 
         getStudent();
     };
 
-    // Criar metodo find (finOne) no controller do back
     // ver questao dos params
     //ver o $scope.loading
     // ver as coisas que mateus botou 
 
     const getStudent = () => {
-        const data = { id };
-
         $scope.loading = true;
-
-        studentServices.showStudents(data)
-        .then(resp => $scope.user = resp)
+        studentServices.findStudent(id)
+        .then(req => {
+            $scope.student = req.data
+            console.log(req.data);
+        })
         .catch( error => {
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
                 $scope.error = "Please, fill the fields.";
@@ -42,6 +38,7 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
     };
 
     $scope.addStudents = student => {
+        $scope.loading = true;
         studentServices.addStudents(student)
             .then(() => {
                 $scope.isValid = true;
@@ -57,10 +54,12 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
                     return;
                 }
                 $scope.error = error.data.error;
-            });
+            })
+            .finally( () => $scope.loading = false )
     };
 
     $scope.updateStudents = student => {
+        $scope.loading = true;
         studentServices.updateStudents(student)
             .then(() => {
                 $scope.isValid = true;
@@ -76,7 +75,8 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
                     return;
                 };
                 $scope.error = error.data.error;
-            });
+            })
+            .finally( () => $scope.loading = false)
     };
 
     init();

@@ -12,6 +12,11 @@ export default {
         height: Yup.number().required(),
       }),
   },
+  find : {
+    params: Yup.object().shape({
+      id: Yup.number().required(),
+    })
+  },
   update: {
     body: Yup.object().shape({
       name: Yup.string(),
