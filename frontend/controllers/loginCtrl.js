@@ -4,18 +4,17 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
     $scope.msg = "Hello teacher, haven't create an account yet, create one "
 
     const dataValidate = user => {
-
-        if (!user.password && !user.email) {
+        if (!user) {
             $scope.error = "Please, fill fields."
             return;
-        } 
+        }
         else if (!user.email) {
             $scope.error = "Please, fill the email field."
             return;
         } else if (!user.password) {
             $scope.error = "Please, fill the password field."
             return;
-        } 
+        }
         else return true;
     }
 
@@ -23,15 +22,16 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
         if (dataValidate(user)) {
             return loginServices.login(user)
                 .then(res => {
+                    $scope.loading = true;
                     loginServices.getToken(res.data.token)
                     $location.path("/menu");
                 })
                 .catch(error => {
-                    console.log(error);
                     if (error && error.data) {
                         $scope.error = error.data.error
                     }
                 })
+                .finally( () => $scope.loading = false)
         }
     };
 });

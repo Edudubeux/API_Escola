@@ -39,24 +39,27 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
   $scope.addUser = user => {
     if (userValidate(user)) {
       return userServices.addUsers(user)
-        .then(res => {
+        .then( () => {
+          $scope.loading = true;
           $location.path("/login");
         })
         .catch(error => {
           console.log(error);
           $scope.error = error.data.error
-        });
+        })
+        .finally( () => $scope.loading = false)
     };
   };
 
   $scope.updateUser = user => {
     userServices.updateUser(user)
     .then(() => {
+      $scope.loading = true;
       $scope.mensagem = msg;
       delete $scope.error;
       $timeout(() => {
         $location.path("/menu");
-      }, 4000)
+      }, 3000)
     })
     .catch(error => {
       if(error && error.data && error.data.error === "REQUIRED_FIELDS") {
@@ -64,7 +67,8 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
         return;
       }
       $scope.error = error.data.error
-    });
+    })
+    .finally( () => $scope.loading = false)
   };
 });
 

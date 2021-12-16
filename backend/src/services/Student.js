@@ -2,14 +2,13 @@ import Student from "../models/Student";
 import Photo from '../models/Photo';
 import User from '../models/User';
 
-
-
-
 const store = async req => {
   try {
     const user_id = req.userId;
+
+    console.log(req.data, "OLA DATA NO SERVICE");
     
-    const emailValidate = await find({ email: req.data.email });
+    const emailValidate = await Student.findOne({ where: { email: req.data.email }});
     
     if (emailValidate) {
       throw new Error('Email already exists.');
@@ -24,7 +23,6 @@ const store = async req => {
 
 const find = async req => {
   try {
-    console.log(req.filter);
     const { id } = req.filter;
 
     const student = await Student.findOne({

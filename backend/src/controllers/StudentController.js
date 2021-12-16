@@ -3,7 +3,8 @@ import StudentService from '../services/Student';
 class StudentController {
   async store(req, res) {
     try {
-      const newStudent = await StudentService.store(req.data);
+      const userId = req.userId
+      const newStudent = await StudentService.store({ data: req.data, userId});
       return res.json(newStudent);
     } catch(error) {
       return res.status(400).json({ error: "REQUIRED_FIELDS" })
@@ -21,7 +22,6 @@ class StudentController {
 
   async find(req, res) {
     try {
-      console.log(req.filter);
       const students = await StudentService.find({ filter: req.filter, });
       return res.json(students)
     } catch(error) {

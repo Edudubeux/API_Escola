@@ -23,24 +23,28 @@
     <div style="margin-top: 130px; font-size: 20px; display: flex;">
         <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
             <li class="list-group-item active" aria-current="true">What are you wishing?</li>
-            <a href="http://127.0.0.1:5501/frontend/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Chage your profile</li></a>
-            <a href="http://127.0.0.1:5501/frontend/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
+            <a href="http://127.0.0.1:5500/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Change your profile</li></a>
+            <a href="http://127.0.0.1:5500/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
         </ul>
     </div>
     
-    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
+    <div class="card" style=" margin-right: 300px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
         <div class="card-header" style="font-weight: bold;">
             Your Students
         </div>
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
+                <img src="../1634842186564_14810.jpg" class="rounded-circle" width="60" height="60">
                 Name: {{student.name}} {{student.surname}}
-                <a id="edit" ng-click="editStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold;">
-                    Edit
-                </a>
                 <span style="float: right; margin-right: 15px;">
                     Age: {{student.age}}
                 </span>
+                <br><a id="delete" ng-click="deleteStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold;">
+                    Delete
+                </a>
+                <a id="edit" ng-click="editStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold; margin-right: 15px;">
+                    Edit
+                </a>
             </li>
     </div>
     

@@ -14,19 +14,14 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
             return;
         };
 
-        getStudent();
+        $scope.getStudent();
     };
 
-    // ver questao dos params
-    //ver o $scope.loading
-    // ver as coisas que mateus botou 
-
-    const getStudent = () => {
+    $scope.getStudent = () => {
         $scope.loading = true;
         studentServices.findStudent(id)
         .then(req => {
-            $scope.student = req.data
-            console.log(req.data);
+            $scope.student = req.data;
         })
         .catch( error => {
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
@@ -41,12 +36,13 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
         $scope.loading = true;
         studentServices.addStudents(student)
             .then(() => {
+                $scope.loading = true;
                 $scope.isValid = true;
                 $scope.mensagem = msg("added")
                 $scope.error = null
                 $timeout(() => {
                     $location.path("/menu");
-                }, 4000);
+                }, 3000);
             })
             .catch(error => {
                 if (error && error.data && error.data.error === "REQUIRED_FIELDS") {
@@ -60,20 +56,16 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
 
     $scope.updateStudents = student => {
         $scope.loading = true;
-        studentServices.updateStudents(student)
-            .then(() => {
+        studentServices.updateStudents(id, student)
+        .then( () => {
                 $scope.isValid = true;
                 $scope.mensagem = msg("updated")
                 $scope.error = null;
                 $timeout(() => {
                     $location.path("/menu")
-                }, 4000);
+                }, 3000);
             })
             .catch(error => {
-                if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS OLA") {
-                    $scope.error = "Please, fill the fields.";
-                    return;
-                };
                 $scope.error = error.data.error;
             })
             .finally( () => $scope.loading = false)

@@ -9,7 +9,7 @@
         <h1 style="text-align: center;">{{app}}</h1><br>
 
         <div ng-show="loading" style="display: flex; justify-content: center;">
-          <img src="../../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+          <img src="../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
         </div> <!-- div do reload -->
 
         <form name="studentForm" ng-show="!loading">
@@ -25,6 +25,8 @@
            name="weight" ng-model="student.weight" ng-required="true">
            <h4>Height</h4> <input type="text" class="form-control" placeholder="height" aria-label="height"
            name="height" ng-model="student.height" ng-required="true">
+           <h4>Add or Change your Photo</h4> <input style="width: 460px;" type="file" class=" form-control form-control-lg" 
+           id="formFieldLg" name="photo" ng-model="student.photo">
         </form>
         
         <button ng-disabled="loading" type="submit" class="btn btn-primary btn-block"

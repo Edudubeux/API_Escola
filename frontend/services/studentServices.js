@@ -14,14 +14,23 @@ angular.module("escolinha").factory("studentServices", function ($http, config) 
         }});
     };
 
-    const updateStudents = student => {
-        return $http.put(config.baseUrl + "/students/:id", student)
+    const updateStudents = (id, student) => {
+        return $http.put(config.baseUrl + `/students/${id}`, student, {params : {
+            id,
+        }})
     };
+
+    const deleteStudent = id => {
+        return $http.delete(config.baseUrl + `/students/${id}`, {params : {
+            id,
+        }});
+    }
 
     return{
         addStudents,
         showStudents,
         updateStudents,
+        deleteStudent,
         findStudent
     };
 });
