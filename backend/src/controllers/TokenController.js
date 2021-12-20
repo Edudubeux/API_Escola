@@ -8,13 +8,11 @@ class TokenController {
     const user = await Token.find(email);
 
     if(!user) {
-      res.status(400).json({ error: "Invalid password or email, try again later." })
-      return;
+      return res.status(400).json({ error: "Invalid password or email, try again later." });
     }
 
     if(!(await user.checkPassword(password))){
-      res.status(400).json({ error: 'Invalid password or email, try again later.'});
-      return;
+      return res.status(400).json({ error: 'Invalid password or email, try again later.'});
     }
 
     const { id } = user;

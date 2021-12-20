@@ -40,8 +40,18 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     if (userValidate(user)) {
       return userServices.addUsers(user)
         .then( () => {
-          $scope.loading = true;
-          $location.path("/login");
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your profile has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          }).then( () => {
+            $scope.loading = true;
+            $timeout( () => {
+              $location.path("/login");
+            })
+          })
         })
         .catch(error => {
           console.log(error);
@@ -56,10 +66,10 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     .then(() => {
       $scope.loading = true;
       $scope.mensagem = msg;
-      delete $scope.error;
+      $scope.error = null;
       $timeout(() => {
         $location.path("/menu");
-      }, 3000)
+      }, 350)
     })
     .catch(error => {
       if(error && error.data && error.data.error === "REQUIRED_FIELDS") {

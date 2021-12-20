@@ -31,6 +31,11 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     controller: "studentCtrl"
   });
 
+  $routeProvider.when("/addPhoto/:id", {
+    templateUrl: "views/addPhotoPage.html", 
+    controller: "photoCtrl"
+  });
+
   $routeProvider.when("/error", {
     templateUrl: "views/sorryPage.html",
   });

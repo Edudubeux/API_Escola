@@ -40,7 +40,7 @@ class StudentController {
 
   async destroy(req, res) {
     try{
-      await StudentService.destroy({ data: req.data, filter: req.filter, userId: req.userId })
+      await StudentService.destroy({ filter: req.filter })
       return res.json({ message: "Student deleted." });
     } catch(error) {
       res.status(400).json({ error: "REQUIRED_FIELDS" })

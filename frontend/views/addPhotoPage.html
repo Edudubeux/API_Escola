@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Photo Page</title>
+</head>
+<body>
+    <section class="container">
+        <h1 style="text-align: center;">{{app}}</h1><br>
+
+        <div ng-show="loading" style="display: flex; justify-content: center;">
+          <img src="../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+        </div> <!-- div do reload -->
+        
+        <form name="photoForm">
+          <input style="width: 460px;" type="file" id="file" class=" form-control form-control-lg" 
+              name="photo" ng-model="photo">
+              
+          <button ng-disabled="loading" type="submit" class="btn btn-primary btn-block" ng-click="add()">
+            addPhoto
+          </button><br>
+        </form>
+        <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
+      </section>
+</body>
+</html>

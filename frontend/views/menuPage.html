@@ -25,12 +25,17 @@
             <li class="list-group-item active" aria-current="true">What are you wishing?</li>
             <a href="http://127.0.0.1:5500/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Change your profile</li></a>
             <a href="http://127.0.0.1:5500/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
+            <a href="http://127.0.0.1:5500/index.html#/login" style="color: black; text-decoration: none; " ng-click="deleteToken()"><li class="list-group-item">Dislog from your account</li></a>
         </ul>
     </div>
     
     <div class="card" style=" margin-right: 300px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
         <div class="card-header" style="font-weight: bold;">
             Your Students
+        </div>
+        <div ng-if="noStudents">
+            {{message}}
+            <br><img ng-src="../carinha_triste.jpeg" style="height: 100px; width: 100px;">
         </div>
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
