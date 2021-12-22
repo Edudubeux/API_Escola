@@ -11,6 +11,6 @@ routes.use(loginRequired);
 
 const upload = multer(multerConfig);
 
-routes.post('/:id', upload.single('file') ,PhotoController.store);
+routes.post('/:id', upload.single('file'),PhotoController.store);
 
 export default routes;

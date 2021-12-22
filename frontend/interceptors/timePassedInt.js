@@ -7,6 +7,7 @@ angular.module("escolinha").factory("timePassedInt", function (localStorage) {
             if (localStorage.token && timePassed > 604800000) {
                 localStorage.removeToken();
             };
+
         }
     }
 });

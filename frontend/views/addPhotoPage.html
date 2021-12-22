@@ -12,8 +12,8 @@
           <img src="../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
         </div> <!-- div do reload -->
         
-        <form name="photoForm">
-          <input style="width: 460px;" type="file" id="file" class=" form-control form-control-lg" 
+        <form name="photoForm" enctype="multipart/form-data" id="photoForm">
+          <input style="width: 460px;" type="file" id="file" ng-file-select="onFileSelect($files)" class="form-control form-control-lg" 
               name="photo" ng-model="photo">
               
           <button ng-disabled="loading" type="submit" class="btn btn-primary btn-block" ng-click="add()">

@@ -1,9 +1,16 @@
 angular.module("escolinha").factory("photoServices", function ($http, config) {
 
-    const addPhoto = id => {
-        return $http.post(config.baseUrl + `/photos/${id}`, {params : {
-            id,
-        }});
+    const addPhoto = (formData, id) => {
+        console.log(formData, 'form data');
+
+        return $http({
+            url: config.baseUrl + `/photos/${id}`,
+            headers: {"Content-Type": undefined },
+            data: {
+                
+            },
+            method: "POST"
+        });
     }
 
     return {
