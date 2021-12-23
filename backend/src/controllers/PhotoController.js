@@ -1,5 +1,5 @@
 import multer from "multer";
-import multerConfig from '../config/multerConfig';
+import multerConfig from "../config/multerConfig"
 
 import Photo from "../services/Photo";
 
@@ -11,25 +11,27 @@ class PhotoController {
       if (err) {
         return res.status(400).json({ errors: [err.code], })
       }
+      
       try {
         const file = req.file;
 
-		console.log(file)
-
         if (!file) {
           return res.status(400).json({
-            error: true
+            err
           });
         }
+        
+        console.log(path, "OLA PATH");
 
         const data = {
-			original_name: file.filename,
-          	file_name: file.path,
-			student_id: req.params.id
+          original_name: file.filename,
+          file_name: file.path,
+          student_id: req.params.id
         };
-        console.log(data, 'data');
 
-        const response = await Photo.store(data); 
+        console.log(data);
+
+        const response = await Photo.store(data);
 
         return res.json(response);
       } catch (error) {
@@ -39,6 +41,14 @@ class PhotoController {
       }
     });
   }
+
+  // async find(req, res) {
+  //   try {
+  //     const photo = 
+  //   } catch {
+
+  //   }
+  // }
 }
 
 export default new PhotoController();

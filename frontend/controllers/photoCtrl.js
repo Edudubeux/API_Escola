@@ -3,17 +3,10 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
 
     const id = $routeParams.id;
 
-    $scope.show = () => {
-        console.log($scope.photo);
-    }
-
-    document.getElementById('photoForm').onsubmit = function () {
+    document.getElementById('photoForm').onsubmit = () => {
         const input = document.getElementById('file');
         const file = input.files[0];
         const formData = new FormData();
-
-        console.log(file);
-
         formData.append('file', file);
 
         photoServices.addPhoto(formData, id)
@@ -25,7 +18,6 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
             })
     };
 
-    $scope.photo = 
 
     $scope.getFile = function () {
         $scope.progress = 0;

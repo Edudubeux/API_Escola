@@ -8,7 +8,7 @@
     <section class="container">
         <h1 style="text-align: center;">{{app}}</h1><br>
         <div ng-show="loading" style="display: flex; justify-content: center;">
-          <img src="../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+          <img src="./loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
         </div> <!-- div do reload -->
         <form name="userForm">
           <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="Email"
@@ -23,7 +23,12 @@
 
         <button type="submit" class="btn btn-primary btn-block"
           ng-click="login(user)">Sign-in</button><br>
-        <div style="font-weight: bold;">{{msg}}<a href="http://127.0.0.1:5500/index.html#/registration" style="font-weight: bold; ">here</a></div>
+        <div style="font-weight: bold;" ng-click="redirectTo()">
+          {{msg}} 
+          <span id="loginHere" ng-click="redirectTo()" style="font-weight: bold; color: #007bff; ">
+            here
+          </span>
+        </div>
       </section>
 </body>
 </html>

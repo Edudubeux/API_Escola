@@ -21,6 +21,10 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
         else return true;
     }
 
+    $scope.redirectTo = () => {
+        $location.path("/registration");
+    };
+
     $scope.login = user => {
         $scope.loading = true;
         if (dataValidate(user)) {

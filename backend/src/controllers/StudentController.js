@@ -14,6 +14,13 @@ class StudentController {
   async index(req, res) {
     try {
       const students = await StudentService.index({ userId: req.userId});
+
+      students.forEach( student => {
+         if (!student.photos) {
+            student.photos.push({file_name: "/Users/eduardodubeux/Documents/Programação/Escola/backend/uploads/user.jpeg"});
+         };
+         return students;
+      });
       return res.json(students)
     } catch(error) {
       return res.status(400).json({ error: "REQUIRED_FIELDS" });

@@ -22,9 +22,23 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
         });
     };
 
-    $scope.deleteToken = () => {
+    $scope.redirectTo = page => {
+        $location.path(`/${page}`)
+    }
+
+    $scope.dislog = () => {
         localStorage.clear();
-        console.log(localStorage);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You log off from your account',
+            showConfirmButton: false,
+            timer: 1500
+        }) .then( () => {
+            $timeout( () => {
+                $location.path("/login")
+            })
+        })
     }
 
     const showUser = () => {
@@ -58,6 +72,7 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
                 }
                 $scope.loading = true;
                 $scope.students = req.data
+                console.log(req.data);
             })
             .catch(error => {
                 console.log(error);

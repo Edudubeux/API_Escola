@@ -6,7 +6,7 @@ export default async (req, res, next) => {
   const { authorization } = (req.headers);
 
   if(!authorization) {
-    res.status(400).json({ error: 'Login required'})
+    return res.status(400).json({ error: 'Login required'});
   }
 
   const [, token ] = await authorization.split(' ');

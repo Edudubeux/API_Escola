@@ -9,7 +9,7 @@
         <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
     </div>
     <div ng-show="loading" style="display: flex; justify-content: center;">
-        <img src="../../loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+        <img src="./loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
     </div> <!-- div do reload -->
     <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
         <div class="card-header" style="font-weight: bold;">
@@ -23,9 +23,15 @@
     <div style="margin-top: 130px; font-size: 20px; display: flex;">
         <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
             <li class="list-group-item active" aria-current="true">What are you wishing?</li>
-            <a href="http://127.0.0.1:5500/index.html#/updateUser" style="color: black; text-decoration: none; "><li class="list-group-item">Change your profile</li></a>
-            <a href="http://127.0.0.1:5500/index.html#/addStudents" style="color: black; text-decoration: none; "><li class="list-group-item">Add new Students</li></a>
-            <a href="http://127.0.0.1:5500/index.html#/login" style="color: black; text-decoration: none; " ng-click="deleteToken()"><li class="list-group-item">Dislog from your account</li></a>
+            <span ng-click="redirectTo('updateUser')">
+                <li class="list-group-item">Change your profile</li>
+            </span>
+            <span ng-click="redirectTo('addStudents')">
+                <li class="list-group-item">Add new Students</li>
+            </span>
+            <span ng-click="dislog()">
+                <li class="list-group-item">Dislog from your account</li>
+            </span>
         </ul>
     </div>
     
@@ -39,7 +45,8 @@
         </div>
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
-                <img src="student.photo" class="rounded-circle" width="60" height="60">
+                <br>
+                <img ng-src="{{student.photos[0].file_name}}" class="rounded-circle" width="60" height="60">
                 Name: {{student.name}} {{student.surname}}
                 <span style="float: right; margin-right: 15px;">
                     Age: {{student.age}}
