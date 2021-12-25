@@ -36,11 +36,7 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     controller: "photoCtrl"
   });
 
-  $routeProvider.when("/error", {
-    templateUrl: "views/sorryPage.html",
-  });
-
   $routeProvider.otherwise({
-    redirectTo: "/error"
+    redirectTo: "/menu"
   });
 });

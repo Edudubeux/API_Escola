@@ -1,6 +1,6 @@
 angular.module("escolinha").controller("userCtrl", function ($scope, userServices, $location, $timeout) {
   $scope.app = "School Full";
-  $scope.msg = "Hello teacher, if you already have an account, sign-in up ";
+  $scope.msg = "Hello teacher, if you already have an account, please sign-in up ";
   $scope.error = "";
   const msg = 'Your profile has been updated! Now you are FULL!';
 
@@ -36,8 +36,13 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     else return true;
   };
 
+  $scope.redirectTo = page => {
+    $location.path(`/${page}`)
+  };
+
   $scope.addUser = user => {
     if (userValidate(user)) {
+      console.log(user);
       return userServices.addUsers(user)
         .then( () => {
           Swal.fire({

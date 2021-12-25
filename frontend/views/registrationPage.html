@@ -21,7 +21,12 @@
         <button type="submit" class="btn btn-primary btn-block"
           ng-click="addUser(user)">Send</button><br>
         <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
-        <div style="font-weight: bold;">{{msg}}<a href="http://127.0.0.1:5500/index.html#/login" style="font-weight: bold; ">here</a></div>
+        <div style="font-weight: bold;">
+          {{msg}}
+          <span id="enterHere" ng-click="redirectTo('login')" style="font-weight: bold; color: #007bff; ">
+            here
+          </span>
+        </div>
       </section>
 </body>
 </html>

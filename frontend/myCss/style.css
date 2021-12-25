@@ -32,7 +32,7 @@ a#edit:hover, a#delete:hover{
   cursor: pointer;
 }
 
-#loginHere:hover{
+#enterHere:hover{
   text-decoration: underline;
   cursor: pointer;
 }

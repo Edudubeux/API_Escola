@@ -22,7 +22,7 @@
     </div>
     <div style="margin-top: 130px; font-size: 20px; display: flex;">
         <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
-            <li class="list-group-item active" aria-current="true">What are you wishing?</li>
+            <li class="list-group-item active" aria-current="true">What do you want to do?</li>
             <span ng-click="redirectTo('updateUser')">
                 <li class="list-group-item">Change your profile</li>
             </span>
@@ -41,7 +41,7 @@
         </div>
         <div ng-if="noStudents">
             {{message}}
-            <br><img ng-src="../carinha_triste.jpeg" style="height: 100px; width: 100px;">
+            <br><img ng-src="/frontend/carinha_triste.jpeg" style="height: 100px; width: 100px;">
         </div>
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">

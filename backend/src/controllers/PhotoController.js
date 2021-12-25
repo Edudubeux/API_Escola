@@ -11,17 +11,15 @@ class PhotoController {
       if (err) {
         return res.status(400).json({ errors: [err.code], })
       }
-      
       try {
+		console.log(req.file);
         const file = req.file;
 
         if (!file) {
           return res.status(400).json({
-            err
+            err,
           });
         }
-        
-        console.log(path, "OLA PATH");
 
         const data = {
           original_name: file.filename,
@@ -41,14 +39,6 @@ class PhotoController {
       }
     });
   }
-
-  // async find(req, res) {
-  //   try {
-  //     const photo = 
-  //   } catch {
-
-  //   }
-  // }
 }
 
 export default new PhotoController();

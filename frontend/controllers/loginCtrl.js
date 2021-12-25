@@ -1,11 +1,11 @@
 angular.module("escolinha").controller("loginCtrl", function ($scope, loginServices, $location, $timeout) {
     $scope.app = "Login";
     $scope.error = "";
-    $scope.msg = "Hello teacher, haven't create an account yet, create one "
+    $scope.msg = "Hello teacher, if you haven't created an account yet, please do it so "
 
     const dataValidate = user => {
-        if (!user) {
-            $scope.error = "Please, fill fields."
+        if (!user.email && !user.password) {
+            $scope.error = "Please, fill the fields."
             $scope.loading = false;
             return;
         }
@@ -21,8 +21,8 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
         else return true;
     }
 
-    $scope.redirectTo = () => {
-        $location.path("/registration");
+    $scope.redirectTo = page => {
+        $location.path(`/${page}`);
     };
 
     $scope.login = user => {

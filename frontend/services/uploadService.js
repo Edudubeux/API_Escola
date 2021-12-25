@@ -1,4 +1,4 @@
-angular.module("escolinha").factory('fileReader', function ($q, $log) {
+angular.module("escolinha").factory('fileReader', function ($q) {
     const onLoad = function (reader, deferred, scope) {
         return function () {
             scope.$apply(function () {
