@@ -12,7 +12,6 @@ class PhotoController {
         return res.status(400).json({ errors: [err.code], })
       }
       try {
-		console.log(req.file);
         const file = req.file;
 
         if (!file) {
@@ -27,8 +26,6 @@ class PhotoController {
           student_id: req.params.id
         };
 
-        console.log(data);
-
         const response = await Photo.store(data);
 
         return res.json(response);
@@ -39,6 +36,10 @@ class PhotoController {
       }
     });
   }
+
+  async delete(req, res) {
+
+  };
 }
 
 export default new PhotoController();

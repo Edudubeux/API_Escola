@@ -19,6 +19,9 @@
           <button ng-disabled="loading" type="submit" class="btn btn-primary btn-block">
             addPhoto
           </button><br>
+          <div ng-if="{{student}}">
+            Your photos:
+          </div>
         </form>
         <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
       </section>

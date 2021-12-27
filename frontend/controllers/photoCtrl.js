@@ -1,4 +1,4 @@
-angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams) {
+angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams, $location) {
     $scope.app = "Add or change your photo here"
 
     const id = $routeParams.id;
@@ -9,19 +9,14 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
         const formData = new FormData();
         formData.append('file', file);
 
-        // const teste = formData.get('file')
-        // console.log(teste);
-
         photoServices.addPhoto(formData, id)
-            .then(req => {
-                console.log(req, "OLA REQ");
+            .then( () => {
+                $location.path("/menu")
             })
             .catch(error => {
                 console.log(error, "OLA ERROR"); 
             });
     };
-    
-
 
     $scope.getFile = function () {
         $scope.progress = 0;
