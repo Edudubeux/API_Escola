@@ -36,6 +36,11 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
     controller: "photoCtrl"
   });
 
+  $routeProvider.when("/changePhoto/:id", {
+    templateUrl: "views/changePhotoPage.html", 
+    controller: "photoChangeCtrl"
+  });
+
   $routeProvider.otherwise({
     redirectTo: "/menu"
   });

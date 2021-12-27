@@ -22,10 +22,11 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
         });
     };
 
+    
     $scope.redirectTo = page => {
         $location.path(`/${page}`)
     }
-
+    
     $scope.dislog = () => {
         localStorage.clear();
         Swal.fire({
@@ -40,44 +41,48 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
             })
         })
     }
-
+    
     const showUser = () => {
         userServices.getUser()
-            .then(req => {
-                $scope.loading = true;
-                const { name, email } = req.data
-                $scope.name = name
-                $scope.email = email
-            })
-            .catch(error => {
-                if (error && error.data) {
-                    $scope.error = error.data.error;
-                    return;
-                }
-            })
-            .finally(() => $scope.loading = false)
+        .then(req => {
+            $scope.loading = true;
+            const { name, email } = req.data
+            $scope.name = name
+            $scope.email = email
+        })
+        .catch(error => {
+            if (error && error.data) {
+                $scope.error = error.data.error;
+                return;
+            }
+        })
+        .finally(() => $scope.loading = false)
     };
-
+    
     $scope.editStudent = id => {
         $location.path(`/updateStudents/${id}`);
     };
-
+    
     const showStudents = () => {
         studentServices.showStudents()
-            .then(req => {
-                if (!req.data.length) {
-                    $scope.noStudents = true;
-                    $scope.message = "You don't have any Students";
-                    return;
-                }
-                $scope.loading = true;
-                $scope.students = req.data
-                console.log(req.data);
-            })
-            .catch(error => {
-                console.log(error);
+        .then(req => {
+            if (!req.data.length) {
+                $scope.noStudents = true;
+                $scope.message = "You don't have any Students";
                 return;
-            })
+            }
+            $scope.loading = true;
+            $scope.students = req.data
+            // const teste = req.data
+            // teste.forEach( value => {
+            //     console.log(value.photos[0].file_name.slice(24));
+            // });
+            // console.log(teste);
+        })
+        .catch(error => {
+            console.log(error);
+            return;
+        })
             .finally(() => $scope.loading = false)
     };
 

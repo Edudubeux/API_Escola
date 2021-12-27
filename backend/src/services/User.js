@@ -23,7 +23,7 @@ export default {
     try {
       const user = await User.findByPk(req.userId)
       if (!user) {
-        throw new Error("This user doesn't exists.")
+        throw "This user doesn't exists."
       }
       return user;
     } catch (error) {

@@ -1,5 +1,5 @@
-angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams, $location) {
-    $scope.app = "Add or change your photo here"
+angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams, $location, $timeout) {
+    $scope.app = "Add your photo here";
 
     const id = $routeParams.id;
 
@@ -10,11 +10,16 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
         formData.append('file', file);
 
         photoServices.addPhoto(formData, id)
-            .then( () => {
-                $location.path("/menu")
+            .then(() => {
+                $location.path(`/updateStudents/${id}`)
             })
-            .catch(error => {
-                console.log(error, "OLA ERROR"); 
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.data.error,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                });
             });
     };
 

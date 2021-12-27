@@ -9,7 +9,7 @@
         <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
     </div>
     <div ng-show="loading" style="display: flex; justify-content: center;">
-        <img src="./loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+        <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
     </div> <!-- div do reload -->
     <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
         <div class="card-header" style="font-weight: bold;">
@@ -40,13 +40,14 @@
             Your Students
         </div>
         <div ng-if="noStudents">
-            {{message}}
-            <br><img ng-src="/frontend/carinha_triste.jpeg" style="height: 100px; width: 100px;">
+            {{message}}<br>
+            <img src="/frontend/uploads/carinha_triste.jpeg" style="height: 100px; width: 100px;">
         </div>
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
                 <br>
-                <img ng-src="{{student.photos[0].file_name}}" class="rounded-circle" width="60" height="60">
+                <img ng-src="{{student.photos[0].file_name.slice(24)}}" ng-if="student.photos.length" class="rounded-circle" width="60" height="60">
+                <img src="/frontend/uploads/user.jpeg" ng-if="!student.photos.length" class="rounded-circle" width="60" height="60">
                 Name: {{student.name}} {{student.surname}}
                 <span style="float: right; margin-right: 15px;">
                     Age: {{student.age}}

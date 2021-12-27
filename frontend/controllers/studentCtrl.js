@@ -1,4 +1,4 @@
-angular.module("escolinha").controller("studentCtrl", function ($scope, studentServices, $location, $timeout, $routeParams) {
+angular.module("escolinha").controller("studentCtrl", function ($scope, studentServices, $location, $timeout, $routeParams, photoServices) {
     $scope.app = "School Full";
     $scope.error = null;
     $scope.isValid = false;
@@ -15,12 +15,38 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
 
     $scope.addPhoto = () => {
         $location.path(`/addPhoto/${id}`)
-    }
+    };
+
+    $scope.changePhoto = () => {
+        $location.path(`/changePhoto/${id}`)
+    };
+
+    $scope.deletePhoto = () => {
+        photoServices.deletePhoto(id)
+        .then(() => {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your photo has been deleted!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${error.data.error}, add a photo to the student profile!`,
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        });
+    };
 
     $scope.getStudent = () => {
         $scope.loading = true;
         studentServices.findStudent(id)
             .then(req => {
+                console.log(req.data)
                 $scope.student = req.data;
             })
             .catch(error => {

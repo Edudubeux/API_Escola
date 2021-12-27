@@ -10,7 +10,7 @@ class StudentController {
       return res.status(400).json({ error: "REQUIRED_FIELDS" })
     };
   }
-  
+
   async index(req, res) {
     try {
       const students = await StudentService.index({ userId: req.userId});
@@ -29,7 +29,7 @@ class StudentController {
 
   async find(req, res) {
     try {
-      const students = await StudentService.find({ filter: req.filter, });
+      const students = await (await StudentService.find({ filter: req.filter, }));
       return res.json(students)
     } catch(error) {
       return res.status(400).json({ error: "REQUIRED_FIELDS" });

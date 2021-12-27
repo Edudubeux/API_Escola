@@ -56,7 +56,7 @@ const index = async req => {
   }
 };
 
-const update = async (req) => {
+const update = async req => {
   try {
     const { id } = req.filter;
 
@@ -69,12 +69,6 @@ const update = async (req) => {
     const updatedStudent = await student.update(req.data);
 
     return updatedStudent;
-    // const options = {
-    //   changes: req.data,
-    //   filter: id
-    // };
-
-    // const updatedStudent = Student.update({ options });
 
   } catch (error) {
     throw new Error(error);
