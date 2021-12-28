@@ -29,8 +29,17 @@ class StudentController {
 
   async find(req, res) {
     try {
-      const students = await (await StudentService.find({ filter: req.filter, }));
-      return res.json(students)
+      const student = await StudentService.find({ filter: req.filter, });
+
+      if(!student){
+        return res.status(400).json({ error: "Student not found!" })
+      }
+
+      if (req.userId !== student.user_id) {
+        return res.status(400).json({ error: "Student not found!" })
+      }
+
+      return res.json(student)
     } catch(error) {
       return res.status(400).json({ error: "REQUIRED_FIELDS" });
     };

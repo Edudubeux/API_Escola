@@ -42,6 +42,6 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
   });
 
   $routeProvider.otherwise({
-    redirectTo: "/menu"
+    redirectTo: "/login"
   });
 });

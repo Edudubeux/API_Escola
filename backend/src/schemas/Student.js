@@ -1,15 +1,16 @@
 import * as Yup from 'yup';
+import sanitize from '../config/sanitize';
 
 export default {
   store: {
     body:
       Yup.object().shape({
-        name: Yup.string().required(),
-        surname: Yup.string().required(),
-        email: Yup.string().required().email(),
-        age: Yup.number().required(),
-        weight: Yup.number().required(),
-        height: Yup.number().required(),
+        name: Yup.string().transform(sanitize).required(),
+        surname: Yup.string().transform(sanitize).required(),
+        email: Yup.string().transform(sanitize).required().email(),
+        age: Yup.number().min(1).required(),
+        weight: Yup.number().required().min(0),
+        height: Yup.number().required().min(0),
       }),
   },
   find : {
@@ -19,12 +20,12 @@ export default {
   },
   update: {
     body: Yup.object().shape({
-      name: Yup.string(),
-      surname: Yup.string(),
-      email: Yup.string().email(),
-      age: Yup.number(),
-      weight: Yup.number(),
-      height: Yup.number(),
+      name: Yup.string().transform(sanitize),
+      surname: Yup.string().transform(sanitize),
+      email: Yup.string().transform(sanitize).email(),
+      age: Yup.number().min(1),
+      weight: Yup.number().min(0),
+      height: Yup.number().min(0),
     }),
     params: Yup.object().shape({
       id: Yup.number().required(),

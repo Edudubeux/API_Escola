@@ -12,7 +12,8 @@ class UserController {
 
 	async index(req, res) {
 		try {
-			const user = await User.index({ userId: req.userId })
+			const userId = req.userId;
+			const user = await User.index({ userId, })
 			return res.json(user);
 		} catch (error) {
 			return res.status(400).json({ error: error.message })

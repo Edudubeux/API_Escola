@@ -1,4 +1,4 @@
-angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams, $location, $timeout) {
+angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader, photoServices, $routeParams, $location) {
     $scope.app = "Add your photo here";
 
     const id = $routeParams.id;
@@ -11,7 +11,7 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
 
         photoServices.addPhoto(formData, id)
             .then(() => {
-                $location.path(`/updateStudents/${id}`)
+                $location.path(`/menu`)
             })
             .catch((error) => {
                 Swal.fire({
@@ -21,6 +21,10 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
                     footer: '<a href="">Why do I have this issue?</a>'
                 });
             });
+    };
+
+    $scope.redirectTo = page => {
+        $location.path(`/${page}`)
     };
 
     $scope.getFile = function () {

@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Student Registration Page</title>
+  <meta charset="UTF-8">
+  <title>Student Registration Page</title>
 </head>
+
 <body>
-    <section class="container">
-        <h1 style="text-align: center;">{{app}}</h1><br>
-        <div ng-show="loading" style="display: flex; justify-content: center;">
-          <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
-        </div> <!-- div do reload -->
-        <form name="studentForm">
-          <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
-           name="name" ng-model="student.name" ng-required="true" maxlength="45">
-           <h4>Last name</h4> <input type="text" class="form-control" placeholder="last name" aria-label="lastName"
-           name="lastName" ng-model="student.surname" ng-required="true" maxlength="45">
-          <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email"
-           name="email" ng-model="student.email" ng-required="true">
-           <h4>Age</h4> <input type="text" class="form-control" placeholder="age" aria-label="age"
-           name="age" ng-model="student.age" ng-required="true">
-           <h4>Weight</h4> <input type="text" class="form-control" placeholder="weight" aria-label="weight"
-           name="weight" ng-model="student.weight" ng-required="true">
-           <h4>Height</h4> <input type="text" class="form-control" placeholder="height" aria-label="height"
-           name="height" ng-model="student.height" ng-required="true">
-        </form>
-        <button type="submit" class="btn btn-primary btn-block"
-          ng-click="addStudents(student)">Add Student</button><br>
-        <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
-        <div class="alert alert-success" ng-if="isValid" style="font-weight: bold;">{{mensagem}}</div>
-      </section>
+  <section class="container">
+    <h1 style="text-align: center;">{{app}}</h1><br>
+    <div ng-show="loading" style="display: flex; justify-content: center;">
+      <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+    </div> <!-- div do reload -->
+    <form name="studentForm">
+      <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name" name="name"
+        ng-model="student.name" ng-required="true" maxlength="45">
+      <h4>Last name</h4> <input type="text" class="form-control" placeholder="last name" aria-label="lastName"
+        name="lastName" ng-model="student.surname" ng-required="true" maxlength="45">
+      <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email" name="email"
+        ng-model="student.email" ng-required="true">
+      <h4>Age</h4> <input type="number" class="form-control" placeholder="age" aria-label="age" name="age"
+        ng-model="student.age" ng-required="true">
+      <h4>Weight</h4> <input type="number" class="form-control" placeholder="weight" aria-label="weight" name="weight"
+        ng-model="student.weight" ng-required="true">
+      <h4>Height</h4> <input type="number" class="form-control" placeholder="height" aria-label="height" name="height"
+        ng-model="student.height" ng-required="true">
+    </form>
+    <button ng-disabled="loading" type="submit" class="btn btn-primary"
+      ng-click="redirectTo('menu')">Menu</button>
+    <button type="submit" class="btn btn-primary btn-block" ng-click="addStudents(student)">Add Student</button><br>
+    <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
+    <div class="alert alert-success" ng-if="isValid" style="font-weight: bold;">{{mensagem}}</div>
+  </section>
 </body>
+
 </html>

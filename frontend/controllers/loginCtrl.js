@@ -4,7 +4,7 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
     $scope.msg = "Hello teacher, if you haven't created an account yet, please do it so "
 
     const dataValidate = user => {
-        if (!user.email && !user.password) {
+        if (!user) {
             $scope.error = "Please, fill the fields."
             $scope.loading = false;
             return;
@@ -30,6 +30,7 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
         if (dataValidate(user)) {
             loginServices.login(user)
                 .then(req => {
+                    $scope.error = null;
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',

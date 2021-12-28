@@ -82,7 +82,7 @@ const destroy = async req => {
     const student = await Student.findOne({ where: { id, }});
 
     if (!student) {
-      throw new Error("This student doesn't exists. ")
+      throw "This student doesn't exists."
     }
 
     await student.destroy();

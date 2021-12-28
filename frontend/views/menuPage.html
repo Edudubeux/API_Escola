@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Menu</title>
 </head>
-<body>    
+
+<body>
     <div class="container">
-        <h1 style="text-align: center; font-weight: bold;" >{{app}}</h1>
+        <h1 style="text-align: center; font-weight: bold;">{{app}}</h1>
     </div>
     <div ng-show="loading" style="display: flex; justify-content: center;">
         <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
@@ -16,28 +18,29 @@
             {{msg}}
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Name: {{name}}</li>
-            <li class="list-group-item">Email: {{email}}</li>
-          </ul>
+            <li class="list-group-item" style="background-color: #fff;">Name: {{name}}</li>
+            <li class="list-group-item" style="background-color: #fff;">Email: {{email}}</li>
+        </ul>
     </div>
     <div style="margin-top: 130px; font-size: 20px; display: flex;">
         <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
             <li class="list-group-item active" aria-current="true">What do you want to do?</li>
-            <span ng-click="redirectTo('updateUser')">
+            <span style="cursor: pointer;" ng-click="redirectTo('updateUser')">
                 <li class="list-group-item">Change your profile</li>
             </span>
-            <span ng-click="redirectTo('addStudents')" ng-hide= "!noStudents"style="animation: blinker 2s linear infinite; font-weight: bold;" >
+            <span ng-click="redirectTo('addStudents')" ng-hide="!noStudents"
+                style="animation: blinker 2s linear infinite; font-weight: bold; cursor: pointer;">
                 <li class="list-group-item">Add new Students</li>
             </span>
-            <span ng-click="redirectTo('addStudents')" ng-hide= "noStudents">
+            <span style="cursor: pointer;" ng-click="redirectTo('addStudents')" ng-hide="noStudents">
                 <li class="list-group-item">Add new Students</li>
             </span>
-            <span ng-click="dislog()">
+            <span style="cursor: pointer;" ng-click="dislog()">
                 <li class="list-group-item">Dislog from your account</li>
             </span>
         </ul>
     </div>
-    
+
     <div class="card" style=" margin-right: 300px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
         <div class="card-header" style="font-weight: bold;">
             Your Students
@@ -49,20 +52,25 @@
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
                 <br>
-                <img ng-src="{{student.photos[0].file_name.slice(24)}}" ng-if="student.photos.length" class="rounded-circle" width="60" height="60">
-                <img src="/frontend/uploads/user.jpeg" ng-if="!student.photos.length" class="rounded-circle" width="60" height="60">
+                <img ng-src="{{student.photos[0].file_name.slice(51)}}" ng-if="student.photos.length"
+                    class="rounded-circle" width="60" height="60" style="margin-right: 15px;">
+                <img src="/frontend/uploads/user.jpeg" ng-if="!student.photos.length" class="rounded-circle" width="60"
+                    height="60" style="margin-right: 15px;">
                 Name: {{student.name}} {{student.surname}}
                 <span style="float: right; margin-right: 15px;">
                     Age: {{student.age}}
                 </span>
-                <br><a id="delete" ng-click="deleteStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold;">
+                <br><a id="delete" ng-click="deleteStudent(student.id)"
+                    style="text-decoration: none; float: right; font-weight: bold;">
                     Delete
                 </a>
-                <a id="edit" ng-click="editStudent(student.id)" style="text-decoration: none; float: right; font-weight: bold; margin-right: 15px;">
+                <a id="edit" ng-click="editStudent(student.id)"
+                    style="text-decoration: none; float: right; font-weight: bold; margin-right: 15px;">
                     Edit
                 </a>
             </li>
     </div>
-    
+
 </body>
+
 </html>

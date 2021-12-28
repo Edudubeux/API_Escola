@@ -38,15 +38,18 @@ export default {
         throw new Error("This user doesn't exists.")
       }
 
+      if (!req.old_password || !req.new_password || !req.confirm_password) {
+        console.log(req.new_password);
+        await user.update({
+          name: req.data.name,
+          email: req.data.email,
+        })
+        return;
+      };
+
       if (!(await user.checkPassword(req.data.old_password))) {
         throw new Error('Invalid password.')
       }
-
-      await user.update({
-        name: req.data.name,
-        email: req.data.email,
-        password: req.data.new_password
-      });
 
       return user;
     } catch (error) {
@@ -56,7 +59,7 @@ export default {
   destroy: async (req) => {
     const user = await User.findByPk(req.userId);
 
-    if(!user) {
+    if (!user) {
       throw new Error("This user doesn't exists.")
     }
 

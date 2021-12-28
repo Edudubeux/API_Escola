@@ -1,22 +1,23 @@
 import * as Yup from 'yup';
+import sanitize from '../config/sanitize';
 
 export default {
   store: {
     body: Yup.object().shape({
-      name: Yup.string().required().max(255),
-      email: Yup.string().required().email(),
-      password: Yup.string().min(6).max(14).required(),
+      name: Yup.string().transform(sanitize).required(),
+      email: Yup.string().transform(sanitize).required().email(),
+      password: Yup.string().transform(sanitize).min(6).max(14).required(),
     }),
   },
   update: {
     body: Yup.object().shape({
-      name: Yup.string().max(255).required(),
-      email: Yup.string().max(255).email().required(),
-      old_password: Yup.string().min(6).max(14).required(),
-      new_password: Yup.string().min(6).max(14).when('old_password', (old_password, field) => {
+      name: Yup.string().transform(sanitize).required(),
+      email: Yup.string().transform(sanitize).email().required(),
+      old_password: Yup.string().transform(sanitize).min(6).max(14).nullable(),
+      new_password: Yup.string().transform(sanitize).min(6).max(14).nullable().when('old_password', (old_password, field) => {
         return old_password ? field.required() : field;
       }),
-      confirm_password: Yup.string().min(6).max(14).when('new_password', (new_password, field) => {
+      confirm_password: Yup.string().transform(sanitize).min(6).max(14).nullable().when('new_password', (new_password, field) => {
         return new_password ? field.required().oneOf([new_password]) : field;
       }
         //   is: true,
