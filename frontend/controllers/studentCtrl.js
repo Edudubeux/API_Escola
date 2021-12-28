@@ -36,7 +36,7 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: `${error.data.error}, add a photo to the student profile!`,
+                text: `${error.data.error}`,
                 footer: '<a href="">Why do I have this issue?</a>'
             })
         });

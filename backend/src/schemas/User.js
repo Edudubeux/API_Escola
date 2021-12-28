@@ -12,7 +12,7 @@ export default {
     body: Yup.object().shape({
       name: Yup.string().max(255).required(),
       email: Yup.string().max(255).email().required(),
-      old_password: Yup.string().min(6).max(14).nullable(),
+      old_password: Yup.string().min(6).max(14).required(),
       new_password: Yup.string().min(6).max(14).when('old_password', (old_password, field) => {
         return old_password ? field.required() : field;
       }),

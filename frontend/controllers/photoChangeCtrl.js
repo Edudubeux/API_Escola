@@ -14,7 +14,12 @@ angular.module("escolinha").controller("photoChangeCtrl", function ($scope, file
         $location.path("/menu")
       })
       .catch(error => {
-        console.log(error, "OLA ERROR");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${error.data.error}`,
+          footer: '<a href="">Why do I have this issue?</a>'
+        });
       });
   };
 

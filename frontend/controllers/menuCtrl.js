@@ -69,15 +69,12 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
             if (!req.data.length) {
                 $scope.noStudents = true;
                 $scope.message = "You don't have any Students";
+                console.log($scope.noStudents);
                 return;
             }
+            $scope.noStudents = false;
             $scope.loading = true;
             $scope.students = req.data
-            // const teste = req.data
-            // teste.forEach( value => {
-            //     console.log(value.photos[0].file_name.slice(24));
-            // });
-            // console.log(teste);
         })
         .catch(error => {
             console.log(error);

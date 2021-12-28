@@ -5,10 +5,7 @@ export default {
 		try{
 			const photo = await Photo.findOne({ where: { student_id }});
 
-			if(photo) {
-				throw "You already have a photo!"
-			};
-
+			return photo;
 		} catch (error) {
 			throw new Error(error);
 		}
@@ -18,16 +15,12 @@ export default {
 		return Photo.create(data)
 	},
 
-	update: data => {
-		return Photo.update(data)
-	},
-
 	delete: async student_id => {
 		try {
 			const photo = await Photo.findOne({ where: { student_id } })
 
 			if (!photo) {
-				throw "You don't have any photo"
+				throw "You don't have any photo!"
 			}
 
 			await photo.destroy();

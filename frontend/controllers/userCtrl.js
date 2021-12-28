@@ -2,7 +2,6 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
   $scope.app = "School Full";
   $scope.msg = "Hello teacher, if you already have an account, please sign-in up ";
   $scope.error = "";
-  const msg = 'Your profile has been updated! Now you are FULL!';
 
   const userValidate = user => {
     if (!user) {
@@ -45,6 +44,7 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
       console.log(user);
       return userServices.addUsers(user)
         .then( () => {
+          $scope.error = null;
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -70,11 +70,18 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     userServices.updateUser(user)
     .then(() => {
       $scope.loading = true;
-      $scope.mensagem = msg;
       $scope.error = null;
-      $timeout(() => {
-        $location.path("/menu");
-      }, 350)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your profile has been update',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        $timeout(() => {
+          $location.path("/menu");
+        }, 350)
+      });
     })
     .catch(error => {
       if(error && error.data && error.data.error === "REQUIRED_FIELDS") {

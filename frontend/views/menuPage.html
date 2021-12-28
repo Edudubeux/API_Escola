@@ -26,7 +26,10 @@
             <span ng-click="redirectTo('updateUser')">
                 <li class="list-group-item">Change your profile</li>
             </span>
-            <span ng-click="redirectTo('addStudents')">
+            <span ng-click="redirectTo('addStudents')" ng-hide= "!noStudents"style="animation: blinker 2s linear infinite; font-weight: bold;" >
+                <li class="list-group-item">Add new Students</li>
+            </span>
+            <span ng-click="redirectTo('addStudents')" ng-hide= "noStudents">
                 <li class="list-group-item">Add new Students</li>
             </span>
             <span ng-click="dislog()">

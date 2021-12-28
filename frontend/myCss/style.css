@@ -36,3 +36,9 @@ a#edit:hover, a#delete:hover{
   text-decoration: underline;
   cursor: pointer;
 }
+
+@keyframes blinker {
+  40% {
+    opacity: 0;
+  }
+}
