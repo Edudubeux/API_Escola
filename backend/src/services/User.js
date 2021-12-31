@@ -1,48 +1,48 @@
 import User from "../models/User"
 
 export default {
-  store: async (req) => {
+  store: async data => {
     try {
       const user = await User.findOne({
         where: {
-          email: req.data.email,
+          email: data.email,
         }
       })
       if (user) {
         throw ('This email already exists.')
       }
 
-      const userCreated = await User.create(req.data);
+      const userCreated = await User.create(data);
 
       return userCreated;
     } catch (error) {
       throw new Error(error)
     }
   },
-  index: async (req) => {
+  index: async userId => {
     try {
-      const user = await User.findByPk(req.userId)
+      const user = await User.findByPk(userId);
       if (!user) {
         throw "This user doesn't exists."
-      }
+      };
       return user;
     } catch (error) {
       throw new Error(error)
     }
   },
-  update: async (req) => {
+  update: async (data, userId) => {
     try {
-      const user = await User.findByPk(req.userId);
+      const user = await User.findByPk(userId);
 
       if (!user) {
         throw new Error("This user doesn't exists.")
-      }
+      };
 
-      if (!req.old_password || !req.new_password || !req.confirm_password) {
-        console.log(req.new_password);
+      if (!data.old_password || !data.new_password || !data.confirm_password) {
+        console.log(data.new_password);
         await user.update({
-          name: req.data.name,
-          email: req.data.email,
+          name: data.name,
+          email: data.email,
         })
         return;
       };
@@ -56,12 +56,12 @@ export default {
       throw new Error(error)
     }
   },
-  destroy: async (req) => {
-    const user = await User.findByPk(req.userId);
+  destroy: async userId => {
+    const user = await User.findByPk(userId);
 
     if (!user) {
-      throw new Error("This user doesn't exists.")
-    }
+      throw "User not found!"
+    };
 
     await user.destroy();
   }

@@ -1,67 +1,72 @@
 import StudentService from '../services/Student';
+import path from 'path';
 
 class StudentController {
-  async store(req, res) {
-    try {
-      const userId = req.userId
-      const newStudent = await StudentService.store({ data: req.data, userId});
-      return res.json(newStudent);
-    } catch(error) {
-      return res.status(400).json({ error: "REQUIRED_FIELDS" })
-    };
-  }
+	async store(req, res) {
+		try {
+			if(!req.data){
+			return res.status(400).json({ error: "REQUIRED_FIELDS" })
+			}
 
-  async index(req, res) {
-    try {
-      const students = await StudentService.index({ userId: req.userId});
+			const newStudent = await StudentService.store(req.data, req.userId);
+			return res.json(newStudent);
+		} catch (error) {
+			return res.status(400).json({ error: error.message })
+		};
+	}
 
-      students.forEach( student => {
-         if (!student.photos) {
-            student.photos.push({file_name: "/Users/eduardodubeux/Documents/Programação/Escola/backend/uploads/user.jpeg"});
-         };
-         return students;
-      });
-      return res.json(students)
-    } catch(error) {
-      return res.status(400).json({ error: "REQUIRED_FIELDS" });
-    };
-  }
+	async index(req, res) {
+		try {
+			const students = await StudentService.index(req.userId);
 
-  async find(req, res) {
-    try {
-      const student = await StudentService.find({ filter: req.filter, });
+			const filePath = path.resolve(__dirname, '../', '../', '/uploads', '/user.jpeg')
 
-      if(!student){
-        return res.status(400).json({ error: "Student not found!" })
-      }
+			students.forEach(student => {
+				if (!student.photos) {
+					student.photos.push({ file_name: filePath });
+				};
+				return students;
+			});
+			return res.json(students)
+		} catch (error) {
+			return res.status(400).json({ error: error.message });
+		};
+	}
 
-      if (req.userId !== student.user_id) {
-        return res.status(400).json({ error: "Student not found!" })
-      }
+	async find(req, res) {
+		try {
+			const student = await StudentService.find(req.filter);
 
-      return res.json(student)
-    } catch(error) {
-      return res.status(400).json({ error: "REQUIRED_FIELDS" });
-    };
-  }
+			if (!student || req.userId !== student.user_id) {
+				return res.status(400).json({ error: "Student not found!" })
+			}
 
-  async update(req, res) {
-    try{
-      const updatedStudent = await StudentService.update({ data: req.data, filter: req.filter, userId: req.userId });
-      return res.json(updatedStudent);
-    } catch(error) {
-      res.status(400).json({ error: "REQUIRED_FIELDS" })
-    };
-  }
+			return res.json(student)
+		} catch (error) {
+			return res.status(400).json({ error: error.message });
+		};
+	}
 
-  async destroy(req, res) {
-    try{
-      await StudentService.destroy({ filter: req.filter })
-      return res.json({ message: "Student deleted." });
-    } catch(error) {
-      res.status(400).json({ error: "REQUIRED_FIELDS" })
-    };
-  }
+	async update(req, res) {
+		try {
+			if(!req.data){
+				return res.status(400).json({ error: "REQUIRED_FIELDS" })
+				}
+			const updatedStudent = await StudentService.update(req.data, req.filter, req.userId);
+			return res.json(updatedStudent);
+		} catch (error) {
+			res.status(400).json({ error: error.message })
+		};
+	}
+
+	async destroy(req, res) {
+		try {
+			await StudentService.destroy(req.filter, req.userId)
+			return res.json({ message: "Student deleted." });
+		} catch (error) {
+			res.status(400).json({ error: error.message })
+		};
+	}
 }
 
 export default new StudentController();

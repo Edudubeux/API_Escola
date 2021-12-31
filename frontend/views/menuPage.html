@@ -52,8 +52,9 @@
         <ul class="list-group list-group-flush" ng-repeat="student in students">
             <li class="list-group-item">
                 <br>
-                <img ng-src="{{student.photos[0].file_name.slice(51)}}" ng-if="student.photos.length"
-                    class="rounded-circle" width="60" height="60" style="margin-right: 15px;">
+                <img ng-src="{{student.path}}" 
+                ng-if="student.photos.length" class="rounded-circle" width="60" height="60"
+                    style="margin-right: 15px;">
                 <img src="/frontend/uploads/user.jpeg" ng-if="!student.photos.length" class="rounded-circle" width="60"
                     height="60" style="margin-right: 15px;">
                 Name: {{student.name}} {{student.surname}}

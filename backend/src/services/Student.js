@@ -2,16 +2,14 @@ import Student from "../models/Student";
 import Photo from '../models/Photo';
 import User from '../models/User';
 
-const store = async req => {
+const store = async (data, user_id) => {
   try {
-    const user_id = req.userId;
-
-    const emailValidate = await Student.findOne({ where: { email: req.data.email }});
+    const emailValidate = await Student.findOne({ where: { email: data.email }});
 
     if (emailValidate) {
       throw new Error('This email already exists.');
     }
-    const newStudent = await Student.create({ user_id, ...req.data });
+    const newStudent = await Student.create({ user_id, ...data });
 
     return newStudent;
   } catch (error) {
@@ -19,12 +17,10 @@ const store = async req => {
   }
 };
 
-const find = async req => {
+const find = async filter => {
   try {
-    const { id } = req.filter;
-
     const student = await Student.findOne({
-      where: { id, }
+      where: { id: filter.id }
     });
     return student;
   } catch (error) {
@@ -32,7 +28,7 @@ const find = async req => {
   }
 };
 
-const index = async req => {
+const index = async user_id => {
   try {
     const students = await Student.findAll({
       attributes: ['id', 'name', 'surname', 'email', 'age', 'weight', 'height'],
@@ -47,7 +43,7 @@ const index = async req => {
         attributes: ['id'],
       }],
       where: {
-        user_id: req.userId
+        user_id
       },
     });
     return students;
@@ -56,17 +52,15 @@ const index = async req => {
   }
 };
 
-const update = async req => {
+const update = async (data, filter, user_id) => {
   try {
-    const { id } = req.filter;
-
-    const student = await Student.findOne({ where: { id }});
+    const student = await Student.findOne({ where: { id: filter.id, user_id }});
 
     if (!student) {
       throw new Error("This student doesn't exists.");
     }
 
-    const updatedStudent = await student.update(req.data);
+    const updatedStudent = await student.update(data);
 
     return updatedStudent;
 
@@ -75,11 +69,9 @@ const update = async req => {
   }
 };
 
-const destroy = async req => {
+const destroy = async (filter, user_id) => {
   try {
-    const { id } = req.filter;
-
-    const student = await Student.findOne({ where: { id, }});
+    const student = await Student.findOne({ where: { id: filter.id, user_id }});
 
     if (!student) {
       throw "This student doesn't exists."

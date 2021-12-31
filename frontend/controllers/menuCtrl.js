@@ -14,7 +14,7 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
             footer: '<a href="">Why do I have this issue?</a>'
         }).then(result => {
             if (result.isConfirmed) {
-                $timeout( () => {
+                $timeout(() => {
                     $location.path("/login");
                 }, 100)
                 return;
@@ -22,11 +22,11 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
         });
     };
 
-    
+
     $scope.redirectTo = page => {
         $location.path(`/${page}`)
     }
-    
+
     $scope.dislog = () => {
         localStorage.clear();
         Swal.fire({
@@ -35,51 +35,59 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
             title: 'You log off from your account',
             showConfirmButton: false,
             timer: 1500
-        }) .then( () => {
-            $timeout( () => {
+        }).then(() => {
+            $timeout(() => {
                 $location.path("/login")
             })
         })
     }
-    
+
     const showUser = () => {
         userServices.getUser()
-        .then(req => {
-            $scope.loading = true;
-            const { name, email } = req.data
-            $scope.name = name
-            $scope.email = email
-        })
-        .catch(error => {
-            if (error && error.data) {
-                $scope.error = error.data.error;
-                return;
-            }
-        })
-        .finally(() => $scope.loading = false)
+            .then(req => {
+                $scope.loading = true;
+                const { name, email } = req.data;
+                $scope.name = name;
+                $scope.email = email;
+            })
+            .catch(error => {
+                if (error && error.data) {
+                    $scope.error = error.data.error;
+                    return;
+                }
+            })
+            .finally(() => $scope.loading = false)
     };
-    
+
     $scope.editStudent = id => {
         $location.path(`/updateStudents/${id}`);
     };
-    
+
     const showStudents = () => {
         studentServices.showStudents()
-        .then(req => {
-            if (!req.data.length) {
-                $scope.noStudents = true;
-                $scope.message = "You don't have any Students";
-                console.log($scope.noStudents);
+            .then(req => {
+                if (!req.data.length) {
+                    $scope.noStudents = true;
+                    $scope.message = "You don't have any Students";
+                    console.log($scope.noStudents);
+                    return;
+                }
+                $scope.noStudents = false;
+                $scope.loading = true;
+                $scope.students = req.data.map(value => {
+                    if (!value.photos.length) {
+                        return value;
+                    };
+                    console.log(value);
+                    value.path = '\\backend\\uploads\\' + value.photos[0].file_name.split('\\')[value.photos[0].file_name.split('\\').length - 1];
+                    return value;
+                });
+                console.log($scope.students, "OLA STUDENTS");
+            })
+            .catch(error => {
+                console.log(error);
                 return;
-            }
-            $scope.noStudents = false;
-            $scope.loading = true;
-            $scope.students = req.data
-        })
-        .catch(error => {
-            console.log(error);
-            return;
-        })
+            })
             .finally(() => $scope.loading = false)
     };
 
