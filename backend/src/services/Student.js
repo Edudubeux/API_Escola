@@ -7,7 +7,7 @@ const store = async (data, user_id) => {
     const emailValidate = await Student.findOne({ where: { email: data.email }});
 
     if (emailValidate) {
-      throw new Error('This email already exists.');
+      throw 'This email already exists.';
     }
     const newStudent = await Student.create({ user_id, ...data });
 
@@ -17,11 +17,19 @@ const store = async (data, user_id) => {
   }
 };
 
-const find = async filter => {
+const find = async (filter, user_id) => {
   try {
     const student = await Student.findOne({
-      where: { id: filter.id }
+      where: {
+		id: filter.id,
+		user_id
+	}
     });
+
+	if(!student){
+		throw "Student not found!";
+	}
+
     return student;
   } catch (error) {
     throw new Error(error);
@@ -54,10 +62,15 @@ const index = async user_id => {
 
 const update = async (data, filter, user_id) => {
   try {
-    const student = await Student.findOne({ where: { id: filter.id, user_id }});
+    const student = await Student.findOne({
+		where: {
+			id: filter.id,
+			user_id
+		}
+	});
 
     if (!student) {
-      throw new Error("This student doesn't exists.");
+      throw "Student not found!"
     }
 
     const updatedStudent = await student.update(data);
@@ -71,10 +84,15 @@ const update = async (data, filter, user_id) => {
 
 const destroy = async (filter, user_id) => {
   try {
-    const student = await Student.findOne({ where: { id: filter.id, user_id }});
+    const student = await Student.findOne({
+		where: {
+			id: filter.id,
+			user_id
+		}
+	});
 
     if (!student) {
-      throw "This student doesn't exists."
+      throw "Student not found!"
     }
 
     await student.destroy();

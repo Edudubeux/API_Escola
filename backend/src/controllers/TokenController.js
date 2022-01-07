@@ -8,16 +8,10 @@ class TokenController {
 				return res.status(400).json({ error: "REQUIRED_FIELDS" })
 			};
 
-			const { email, password } = req.data;
+			const user = await Token.find(req.data);
 
-			const user = await Token.find(email);
-
-			if (!user) {
+			if (!user || !(await user.checkPassword(req.data.password))) {
 				return res.status(400).json({ error: "Invalid password or email, try again later." });
-			}
-
-			if (!(await user.checkPassword(password))) {
-				return res.status(400).json({ error: 'Invalid password or email, try again later.' });
 			}
 
 			const { id } = user;

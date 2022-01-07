@@ -4,8 +4,8 @@ import path from 'path';
 class StudentController {
 	async store(req, res) {
 		try {
-			if(!req.data){
-			return res.status(400).json({ error: "REQUIRED_FIELDS" })
+			if (!req.data) {
+				return res.status(400).json({ error: "REQUIRED_FIELDS" })
 			}
 
 			const newStudent = await StudentService.store(req.data, req.userId);
@@ -27,6 +27,7 @@ class StudentController {
 				};
 				return students;
 			});
+
 			return res.json(students)
 		} catch (error) {
 			return res.status(400).json({ error: error.message });
@@ -35,10 +36,10 @@ class StudentController {
 
 	async find(req, res) {
 		try {
-			const student = await StudentService.find(req.filter);
+			const student = await StudentService.find(req.filter, req.userId);
 
 			if (!student || req.userId !== student.user_id) {
-				return res.status(400).json({ error: "Student not found!" })
+				return res.status(400).json({ error: error.message })
 			}
 
 			return res.json(student)
@@ -49,9 +50,9 @@ class StudentController {
 
 	async update(req, res) {
 		try {
-			if(!req.data){
+			if (!req.data) {
 				return res.status(400).json({ error: "REQUIRED_FIELDS" })
-				}
+			}
 			const updatedStudent = await StudentService.update(req.data, req.filter, req.userId);
 			return res.json(updatedStudent);
 		} catch (error) {
