@@ -69,7 +69,6 @@ angular.module("escolinha").controller("menuCtrl", function ($scope, userService
                 if (!req.data.length) {
                     $scope.noStudents = true;
                     $scope.message = "You don't have any Students";
-                    console.log($scope.noStudents);
                     return;
                 }
                 $scope.noStudents = false;

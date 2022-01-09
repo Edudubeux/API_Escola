@@ -8,9 +8,9 @@ export default {
         name: Yup.string().transform(sanitize).required(),
         surname: Yup.string().transform(sanitize).required(),
         email: Yup.string().transform(sanitize).required().email(),
-        age: Yup.number().min(1).required(),
-        weight: Yup.number().required().min(0),
-        height: Yup.number().required().min(0),
+        age: Yup.number().min(1).required().max(100),
+        weight: Yup.number().required().min(0).max(120),
+        height: Yup.number().required().min(0).max(2.10),
       }),
   },
   find : {

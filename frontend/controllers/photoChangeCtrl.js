@@ -23,6 +23,10 @@ angular.module("escolinha").controller("photoChangeCtrl", function ($scope, file
       });
   };
 
+  $scope.redirectTo = page => {
+    $location.path(`/${page}/${id}`)
+  };
+
   $scope.getFile = function () {
     $scope.progress = 0;
     fileReader.readAsDataUrl($scope.file, $scope)

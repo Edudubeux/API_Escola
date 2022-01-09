@@ -85,30 +85,31 @@ angular.module("escolinha").controller("studentCtrl", function ($scope, studentS
     };
 
     $scope.addStudents = student => {
-        $scope.loading = true;
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your profile has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        }).then(() => {
-            $timeout(() => {
-                studentServices.addStudents(student)
-                    .then(() => {
-                        $scope.isValid = true;
-                        $scope.error = null
-                        $location.path("/menu");
-                    }).catch(error => {
-                        if (error && error.data && error.data.error === "REQUIRED_FIELDS") {
-                            $scope.error = "Please, fill the fields."
-                            return;
-                        }
-                        $scope.error = error.data.error;
-                    })
+        studentServices.addStudents(student)
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your profile has been saved',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
-        })
-
+            .then(() => {
+                $timeout(() => {
+                    $scope.loading = true;
+                    $scope.isValid = true;
+                    $scope.error = null
+                    $location.path("/menu");
+                })
+            }).catch(error => {
+                console.log(error);
+                if (error && error.data && error.data.error === "REQUIRED_FIELDS") {
+                    $scope.error = "Please, fill the fields."
+                    return;
+                }
+                $scope.error = error.data.error;
+            })
     };
 
 

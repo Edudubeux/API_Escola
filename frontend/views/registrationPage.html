@@ -11,13 +11,14 @@
           <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
         </div> <!-- div do reload -->
         <form name="userForm">
-          <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
+          <h4>Name*</h4> <input type="text" class="form-control" placeholder="name" aria-label="name"
            name="name" ng-model="user.name" ng-required="true" maxlength="45">
-          <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email"
+          <h4>Email*</h4> <input type="text" class="form-control" placeholder="email" aria-label="email"
            name="email" ng-model="user.email" ng-required="true">
-          <h4>Password</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
+          <h4>Password*</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
            name="password" ng-model="user.password" ng-required="true" ng-minlength="6" maxlength="10">
         </form>
+        <div style="color: red; font-weight: bold; margin-top: 10px;">*Required fields</div>
         <button type="submit" class="btn btn-primary btn-block"
           ng-click="addUser(user)">Send</button><br>
         <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>

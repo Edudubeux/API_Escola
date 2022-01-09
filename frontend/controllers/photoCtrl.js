@@ -24,7 +24,7 @@ angular.module("escolinha").controller("photoCtrl", function ($scope, fileReader
     };
 
     $scope.redirectTo = page => {
-        $location.path(`/${page}`)
+        $location.path(`/${page}/${id}`)
     };
 
     $scope.getFile = function () {

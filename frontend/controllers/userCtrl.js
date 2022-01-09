@@ -39,6 +39,13 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     $location.path(`/${page}`)
   };
 
+  userServices.getUser()
+  .then( user => {
+    $scope.user = user.data
+  }).catch( error => {
+    $scope.error = error.data.error
+  });
+
   $scope.addUser = user => {
     if (userValidate(user)) {
       console.log(user);
@@ -59,7 +66,6 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
           })
         })
         .catch(error => {
-          console.log(error);
           $scope.error = error.data.error
         })
         .finally( () => $scope.loading = false)
