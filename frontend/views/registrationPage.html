@@ -18,7 +18,6 @@
           <h4>Password*</h4><input type="password" class="form-control" placeholder="password" aria-label="password"
            name="password" ng-model="user.password" ng-required="true" ng-minlength="6" maxlength="10">
         </form>
-        <div style="color: red; font-weight: bold; margin-top: 10px;">*Required fields</div>
         <button type="submit" class="btn btn-primary btn-block"
           ng-click="addUser(user)">Send</button><br>
         <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
