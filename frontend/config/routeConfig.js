@@ -1,9 +1,9 @@
-angular.module("escolinha").config(function($routeProvider, $locationProvider) {
+angular.module("escolinha").config(function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
 
   $routeProvider.when("/registration", {
     templateUrl: "views/registrationPage.html",
-    controller: "userCtrl"
+    controller: "userCtrl",
   });
 
   $routeProvider.when("/menu/:id?", {
@@ -18,9 +18,10 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
 
   $routeProvider.when("/updateUser", {
     templateUrl: "views/updateUsersPage.html",
-    controller: "userCtrl"
+    controller: "userCtrl",
+    type: "updateUsers"
   });
-  
+
   $routeProvider.when("/addStudents", {
     templateUrl: "views/addStudentsPage.html",
     controller: "studentCtrl"
@@ -32,12 +33,12 @@ angular.module("escolinha").config(function($routeProvider, $locationProvider) {
   });
 
   $routeProvider.when("/addPhoto/:id", {
-    templateUrl: "views/addPhotoPage.html", 
+    templateUrl: "views/addPhotoPage.html",
     controller: "photoCtrl"
   });
 
   $routeProvider.when("/changePhoto/:id", {
-    templateUrl: "views/changePhotoPage.html", 
+    templateUrl: "views/changePhotoPage.html",
     controller: "photoChangeCtrl"
   });
 

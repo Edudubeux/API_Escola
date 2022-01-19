@@ -1,4 +1,4 @@
-angular.module("escolinha").controller("userCtrl", function ($scope, userServices, $location, $timeout) {
+angular.module("escolinha").controller("userCtrl", function ($scope, userServices, $location, $timeout, $route) {
   $scope.app = "School Full";
   $scope.msg = "Hello teacher, if you already have an account, please sign-in up ";
   $scope.error = "";
@@ -39,18 +39,21 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
     $location.path(`/${page}`)
   };
 
-  userServices.getUser()
-  .then( user => {
-    $scope.user = user.data
-  }).catch( error => {
-    $scope.error = error.data.error
-  });
+  const isUpdate = $route.current.$$route.type && $route.current.$$route.type === "updateUsers"
+
+  if (isUpdate) {
+    userServices.getUser()
+      .then(user => {
+        $scope.teacher = user.data
+      }).catch(error => {
+        $scope.error = error.data.error
+      });
+  }
 
   $scope.addUser = user => {
     if (userValidate(user)) {
-      console.log(user);
       return userServices.addUsers(user)
-        .then( () => {
+        .then(() => {
           $scope.error = null;
           Swal.fire({
             position: 'top-end',
@@ -58,9 +61,9 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
             title: 'Your profile has been saved',
             showConfirmButton: false,
             timer: 1500
-          }).then( () => {
+          }).then(() => {
             $scope.loading = true;
-            $timeout( () => {
+            $timeout(() => {
               $location.path("/login");
             })
           })
@@ -68,35 +71,35 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
         .catch(error => {
           $scope.error = error.data.error
         })
-        .finally( () => $scope.loading = false)
+        .finally(() => $scope.loading = false)
     };
   };
 
   $scope.updateUser = user => {
     userServices.updateUser(user)
-    .then(() => {
-      $scope.loading = true;
-      $scope.error = null;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your profile has been update',
-        showConfirmButton: false,
-        timer: 1500
-      }).then(() => {
-        $timeout(() => {
-          $location.path("/menu");
-        }, 350)
-      });
-    })
-    .catch(error => {
-      if(error && error.data && error.data.error === "REQUIRED_FIELDS") {
-        $scope.error = "Please, fill the fields."
-        return;
-      }
-      $scope.error = error.data.error
-    })
-    .finally( () => $scope.loading = false)
+      .then(() => {
+        $scope.loading = true;
+        $scope.error = null;
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your profile has been update',
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          $timeout(() => {
+            $location.path("/menu");
+          }, 350)
+        });
+      })
+      .catch(error => {
+        if (error && error.data && error.data.error === "REQUIRED_FIELDS") {
+          $scope.error = "Please, fill the fields."
+          return;
+        }
+        $scope.error = error.data.error
+      })
+      .finally(() => $scope.loading = false)
   };
 });
 

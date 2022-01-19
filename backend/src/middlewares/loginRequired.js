@@ -12,7 +12,7 @@ export default async (req, res, next) => {
   const [, token ] = await authorization.split(' ');
 
   try {
-    const data = await jwt.verify(token, 'admin');
+    const data = jwt.verify(token, 'admin');
     const { id, email } = data;
 
     const user = await User.findByPk(id)

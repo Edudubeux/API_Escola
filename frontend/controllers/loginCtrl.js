@@ -37,13 +37,14 @@ angular.module("escolinha").controller("loginCtrl", function ($scope, loginServi
                         title: 'Your login has been saved',
                         showConfirmButton: false,
                         timer: 1500
-                    }) .then( () => {
+                    }).then(() => {
                         $timeout(() => {
                             loginServices.getToken(req.data.token)
                             $location.path("/menu");
                         })
                     })
                 }).catch(error => {
+                    console.log(error);
                     if (error && error.data) {
                         $scope.error = error.data.error
                     }

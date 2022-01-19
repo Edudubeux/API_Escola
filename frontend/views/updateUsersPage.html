@@ -14,24 +14,21 @@
         </div> <!-- div do reload -->
         <form name="userForm">
             <h4>Name</h4> <input type="text" class="form-control" placeholder="name" aria-label="name" name="name"
-                ng-model="user.name">
+                ng-model="teacher.name">
             <h4>Email</h4> <input type="text" class="form-control" placeholder="email" aria-label="email" name="email"
-                ng-model="user.email">
+                ng-model="teacher.email">
             <h4>Old password</h4><input type="password" class="form-control" placeholder="old password"
-                aria-label="old_password" name="old_password" ng-model="user.old_password">
+                aria-label="old_password" name="old_password" ng-model="teacher.old_password">
             <h4>New password</h4><input type="password" class="form-control" placeholder="new password"
-                aria-label="new_password" name="new_password" ng-model="user.new_password">
+                aria-label="new_password" name="new_password" ng-model="teacher.new_password">
             <h4>Confirm password</h4><input type="password" class="form-control" placeholder="confirm password"
-                aria-label="confirm_password" name="confirm_password" ng-model="user.confirm_password">
+                aria-label="confirm_password" name="confirm_password" ng-model="teacher.confirm_password">
         </form>
 
         <div ng-if="error" class="alert alert-danger" style="font-weight: bold; margin-top: 20px;">
             {{error}}
         </div>
 
-        <div ng-show="mensagem" class="alert alert-success" style="font-weight: bold; margin-top: 20px;">
-            {{mensagem}}
-        </div>
         <button ng-disabled="loading" type="submit" class="btn btn-primary" ng-click="redirectTo('menu')">Menu</button>
         <button type="submit" class="btn btn-primary btn-block" ng-click="updateUser(user)">Update your
             profile</button><br>

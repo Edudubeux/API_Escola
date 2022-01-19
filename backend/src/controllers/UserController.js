@@ -6,8 +6,10 @@ class UserController {
 			if (!req.data) {
 				return res.status(400).json({ error: "REQUIRED_FIELDS" })
 			};
-			const newUser = await User.store(req.data);
-			return res.json(newUser);
+
+			User.store(req.data);
+
+			return;
 		} catch (error) {
 			res.status(400).json({ error: error.message })
 		}
@@ -35,7 +37,7 @@ class UserController {
 		}
 	}
 
-	async destroy(req, res) {
+	async destroy (req) {
 		const deletedUser = await User.destroy(req.userId)
 
 		return deletedUser;

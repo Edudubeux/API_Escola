@@ -6,6 +6,6 @@ import Validate from '../schemas/Validate'
 
 const routes = new Router();
 
-routes.post('/',Validate(TokenSchema.store), TokenController.store);
+routes.post('/', Validate(TokenSchema.store), TokenController.store);
 
 export default routes;
