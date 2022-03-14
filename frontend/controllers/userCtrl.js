@@ -69,7 +69,10 @@ angular.module("escolinha").controller("userCtrl", function ($scope, userService
           })
         })
         .catch(error => {
-          $scope.error = error.data.error
+          console.log(error1);
+          if ($scope.error && $scope.error.data) {
+            $scope.error = error.data.error
+          }
         })
         .finally(() => $scope.loading = false)
     };

@@ -1,0 +1,26 @@
+https://www.npmjs.com/package/cep-promisex
+- Fornecedor
+    - nome
+    - email
+    - endereço
+        - rua
+        - cep
+        - bairro
+        - cidade
+        - uf
+        - numero
+    - cnpj
+- Produto
+  - nome
+  - preço
+- Pedido de compra
+  - cliente
+  - situação (ABERTO/CANCELADO/FINALIZADO)
+  - produtos []
+- Telas:
+  1 - CRUD de fornecedores
+  2 - CRUD de Produtos
+  3 - CRUD de pedido de compra
+      - PDF da listagem
+      - PDF do pedido de compra
+Obs.: Todas as listagens precisam ter paginação e pesquisa por pelo menos nome
