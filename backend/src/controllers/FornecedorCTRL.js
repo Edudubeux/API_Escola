@@ -16,7 +16,7 @@ class FornecedorCTRL {
 
     async index(req, res) {
         try {
-            if (req.filter){
+            if (req.filter.id){
                 const fornecedor = await FornecedorServices.find(req.filter.id);
                 return res.json(fornecedor);
             }

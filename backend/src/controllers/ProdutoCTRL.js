@@ -7,7 +7,7 @@ class ProdutoCTRL {
 				return res.status(400).json({ error: "REQUIRED_FIELDS" })
 			}
 
-            const newProduto = ProdutoService.add(req.data, req.filter);
+            const newProduto = await ProdutoService.add(req.data, req.filter);
             return res.json(newProduto);
         } catch (error) {
             return res.status(400).json({ error: error.message })

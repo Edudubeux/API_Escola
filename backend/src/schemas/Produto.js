@@ -7,13 +7,9 @@ export default {
             nome: yup.string(255).transform(sanitize).required(),
             preço: yup.number().required(),
         }),
-        params: yup.object().shape({
-            fornecedor_id: yup.number().required()
-        })
     },
     index: {
         params: yup.object().shape({
-            fornecedor_id: yup.number().required(),
             id: yup.number()
         })
     },
@@ -23,13 +19,11 @@ export default {
             preço: yup.number(),
         }),
         params: yup.object().shape({
-            fornecedor_id: yup.number().required(),
             id: yup.number().required()
         })
     },
     destroy: {
         params: yup.object().shape({
-            fornecedor_id: yup.number().required(),
             id: yup.number().required()
         })
     }

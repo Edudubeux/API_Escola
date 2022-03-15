@@ -5,8 +5,7 @@ module.exports = {
 		const transaction = await queryInterface.sequelize.transaction();
 
 		try {
-			await queryInterface.removeColumn('produtos', 'cliente');
-
+			await queryInterface.removeColumn('produtos', 'fornecedor_id')
 			await transaction.commit();
 		} catch (error) {
 			await transaction.rollback();
@@ -14,14 +13,18 @@ module.exports = {
 		};
 	},
 
-	down: async (queryInterface, Sequelize) => {
+	down: async queryInterface => {
 		const transaction = await queryInterface.sequelize.transaction();
 
 		try {
-			await queryInterface.addColumn('produtos', 'cliente', {
-				type: Sequelize.DataTypes.STRING,
-				allowNull: false
-			}, { transaction });
+			await queryInterface.addColumn('produtos', 'fornecedor_id', {
+        type: Sequelize.DataTypes.INTEGER,
+					allowNull: false,
+					references: {
+						model: 'fornecedores',
+						key: 'id'
+					}
+      }, { transaction });
 			await transaction.commit();
 		} catch (error) {
 			await transaction.rollback();

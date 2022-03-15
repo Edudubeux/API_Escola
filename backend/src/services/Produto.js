@@ -24,11 +24,6 @@ export default {
                 id: filter.id,
                 fornecedor_id: filter.fornecedor_id
             },
-            // include: [{
-            //     model: 'Fornecedor',
-            //     as: 'fornecedor',
-            //     include: [ 'nome', 'cnpj' ]
-            // }]
         });
 
         if(!produto) {

@@ -12,7 +12,7 @@ export default {
             bairro: yup.string(255).transform(sanitize).required(),
             cidade: yup.string(255).transform(sanitize).required(),
             uf: yup.string(255).transform(sanitize).required()
-        })
+        }).noUnknown()
     },
     find: {
         params: yup.object().shape({
@@ -28,7 +28,7 @@ export default {
             bairro: yup.string(255).transform(sanitize),
             cidade: yup.string(255).transform(sanitize),
             uf: yup.string(255).transform(sanitize)
-        }),
+        }).noUnknown(),
         params: yup.object().shape({
             id: yup.number().required()
         })

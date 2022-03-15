@@ -33,10 +33,6 @@ module.exports = {
 					type: Sequelize.DataTypes.STRING,
 					allowNull: false
 				},
-				numero: {
-					type: Sequelize.DataTypes.INTEGER,
-					allowNull: false
-				},
 				bairro: {
 					type: Sequelize.DataTypes.STRING,
 					allowNull: false
@@ -76,10 +72,6 @@ module.exports = {
 				},
 				preço: {
 					type: Sequelize.DataTypes.FLOAT,
-					allowNull: false
-				},
-				cliente: {
-					type: Sequelize.DataTypes.STRING,
 					allowNull: false
 				},
 				fornecedor_id: {

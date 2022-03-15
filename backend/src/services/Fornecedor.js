@@ -1,4 +1,5 @@
 import Fornecedor from "../models/Fornecedor";
+import Produto from "../models/Produto";
 
 export default {
     store: async data => {
@@ -15,12 +16,32 @@ export default {
 
         return Fornecedor.create(data);
     },
-
+    // findOrder: async id => {
+    //     const pedido = await Order.findOne({
+    //         where: {
+    //             id
+    //         },
+    //         include: [{
+    //             model: PedidoProduto,
+    //             required: true,
+    //             include: [{
+    //                 model: Produto,
+    //                 attributes: ['id', 'name']
+    //             }],
+    //             attributes: ['id', 'product_id', 'order_id']
+    //         }, {
+    //             model: Fornecedor,
+    //             paranoid: false,
+    //             attributes: ['id', 'name']
+    //         }],
+    //         attributes: ['id', 'situtation', 'fornecedor_id']
+    //     });
+    // },
     find: async id => {
         const fornecedor = await Fornecedor.findByPk(id, {
             attributes: [ 'nome', 'email', 'cnpj' ],
             include: [{
-                model: 'Produto',
+                model: Produto,
                 as: 'produtos',
                 attributes: [ 'nome', 'preço' ]
             }]

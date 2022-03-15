@@ -12,4 +12,4 @@ const cepValidator = CEP => {
     });
 };
 
-return cepValidator;
+export default cepValidator;

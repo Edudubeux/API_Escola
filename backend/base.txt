@@ -14,7 +14,8 @@ https://www.npmjs.com/package/cep-promisex
   - nome
   - preço
 - Pedido de compra
-  - cliente
+  - fornecedor_id
+  - produto_id
   - situação (ABERTO/CANCELADO/FINALIZADO)
   - produtos []
 - Telas:
