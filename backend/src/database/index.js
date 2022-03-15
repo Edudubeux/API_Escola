@@ -1,7 +1,9 @@
 import Sequelize from 'sequelize';
 import dbConfig from '../config/database';
+import Fornecedor from '../models/Fornecedor';
+import Produto from '../models/Produto';
 
-const models = [];
+const models = [ Fornecedor, Produto ];
 const connection = new Sequelize(dbConfig);
 
 connection.authenticate().then(() => {
@@ -11,7 +13,7 @@ connection.authenticate().then(() => {
       model.associate(connection.models);
     }
   });
-}).catch((error) => {
+}).catch(error => {
   console.error('Unable to connect to the database:', error);
 });
 

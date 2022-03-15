@@ -3,12 +3,12 @@ https://www.npmjs.com/package/cep-promisex
     - nome
     - email
     - endereço
-        - rua
         - cep
+        - rua
+        - numero
         - bairro
         - cidade
         - uf
-        - numero
     - cnpj
 - Produto
   - nome
