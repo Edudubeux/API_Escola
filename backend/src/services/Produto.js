@@ -1,28 +1,26 @@
 import Produto from '../models/Produto';
 
 export default {
-    add: async (data, filter) => {
+    add: async data => {
         const produto = await Produto.findOne({
             attributes: [ 'nome', 'preço' ],
             where: {
                 nome: data.nome,
-                fornecedor_id: filter.fornecedor_id
             }
         });
 
         if (produto) {
-            throw { message: 'Esse fornecedor já vende esse produto.' };
+            throw { message: 'Esse produto ja existe.' };
         }
 
-        return Produto.create({ fornecedor_id: filter.fornecedor_id, ...data });
+        return Produto.create(data);
     },
 
-    find: async filter => {
+    find: async id => {
         const produto = await Produto.findOne({
             attributes: [ 'nome', 'preço' ],
             where: {
-                id: filter.id,
-                fornecedor_id: filter.fornecedor_id
+                id
             },
         });
 
@@ -33,23 +31,19 @@ export default {
         return produto;
     },
 
-    listAll: async  filter => {
+    listAll: async () => {
         const produtos = await Produto.findAll({
             attributes: [ 'nome', 'preço' ],
-            where: {
-                fornecedor_id: filter.fornecedor_id
-            }
         });
 
         return produtos;
     },
 
-    update: async (data, filter) => {
+    update: async (data, id) => {
         const produto = await Produto.update(data, {
             attributes: [ 'nome', 'preço' ],
             where: {
-                id: filter.id,
-                fornecedor_id: filter.fornecedor_id
+                id
             }
         });
 
@@ -60,12 +54,11 @@ export default {
         return produto;
     },
 
-    destroy: async filter => {
+    destroy: async id => {
         const produto = await Produto.destroy({
             attributes: [ 'nome', 'preço' ],
             where: {
-                id: filter.id,
-                fornecedor_id: filter.fornecedor_id
+                id
             }
         });
 

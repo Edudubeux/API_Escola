@@ -36,10 +36,6 @@ class Fornecedor extends Model {
 
         return this;
     }
-
-    static associate(models) {
-        this.hasMany(models.Produto, { foreignKey: 'fornecedor_id', as: 'produtos' })
-    }
-}
+};
 
 export default Fornecedor;

@@ -5,7 +5,7 @@ import ProdutoSchema from '../schemas/Produto';
 
 const routes = new Router();
 
-routes.post('', Validate(ProdutoSchema.add), ProdutoCTRL.add);
+routes.post('/', Validate(ProdutoSchema.add), ProdutoCTRL.add);
 routes.get('/:id?', Validate(ProdutoSchema.index), ProdutoCTRL.index);
 routes.put('/:id', Validate(ProdutoSchema.update), ProdutoCTRL.update);
 routes.delete('/:id', Validate(ProdutoSchema.destroy), ProdutoCTRL.destroy);

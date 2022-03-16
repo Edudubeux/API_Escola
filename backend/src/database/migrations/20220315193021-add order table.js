@@ -16,14 +16,14 @@ module.exports = {
 					type: Sequelize.DataTypes.STRING,
 					allowNull: false
 				},
-        fornecedor_id: {
-          type: Sequelize.DataTypes.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'fornecedores',
-            key: 'id'
-          }
-        },
+				fornecedor_id: {
+				type: Sequelize.DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+					model: 'fornecedores',
+					key: 'id'
+				}
+				},
 				created_at: {
 					type: Sequelize.DataTypes.DATE,
 					defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
