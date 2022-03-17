@@ -1,5 +1,6 @@
-import Fornecedor from "../models/Fornecedor";
-import Produto from "../models/Produto";
+import Fornecedor from '../models/Fornecedor';
+import Pedido from '../models/Pedido';
+import Produto from '../models/Produto';
 
 export default {
     store: async data => {
@@ -16,34 +17,21 @@ export default {
 
         return Fornecedor.create(data);
     },
-    // findOrder: async id => {
-    //     const pedido = await Order.findOne({
-    //         where: {
-    //             id
-    //         },
-    //         include: [{
-    //             model: PedidoProduto,
-    //             required: true,
-    //             include: [{
-    //                 model: Produto,
-    //                 attributes: ['id', 'name']
-    //             }],
-    //             attributes: ['id', 'product_id', 'order_id']
-    //         }, {
-    //             model: Fornecedor,
-    //             paranoid: false,
-    //             attributes: ['id', 'name']
-    //         }],
-    //         attributes: ['id', 'situtation', 'fornecedor_id']
-    //     });
-    // },
+
     find: async id => {
         const fornecedor = await Fornecedor.findByPk(id, {
             attributes: [ 'nome', 'email', 'cnpj' ],
             include: [{
-                model: Produto,
-                as: 'produtos',
-                attributes: [ 'nome', 'preço' ]
+                model: Pedido,
+                as: 'pedidos',
+                attributes: ['id'],
+                paranoid: false,
+                include: [{
+                    model: Produto,
+				    as: 'produtos',
+				    paranoid: false,
+				    attributes: ['nome', 'preço']
+                }]
             }]
         });
 
@@ -77,14 +65,14 @@ export default {
 
     destroy: async id => {
         const fornecedor = await Fornecedor.findOne({
-            attributes: ['nome', 'email'],
+            attributes: ['id', 'nome', 'email', 'cnpj'],
 			where: {
                 id
 			}
 		});
         
 		if (!fornecedor) {
-			throw { message: "Fornecedor não encontrado" }
+			throw { message: 'Fornecedor não encontrado' }
 		};
 
 		return fornecedor.destroy();

@@ -8,8 +8,13 @@ export default {
         }),
     },
     index: {
+        body: yup.object().shape({
+            fornecedor_id: yup.number().min(1).required()
+        })
+    },
+    find: {
         params: yup.object().shape({
-            id: yup.number()
+            id: yup.number().required()
         })
     },
     update: {

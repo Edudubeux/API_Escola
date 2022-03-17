@@ -29,8 +29,8 @@ class Pedido extends Model {
     };
 
     static associate(models) {
-        this.belongsTo(models.Fornecedor, { foreignKey: 'fornecedor_id' });
-        this.belongsToMany(models.Produto, { foreignKey: 'produto_id', as: 'produtos', through: 'produtos_pedidos' })
+        this.belongsTo(models.Fornecedor, {foreignKey: 'fornecedor_id', as: 'fornecedor'});
+        this.belongsToMany(models.Produto, {foreignKey: 'produto_id', as: 'produtos', through: 'produtos_pedidos'});
     }
 };
 
