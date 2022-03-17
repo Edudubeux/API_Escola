@@ -1,7 +1,7 @@
 import Pedido from '../models/Pedido';
 import Produto from '../models/Produto';
 import Fornecedor from '../models/Fornecedor';
-import ProdutoPedido from '../models/Produtos_Pedidos'
+import ProdutoPedido from '../models/ProdutosPedidos'
 
 // import { readFileSync } from 'fs'
 // const html = readFileSync('./src/routes/1.html', 'utf8');
@@ -38,47 +38,65 @@ export default {
 				as: 'fornecedor',
 				paranoid: false,
 				attributes: ['id', 'nome']
-			},{
-				model: Produto,
-				as: 'produtos',
-				paranoid: false,
-				attributes: ['nome', 'preço']
+			}, {
+				model: ProdutoPedido,
+				attributes: ['id']
 			}]
 		});
 
-		if(!pedido) {
-			throw {message: 'Pedido não encontrado.'}
-		}
+		// const pedido = await Pedido.findOne({
+		// 	where: {
+		// 		id
+		// 	},
+		// 	paranoid: false,
+		// 	attributes: ['fornecedor_id', 'situation'],
+		// 	include: [{
+		// 		model: Fornecedor,
+		// 		as: 'fornecedor',
+		// 		paranoid: false,
+		// 		attributes: ['id', 'nome']
+		// 	}, {
+		// 		model: Produto,
+		// 		as: 'produtos',
+		// 		attributes: ['id', 'nome', 'preço'],
+		// 		paranoid: false
+		// 	}]
+		// });
+
+	if(!pedido) {
+		throw { message: 'Pedido não encontrado.' }
+	}
 
 		return pedido;
-	},
+},
 
-	listAll: async fornecedor_id => {
-		const pedidos = await Pedido.findAll({
-			where: {
-				fornecedor_id
-			},
+listAll: async fornecedor_id => {
+	const pedidos = await Pedido.findAll({
+		where: {
+			fornecedor_id
+		},
+		paranoid: false,
+		attributes: ['fornecedor_id', 'situation'],
+		include: [{
+			model: Fornecedor,
+			as: 'fornecedor',
 			paranoid: false,
-			attributes: ['fornecedor_id', 'situation'],
-			include: [{
-				model: Fornecedor,
-				as: 'fornecedor',
-				paranoid: false,
-				attributes: ['id', 'nome']
-			},{
-				model: Produto,
-				as: 'produtos',
-				paranoid: false,
-				attributes: ['nome', 'preço']
-			}] 
-		});
+			attributes: ['id', 'nome']
+		},
+		{
+			model: Produto,
+			as: 'produtos',
+			paranoid: false,
+			attributes: ['id', 'nome', 'preço']
+		}]
+	});
 
-		if(!pedidos) {
-			throw {message: 'Não existem pedidos desse fornecedor.'}
-		}
+	if (!pedidos) {
+		throw { message: 'Não existem pedidos desse fornecedor.' }
+	}
 
-		return pedidos;
-	},
+	return pedidos;
+},
 
 	update: async (data, id) => {
 		const pedido = await Pedido.findOne({
@@ -86,13 +104,13 @@ export default {
 				fornecedor_id: data.fornecedor_id,
 				id
 			},
-			attributes: ['id','fornecedor_id', 'situation'],
+			attributes: ['id', 'fornecedor_id', 'situation'],
 			include: [{
 				model: Fornecedor,
 				as: 'fornecedor',
 				paranoid: false,
 				attributes: ['id', 'nome']
-			},{
+			}, {
 				model: Produto,
 				as: 'produtos',
 				paranoid: false,
@@ -100,31 +118,31 @@ export default {
 			}]
 		});
 
-		if(!pedido) {
-			throw {message: 'Pedido não encontrado.'}
+		if (!pedido) {
+			throw { message: 'Pedido não encontrado.' }
 		}
 
-		if(pedido.situation !== 'OPEN') {
-			throw {message: 'Pedido finalizado ou cancelado.'}
+		if (pedido.situation !== 'OPEN') {
+			throw { message: 'Pedido finalizado ou cancelado.' }
 		}
 
 		return pedido.update(data)
 	},
 
-	destroy: async id => {
-		const pedido = await Pedido.findOne({
-			where: {
-				id
-			},
-			attributes: ['id', 'situation', 'fornecedor_id']
-		});
+		destroy: async id => {
+			const pedido = await Pedido.findOne({
+				where: {
+					id
+				},
+				attributes: ['id', 'situation', 'fornecedor_id']
+			});
 
-		if(!pedido) {
-			throw {message: 'Pedido não encontrado.'}
+			if (!pedido) {
+				throw { message: 'Pedido não encontrado.' }
+			}
+
+			await pedido.update({ situation: 'DONE' });
+
+			return pedido.destroy();
 		}
-
-		await pedido.update({situation: 'DONE'});
-
-		return pedido.destroy();
-	}
 };

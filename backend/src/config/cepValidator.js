@@ -1,7 +1,7 @@
 const cep = require('cep-promise'); //ver onde eu vou usar
 
 const cepValidator = CEP => {
-    cep(CEP).then( value => {
+    cep(CEP).then(value => {
         return value;
     }) .catch(error => {
         error.errors.filter(value => {

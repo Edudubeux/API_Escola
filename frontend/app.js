@@ -1,1 +1,1 @@
-angular.module("escolinha", ["ngRoute"]);
+const app = angular.module("Ecommerce", ["ngRoute"]);

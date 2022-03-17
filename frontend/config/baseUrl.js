@@ -1,3 +1,3 @@
-angular.module('escolinha').value('config', {
+app.value('config', {
   baseUrl: "http://localhost:3001"
 });

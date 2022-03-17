@@ -3,9 +3,9 @@ import dbConfig from '../config/database';
 import Fornecedor from '../models/Fornecedor';
 import Pedido from '../models/Pedido';
 import Produto from '../models/Produto';
-import Produtos_Pedidos from '../models/Produtos_Pedidos';
+import ProdutosPedidos from '../models/ProdutosPedidos';
 
-const models = [ Fornecedor, Produto, Pedido, Produtos_Pedidos ];
+const models = [ Fornecedor, Produto, Pedido, ProdutosPedidos ];
 const connection = new Sequelize(dbConfig);
 
 connection.authenticate().then(() => {

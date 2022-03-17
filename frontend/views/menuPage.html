@@ -17,61 +17,40 @@
         <div class="card-header" style="font-weight: bold;">
             {{msg}}
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="background-color: #fff;">Name: {{name}}</li>
-            <li class="list-group-item" style="background-color: #fff;">Email: {{email}}</li>
-        </ul>
     </div>
-    <div style="margin-top: 130px; font-size: 20px; display: flex;">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">CEP</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">UF</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="fornecedor in fornecedores">
+          <tr>
+            <td>fornecedor.nome</td>
+            <td>fornecedor.email</td>
+            <td>fornecedor.cnpj</td>
+            <td>fornecedor.cep</td>
+            <td>fornecedor.rua</td>
+            <td>fornecedor.bairro</td>
+            <td>fornecedor.cidade</td>
+            <td>fornecedor.uf</td>
+          </tr>
+        </tbody>
+      </table>
+    <div>
         <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
-            <li class="list-group-item active" aria-current="true">What do you want to do?</li>
-            <span style="cursor: pointer;" ng-click="redirectTo('updateUser')">
-                <li class="list-group-item">Change your profile</li>
-            </span>
-            <span ng-click="redirectTo('addStudents')" ng-hide="!noStudents"
-                style="animation: blinker 2s linear infinite; font-weight: bold; cursor: pointer;">
-                <li class="list-group-item">Add new Students</li>
-            </span>
-            <span style="cursor: pointer;" ng-click="redirectTo('addStudents')" ng-hide="noStudents">
-                <li class="list-group-item">Add new Students</li>
-            </span>
-            <span style="cursor: pointer;" ng-click="dislog()">
-                <li class="list-group-item">Dislog from your account</li>
+            <span style="cursor: pointer;" ng-click="redirectTo('addFornecedor')">
+                <li class="list-group-item">Adicione um fornecedor</li>
             </span>
         </ul>
     </div>
-
-    <div class="card" style=" margin-right: 300px; font-size: 23px; display: flex; margin-left: 55%; margin-top: -25%;">
-        <div class="card-header" style="font-weight: bold;">
-            Your Students
-        </div>
-        <div ng-if="noStudents">
-            {{message}}<br>
-            <img src="/frontend/uploads/carinha_triste.jpeg" style="height: 100px; width: 100px;">
-        </div>
-        <ul class="list-group list-group-flush" ng-repeat="student in students">
-            <li class="list-group-item">
-                <br>
-                <img ng-src="{{student.path}}" 
-                ng-if="student.photos.length" class="rounded-circle" width="60" height="60"
-                    style="margin-right: 15px;">
-                <img src="/frontend/uploads/user.jpeg" ng-if="!student.photos.length" class="rounded-circle" width="60"
-                    height="60" style="margin-right: 15px;">
-                Name: {{student.name}} {{student.surname}}
-                <span style="float: right; margin-right: 15px;">
-                    Age: {{student.age}}
-                </span>
-                <br><a id="delete" ng-click="deleteStudent(student.id)"
-                    style="text-decoration: none; float: right; font-weight: bold;">
-                    Delete
-                </a>
-                <a id="edit" ng-click="editStudent(student.id)"
-                    style="text-decoration: none; float: right; font-weight: bold; margin-right: 15px;">
-                    Edit
-                </a>
-            </li>
-    </div>
-
 </body>
 
 </html>

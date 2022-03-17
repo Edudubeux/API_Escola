@@ -1,10 +1,8 @@
 import sanitizeHtml from 'sanitize-html'
 
 const sanitize = value => {
-    let nullValue = null;
-
     if(!value) {
-        return nullValue;
+        return null;
     }
 
     const clean = sanitizeHtml(value, {
@@ -13,10 +11,7 @@ const sanitize = value => {
         allowedIframeHostnames: []
     });
 
-    const response = clean ? clean : null;
-
-    return response;
+    return clean || null;
 };
-
 
 export default sanitize;
