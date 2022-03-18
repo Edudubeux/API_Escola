@@ -4,17 +4,15 @@ export default {
     add: {
         body: yup.object().shape({
             fornecedor_id: yup.number().min(1).required(),
-            produto_id: yup.array().required()
+            produto_id: yup.array().required().label('teste')
         }),
     },
     index: {
-        body: yup.object().shape({
+        query: yup.object().shape({
             fornecedor_id: yup.number().min(1).required()
-        })
-    },
-    find: {
+        }),
         params: yup.object().shape({
-            id: yup.number().required()
+            id: yup.number().min(1).required()
         })
     },
     update: {

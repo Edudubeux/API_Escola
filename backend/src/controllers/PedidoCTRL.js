@@ -16,8 +16,8 @@ class PedidoCTRL {
 
 	async index (req, res) {
 		try {
-			if(req.data) {
-				const pedidos = await PedidoService.listAll(req.data.fornecedor_id);
+			if(req.filter.fornecedor_id) {
+				const pedidos = await PedidoService.listAll(req.filter.fornecedor_id);
 				return res.json(pedidos);
 			}
 			

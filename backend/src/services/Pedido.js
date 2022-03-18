@@ -38,9 +38,6 @@ export default {
 				as: 'fornecedor',
 				paranoid: false,
 				attributes: ['id', 'nome']
-			}, {
-				model: ProdutoPedido,
-				attributes: ['id']
 			}]
 		});
 
@@ -67,7 +64,7 @@ export default {
 		throw { message: 'Pedido não encontrado.' }
 	}
 
-		return pedido;
+	return pedido;
 },
 
 listAll: async fornecedor_id => {

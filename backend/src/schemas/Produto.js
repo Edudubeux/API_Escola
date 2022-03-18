@@ -10,7 +10,7 @@ export default {
     },
     index: {
         params: yup.object().shape({
-            id: yup.number()
+            id: yup.number().min(1).required()
         })
     },
     update: {

@@ -12,7 +12,7 @@ export default {
         });
 
         if (fornecedor) {
-            throw { message: 'Esse email já foi usado.' };
+            throw { message: 'Usuário já cadastrado.' };
         }
 
         return Fornecedor.create(data);
@@ -44,10 +44,12 @@ export default {
 
     listAll: async () => {
         const fornecedores = await Fornecedor.findAll({
-            attributes: [ 'nome', 'email', 'cnpj' ],
+            attributes: [ 'nome', 'email', 'cnpj', 'cep', 'rua', 'bairro', 'cidade', 'uf' ],
         });
 
-        return fornecedores;
+        return {
+            data: fornecedores
+        };
     },
 
     update: async (data, id) => {

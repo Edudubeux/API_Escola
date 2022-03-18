@@ -1,4 +1,4 @@
-app.controller("menuCtrl", function ($scope, $location, fornecedorService) {
+angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, fornecedorService, $timeout) {
     $scope.app = "Base de fornecedores FULL";
     $scope.msg = "Fornecedores:";
 
@@ -7,10 +7,12 @@ app.controller("menuCtrl", function ($scope, $location, fornecedorService) {
     }
 
     const showFornecedores = () => {
+        $scope.loading = true;
         fornecedorService.listFornecedores()
-            .then(req => {
-                $scope.loading = true;
-                $scope.fornecedores = req.data;
+            .then(resp => {
+                $timeout(() => {
+                    $scope.fornecedores = resp.data;
+                });
             })
             .catch(error => {
                 if (error && error.data) {

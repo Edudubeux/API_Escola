@@ -16,7 +16,7 @@ export default {
     },
     find: {
         params: yup.object().shape({
-            id: yup.number().required()
+            id: yup.number().min(1).nullable()
         })
     },
     update: {

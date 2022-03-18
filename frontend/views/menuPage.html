@@ -16,31 +16,40 @@
     <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
         <div class="card-header" style="font-weight: bold;">
             {{msg}}
+            <input class="form form-control" type="text" ng-model="filterText">
         </div>
     </div>
     <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Email</th>
-            <th scope="col">CNPJ</th>
-            <th scope="col">CEP</th>
-            <th scope="col">Rua</th>
-            <th scope="col">Bairro</th>
-            <th scope="col">Cidade</th>
-            <th scope="col">UF</th>
-          </tr>
-        </thead>
-        <tbody ng-repeat="fornecedor in fornecedores">
-          <tr>
-            <td>fornecedor.nome</td>
-            <td>fornecedor.email</td>
-            <td>fornecedor.cnpj</td>
-            <td>fornecedor.cep</td>
-            <td>fornecedor.rua</td>
-            <td>fornecedor.bairro</td>
-            <td>fornecedor.cidade</td>
-            <td>fornecedor.uf</td>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Rua</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">UF</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="fornecedor in fornecedores | filter: filterText">
+        <tr>
+          <td>{{fornecedor.nome}}</td>
+          <td>{{fornecedor.email}}</td>
+          <td>{{fornecedor.cnpj}}</td>
+          <td>{{fornecedor.cep}}</td>
+          <td>{{fornecedor.rua}}</td>
+          <td>{{fornecedor.bairro}}</td>
+          <td>{{fornecedor.cidade}}</td>
+          <td>{{fornecedor.uf}}</td>
+          <td>
+            <select class="form-select form-select-sm">
+              <option value="Selecione"></option>
+              <option>Editar</option>
+              <option>Remover</option>
+            </select>
+        </td>
           </tr>
         </tbody>
       </table>

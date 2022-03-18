@@ -1,4 +1,4 @@
-app.controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location) {
+angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location) {
     const consultCep = () => {
         if (!$scope.forcedor.cep || $scope.forcedor.cep.length !== 8) {
             return;
