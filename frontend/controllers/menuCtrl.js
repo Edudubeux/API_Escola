@@ -1,6 +1,6 @@
 angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, fornecedorService, $timeout) {
     $scope.app = "Base de fornecedores FULL";
-    $scope.msg = "Fornecedores:";
+    $scope.title = "Fornecedores:";
 
     $scope.redirectTo = page => {
         $location.path(`/${page}`)
@@ -21,6 +21,34 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
                 }
             })
             .finally(() => $scope.loading = false)
+    };
+
+    const removeFornecedor = id => {
+        $scope.loading = true;
+        Swal.fire({
+            title: 'Você tem certeza que deseja deletar esse fornecedor?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, delete!'
+        }).then(result => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                ).then(() => {
+                    console.log('ói');
+                    fornecedorService.destroyFornecedor(id).then(showFornecedores());
+                })
+            }
+        }).finally(() => $scope.loading = false);
+    };
+
+    const editFornecedor = id => {
+        $location.path(`/editFornecedor/${id}`);
     };
 
     // const showStudents = () => {
@@ -68,4 +96,7 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
     // };
 
     showFornecedores();
+
+    $scope.removeFornecedor = removeFornecedor;
+    $scope.editFornecedor = editFornecedor;
 });

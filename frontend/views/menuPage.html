@@ -2,64 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Menu</title>
+  <meta charset="UTF-8">
+  <title>Menu</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1 style="text-align: center; font-weight: bold;">{{app}}</h1>
+  <div class="container">
+    <h1 style="text-align: center; font-weight: bold;">{{app}}</h1>
+  </div>
+  <div ng-show="loading" style="display: flex; justify-content: center;">
+    <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+  </div> <!-- div do reload -->
+  <div class="card text-white bg-dark mb-3"
+    style="width: 88%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
+    <div class="card-header" style="font-weight: bold; display: flex;">
+      {{title}}
+      <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px;" placeholder="Pesquise aqui">
+      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 50%;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
     </div>
-    <div ng-show="loading" style="display: flex; justify-content: center;">
-        <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
-    </div> <!-- div do reload -->
-    <div class="card" style="width: 30rem; margin-left: 400px; font-size: 23px; display: flex;">
-        <div class="card-header" style="font-weight: bold;">
-            {{msg}}
-            <input class="form form-control" type="text" ng-model="filterText">
-        </div>
-    </div>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Email</th>
-          <th scope="col">CNPJ</th>
-          <th scope="col">CEP</th>
-          <th scope="col">Rua</th>
-          <th scope="col">Bairro</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">UF</th>
-          <th scope="col">Ações</th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="fornecedor in fornecedores | filter: filterText">
-        <tr>
-          <td>{{fornecedor.nome}}</td>
-          <td>{{fornecedor.email}}</td>
-          <td>{{fornecedor.cnpj}}</td>
-          <td>{{fornecedor.cep}}</td>
-          <td>{{fornecedor.rua}}</td>
-          <td>{{fornecedor.bairro}}</td>
-          <td>{{fornecedor.cidade}}</td>
-          <td>{{fornecedor.uf}}</td>
-          <td>
-            <select class="form-select form-select-sm">
-              <option value="Selecione"></option>
-              <option>Editar</option>
-              <option>Remover</option>
-            </select>
+  </div>
+  <table class="table" style="width: 88%; margin-left: 79.5px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">CNPJ</th>
+        <th scope="col">CEP</th>
+        <th scope="col">Rua</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">UF</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="fornecedor in fornecedores | filter: filterText">
+      <tr>
+        <td>{{fornecedor.nome}}</td>
+        <td>{{fornecedor.email}}</td>
+        <td>{{fornecedor.cnpj}}</td>
+        <td>{{fornecedor.cep}}</td>
+        <td>{{fornecedor.rua}}</td>
+        <td>{{fornecedor.bairro}}</td>
+        <td>{{fornecedor.cidade}}</td>
+        <td>{{fornecedor.uf}}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Selecione
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" ng-click="editFornecedor(fornecedor.id)">Editar</a>
+              <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
+            </div>
+          </div>
         </td>
-          </tr>
-        </tbody>
-      </table>
-    <div>
-        <ul class="list-group" style="margin-right: 50%; margin-left: 25rem; width: 25.5%;">
-            <span style="cursor: pointer;" ng-click="redirectTo('addFornecedor')">
-                <li class="list-group-item">Adicione um fornecedor</li>
-            </span>
-        </ul>
-    </div>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>

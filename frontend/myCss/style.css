@@ -48,3 +48,8 @@ a#edit:hover, a#delete:hover{
   height: 400px;
   background: black;
 }
+
+#remove:hover{
+  background-color: rgb(218, 124, 124);
+  color: #fff
+}

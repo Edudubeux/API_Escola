@@ -11,7 +11,7 @@ export default {
             rua: yup.string(255).transform(sanitize).required(),
             bairro: yup.string(255).transform(sanitize).required(),
             cidade: yup.string(255).transform(sanitize).required(),
-            uf: yup.string(255).transform(sanitize).required()
+            uf: yup.string(255).transform(sanitize).min(2).max(2).required()
         }).noUnknown()
     },
     find: {

@@ -1,13 +1,22 @@
 angular.module('Ecommerce').config(function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
 
+  $routeProvider.otherwise({
+    redirectTo: "/menu"
+  });
+
   $routeProvider.when("/menu", {
     templateUrl: "views/menuPage.html",
     controller: "menuCtrl",
   });
 
   $routeProvider.when("/addFornecedor", {
-    templateUrl: "views/addFornecedorPage.html",
+    templateUrl: "views/fornecedorFormPage.html",
+    controller: "fornecedorCtrl",
+  });
+
+  $routeProvider.when("/editFornecedor/:id", {
+    templateUrl: "views/fornecedorFormPage.html",
     controller: "fornecedorCtrl",
   });
 });

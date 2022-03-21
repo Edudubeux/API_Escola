@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fornecedor Form</title>
+</head>
+
+<body>
+  <section class="container">
+    <h1 style="text-align: center;">{{app}}</h1><br>
+    <div ng-show="loading" style="display: flex; justify-content: center;">
+      <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+    </div> <!-- div do reload -->
+    <form name="fornecedorForm">
+      <h4>Nome*</h4> <input type="text" class="form-control" placeholder="nome" name="nome" ng-model="fornecedor.nome"
+        ng-required="true">
+      <h4>Email*</h4> <input type="text" class="form-control" placeholder="email" name="email"
+        ng-model="fornecedor.email" ng-required="true">
+      <h4>CNPJ*</h4> <input type="text" class="form-control" placeholder="cnpj" name="cnpj" ng-model="fornecedor.cnpj"
+        ng-required="true">
+      <h4>CEP*</h4> <input type="text" class="form-control" placeholder="cep" name="cep" ng-model="fornecedor.cep"
+        ng-required="true" ng-blur="consultCep(fornecedor.cep)">
+      <div ng-if="cepField">
+        <h4>Rua*</h4> <input type="text" class="form-control" placeholder="rua" name="rua" ng-model="fornecedor.rua"
+          ng-required="true">
+        <h4>Bairro*</h4> <input type="text" class="form-control" placeholder="bairro" name="bairro" ng-model="fornecedor.bairro"
+          ng-required="true">
+        <h4>Cidade*</h4> <input type="text" class="form-control" placeholder="cidade" name="cidade" ng-model="fornecedor.cidade"
+          ng-required="true">
+        <h4>UF*</h4> <input type="text" class="form-control" placeholder="uf" name="uf" ng-model="fornecedor.uf"
+          ng-required="true">
+      </div>
+    </form>
+    <button ng-disabled="loading" type="submit" class="btn btn-primary" ng-click="redirectTo('menu')">Menu</button>
+    <button type="submit" class="btn btn-primary btn-block" ng-click="submit(fornecedor)">{{msg}}</button><br>
+    <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
+  </section>
+</body>
+
+</html>

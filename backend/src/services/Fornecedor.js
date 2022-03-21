@@ -20,7 +20,7 @@ export default {
 
     find: async id => {
         const fornecedor = await Fornecedor.findByPk(id, {
-            attributes: [ 'nome', 'email', 'cnpj' ],
+            attributes: ['id', 'nome', 'email', 'cnpj'],
             include: [{
                 model: Pedido,
                 as: 'pedidos',
@@ -44,7 +44,7 @@ export default {
 
     listAll: async () => {
         const fornecedores = await Fornecedor.findAll({
-            attributes: [ 'nome', 'email', 'cnpj', 'cep', 'rua', 'bairro', 'cidade', 'uf' ],
+            attributes: ['id', 'nome', 'email', 'cnpj', 'cep', 'rua', 'bairro', 'cidade', 'uf' ],
         });
 
         return {
@@ -56,7 +56,7 @@ export default {
         const fornecedor = await Fornecedor.update(data, {
             where: { id }
         }, {
-            attributes: [ 'nome', 'email', 'cnpj' ],
+            attributes: ['id', 'nome', 'email', 'cnpj'],
         });
 
         if (!fornecedor) {

@@ -33,7 +33,7 @@ const Validate = schema => {
       req.filter = Object.keys(req.query).length ? {
         ...req.filter,
         ...await schema.params.validate(req.query)
-      } : req.filter;
+      } : req.filter || null;
       return next();
     } catch (error) {
       res.status(401).json({ error: "Validation failed" })
