@@ -12,7 +12,7 @@ export default {
         });
 
         if (fornecedor) {
-            throw { message: 'Usuário já cadastrado.' };
+            throw { message: 'Esse fornecedor já foi cadastrado.' };
         }
 
         return Fornecedor.create(data);

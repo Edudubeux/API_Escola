@@ -24,7 +24,6 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
     };
 
     const removeFornecedor = id => {
-        $scope.loading = true;
         Swal.fire({
             title: 'Você tem certeza que deseja deletar esse fornecedor?',
             text: "",
@@ -40,11 +39,10 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
                     'Your file has been deleted.',
                     'success'
                 ).then(() => {
-                    console.log('ói');
-                    fornecedorService.destroyFornecedor(id).then(showFornecedores());
+                    fornecedorService.destroyFornecedor(id);
                 })
             }
-        }).finally(() => $scope.loading = false);
+        }).finally(() => showFornecedores());
     };
 
     const editFornecedor = id => {

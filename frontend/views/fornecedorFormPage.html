@@ -21,7 +21,7 @@
         ng-required="true">
       <h4>CEP*</h4> <input type="text" class="form-control" placeholder="cep" name="cep" ng-model="fornecedor.cep"
         ng-required="true" ng-blur="consultCep(fornecedor.cep)">
-      <div ng-if="cepField">
+      <div ng-show="cepField">
         <h4>Rua*</h4> <input type="text" class="form-control" placeholder="rua" name="rua" ng-model="fornecedor.rua"
           ng-required="true">
         <h4>Bairro*</h4> <input type="text" class="form-control" placeholder="bairro" name="bairro" ng-model="fornecedor.bairro"

@@ -1,4 +1,4 @@
-angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams) {
+angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams, $timeout) {
     $scope.app = 'Formulário FULL'
     $scope.cepField = false;
 
@@ -14,10 +14,14 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
             return;
         }
         cepService.get(cep)
-            .then(resp => {
-                console.log(resp);
-                // $scope.fornecedor.rua = resp.rua
-                // $scope.cepField = true;
+        .then(resp => {
+                $timeout(() => {
+                    $scope.cepField = true;
+                    $scope.fornecedor.rua = resp.data.street;
+                    $scope.fornecedor.bairro = resp.data.neighborhood;
+                    $scope.fornecedor.cidade = resp.data.city;
+                    $scope.fornecedor.uf = resp.data.state;
+                })
             })
             .catch(error => {
                 console.log(error.data);
@@ -26,7 +30,7 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
 
     const submit = data => {
         $scope.loading = true;
-        const action = isEdit ? fornecedorService.updateFornecedores(data) : fornecedorService.addFornecedor(data, $routeParams.id);
+        const action = isEdit ? fornecedorService.updateFornecedores(data, $routeParams.id) : fornecedorService.addFornecedor(data);
 
         action.then(resp => {
             console.log(resp);
@@ -35,8 +39,9 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
                 $scope.error = "Please, fill the fields.";
                 return;
             };
-        }).finally(() => $scope.loading = false)
-
+        }).finally(() => {
+            $timeout(() => $scope.loading = false);
+        });
     };
 
     $scope.submit = submit;
