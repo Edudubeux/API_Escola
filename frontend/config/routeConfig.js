@@ -19,4 +19,9 @@ angular.module('Ecommerce').config(function ($routeProvider, $locationProvider) 
     templateUrl: "views/fornecedorFormPage.html",
     controller: "fornecedorCtrl",
   });
+
+  $routeProvider.when("/produtos", {
+    templateUrl: "views/produtosPage.html",
+    controller: "produtoCtrl",
+  });
 });

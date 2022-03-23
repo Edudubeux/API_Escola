@@ -2,7 +2,11 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
     $scope.app = "Base de fornecedores FULL";
     $scope.title = "Fornecedores:";
 
-    $scope.redirectTo = page => {
+    const redirectTo = (page, id = null) => {
+        if (id) {
+            $location.path(`/${page}/${id}`);
+            return;
+        }
         $location.path(`/${page}`)
     }
 
@@ -10,9 +14,7 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
         $scope.loading = true;
         fornecedorService.listFornecedores()
             .then(resp => {
-                $timeout(() => {
-                    $scope.fornecedores = resp.data;
-                });
+                $scope.$apply($scope.fornecedores = resp.data);
             })
             .catch(error => {
                 if (error && error.data) {
@@ -20,7 +22,7 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
                     return;
                 }
             })
-            .finally(() => $scope.loading = false)
+            .finally(() => $scope.$apply($scope.loading = false));
     };
 
     const removeFornecedor = id => {
@@ -31,12 +33,12 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim, delete!'
+            confirmButtonText: 'Sim'
         }).then(result => {
             if (result.isConfirmed) {
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Deletado!',
+                    'Fornecedor deletado.',
                     'success'
                 ).then(() => {
                     fornecedorService.destroyFornecedor(id);
@@ -45,56 +47,8 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
         }).finally(() => showFornecedores());
     };
 
-    const editFornecedor = id => {
-        $location.path(`/editFornecedor/${id}`);
-    };
-
-    // const showStudents = () => {
-    //     studentServices.showStudents()
-    //         .then(req => {
-    //             if (!req.data.length) {
-    //                 $scope.noStudents = true;
-    //                 $scope.message = "You don't have any Students";
-    //                 return;
-    //             }
-    //             $scope.noStudents = false;
-    //             $scope.loading = true;
-    //             $scope.students = req.data.map(value => {
-    //                 if (!value.photos.length) {
-    //                     return value;
-    //                 };
-    //                 console.log(value);
-    //                 value.path = '\\backend\\uploads\\' + value.photos[0].file_name.split('\\')[value.photos[0].file_name.split('\\').length - 1];
-    //                 return value;
-    //             });
-    //             console.log($scope.students, "OLA STUDENTS");
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             return;
-    //         })
-    //         .finally(() => $scope.loading = false)
-    // };
-
-    // $scope.deleteStudent = id => {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //     }).then(result => {
-    //         if (!result.isConfirmed) {
-    //             return;
-    //         }
-    //         studentServices.deleteStudent(id).then(showStudents);
-    //     });
-    // };
-
     showFornecedores();
 
     $scope.removeFornecedor = removeFornecedor;
-    $scope.editFornecedor = editFornecedor;
+    $scope.redirectTo = redirectTo;
 });

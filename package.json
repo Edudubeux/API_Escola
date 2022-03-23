@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "sanitize-html": "^2.6.1"
+  },
+  "devDependencies": {
+    "ngx-mask": "^13.1.1"
   }
 }

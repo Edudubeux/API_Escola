@@ -20,7 +20,7 @@ export default {
 
     find: async id => {
         const fornecedor = await Fornecedor.findByPk(id, {
-            attributes: ['id', 'nome', 'email', 'cnpj'],
+            attributes: ['id', 'nome', 'email', 'cnpj', 'cep', 'rua', 'bairro', 'cidade', 'uf'],
             include: [{
                 model: Pedido,
                 as: 'pedidos',

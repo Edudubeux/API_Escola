@@ -20,7 +20,7 @@
       <h4>CNPJ*</h4> <input type="text" class="form-control" placeholder="cnpj" name="cnpj" ng-model="fornecedor.cnpj"
         ng-required="true">
       <h4>CEP*</h4> <input type="text" class="form-control" placeholder="cep" name="cep" ng-model="fornecedor.cep"
-        ng-required="true" ng-blur="consultCep(fornecedor.cep)">
+        ng-required="true" ng-blur="consultCep(fornecedor.cep)" mask="{{cepMask}}">
       <div ng-show="cepField">
         <h4>Rua*</h4> <input type="text" class="form-control" placeholder="rua" name="rua" ng-model="fornecedor.rua"
           ng-required="true">

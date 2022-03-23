@@ -1,49 +1,73 @@
 angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams, $timeout) {
     $scope.app = 'Formulário FULL'
     $scope.cepField = false;
+    $scope.cepMask = '99999-999';
 
     const isEdit = !!$routeParams.id;
     $scope.msg = isEdit ? 'Editar Fornecedor' : 'Adicionar Fornecedor';
 
-    $scope.redirectTo = page => {
+    const redirectTo = page => {
+        getFornecedor($routeParams.id);
         $location.path(`/${page}`)
-    }
+    };
+
+    const getFornecedor = id => {
+        if ($routeParams.id) {
+            $scope.cepField = true;
+            fornecedorService.findFornecedor(id)
+                .then(resp => {
+                    $scope.$apply($scope.fornecedor = resp)
+                }).catch(error => {
+                    $scope.error = error
+                })
+        }
+    };
 
     const consultCep = cep => {
-        if (!$scope.fornecedor.cep || $scope.fornecedor.cep.length !== 8) {
+        if (!$scope.fornecedor.cep || 8 > $scope.fornecedor.cep.length > 9) {
+            $scope.error = 'Digite um CEP válido'
             return;
         }
+
+        cep = cep.replace('-', '');
         cepService.get(cep)
-        .then(resp => {
-                $timeout(() => {
+            .then(resp => {
                     $scope.cepField = true;
-                    $scope.fornecedor.rua = resp.data.street;
-                    $scope.fornecedor.bairro = resp.data.neighborhood;
-                    $scope.fornecedor.cidade = resp.data.city;
-                    $scope.fornecedor.uf = resp.data.state;
-                })
+                    $scope.$apply(
+                        $scope.fornecedor.rua = resp.data.street,
+                        $scope.fornecedor.bairro = resp.data.neighborhood,
+                        $scope.fornecedor.cidade = resp.data.city,
+                        $scope.fornecedor.uf = resp.data.state
+                    );
             })
             .catch(error => {
-                console.log(error.data);
+                $scope.error = error.data.error
             });
     };
 
     const submit = data => {
         $scope.loading = true;
         const action = isEdit ? fornecedorService.updateFornecedores(data, $routeParams.id) : fornecedorService.addFornecedor(data);
+        const msg = isEdit ? 'editado.' : 'adicionado';
 
-        action.then(resp => {
-            console.log(resp);
+        action.then(() => {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `Fornecedor ${msg}`,
+                showConfirmButton: false,
+                timer: 1500
+              }).then(() => redirectTo('menu'))
         }).catch(error => {
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
                 $scope.error = "Please, fill the fields.";
                 return;
             };
-        }).finally(() => {
-            $timeout(() => $scope.loading = false);
-        });
+        }).finally(() => $scope.$apply($scope.loading = false));
     };
 
+    getFornecedor($routeParams.id);
     $scope.submit = submit;
     $scope.consultCep = consultCep;
+    $scope.redirectTo = redirectTo;
 });

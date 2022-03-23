@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Menu</title>
+  <title>Produtos</title>
 </head>
 
 <body>
@@ -39,8 +39,8 @@
       <tr>
         <td>{{fornecedor.nome}}</td>
         <td>{{fornecedor.email}}</td>
-        <td style="width: 15%;">{{fornecedor.cnpj}}</td>
-        <td style="width: 10%;">{{fornecedor.cep}}</td>
+        <td>{{fornecedor.cnpj}}</td>
+        <td>{{fornecedor.cep}}</td>
         <td>{{fornecedor.rua}}</td>
         <td>{{fornecedor.bairro}}</td>
         <td>{{fornecedor.cidade}}</td>
@@ -55,7 +55,6 @@
               <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
             </div>
           </div>
-          <button class="btn btn-primary" ng-click="redirectTo('produto/')">Produtos</button>
         </td>
       </tr>
     </tbody>

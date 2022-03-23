@@ -1,1 +1,1 @@
-const app = angular.module("Ecommerce", ["ngRoute"]);
+const app = angular.module("Ecommerce", ["ngRoute", "ngMask"]);
