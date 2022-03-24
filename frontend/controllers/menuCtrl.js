@@ -8,7 +8,7 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
             return;
         }
         $location.path(`/${page}`)
-    }
+    };
 
     const showFornecedores = () => {
         $scope.loading = true;

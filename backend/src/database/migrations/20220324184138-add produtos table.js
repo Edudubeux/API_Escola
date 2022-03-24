@@ -4,26 +4,22 @@ module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		const transaction = await queryInterface.sequelize.transaction();
 
-		try {
-			await queryInterface.createTable('pedidos', {
+    try {
+			await queryInterface.createTable('produtos', {
 				id: {
 					type: Sequelize.DataTypes.INTEGER,
 					allowNull: false,
 					autoIncrement: true,
 					primaryKey: true
 				},
-				situation: {
-					type: Sequelize.DataTypes.STRING,
-					allowNull: false
-				},
-				fornecedor_id: {
-				type: Sequelize.DataTypes.INTEGER,
-				allowNull: false,
-				references: {
-					model: 'fornecedores',
-					key: 'id'
-				}
-				},
+        nome: {
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false
+        },
+        preco: {
+          type: Sequelize.DataTypes.FLOAT,
+          allowNull: false
+        },
 				created_at: {
 					type: Sequelize.DataTypes.DATE,
 					defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
@@ -47,13 +43,12 @@ module.exports = {
 
 	down: async queryInterface => {
 		const transaction = await queryInterface.sequelize.transaction();
-
-		try {
-			await queryInterface.dropTable('pedidos', { transaction });
-			await transaction.commit();
-		} catch (error) {
-			await transaction.rollback();
-			throw error;
-		}
-	}
+      try {
+        await queryInterface.dropTable('produtos', { transaction });
+        await transaction.commit();
+      } catch (error) {
+        await transaction.rollback();
+        throw error;
+      }
+    }
 };

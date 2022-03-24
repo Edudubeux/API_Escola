@@ -1,13 +1,16 @@
-angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams, $timeout) {
-    $scope.app = 'Formulário FULL'
+angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams) {
+    $scope.app = 'Formulário FULL dos Fornecedores'
     $scope.cepField = false;
     $scope.cepMask = '99999-999';
 
     const isEdit = !!$routeParams.id;
     $scope.msg = isEdit ? 'Editar Fornecedor' : 'Adicionar Fornecedor';
 
-    const redirectTo = page => {
-        getFornecedor($routeParams.id);
+    const redirectTo = (page, id = null) => {
+        if (id) {
+            $location.path(`/${page}/${id}`);
+            return;
+        }
         $location.path(`/${page}`)
     };
 
@@ -16,9 +19,9 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
             $scope.cepField = true;
             fornecedorService.findFornecedor(id)
                 .then(resp => {
-                    $scope.$apply($scope.fornecedor = resp)
+                    $scope.$apply($scope.fornecedor = resp);
                 }).catch(error => {
-                    $scope.error = error
+                    $scope.error = error;
                 })
         }
     };
@@ -41,7 +44,7 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
                     );
             })
             .catch(error => {
-                $scope.error = error.data.error
+                $scope.error = error.data.error;
             });
     };
 
@@ -62,7 +65,12 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
                 $scope.error = "Please, fill the fields.";
                 return;
-            };
+            }
+
+            if (error.data && error.data.error && error.data.error === "Validation failed") {
+                $scope.error = error.data.error;
+                return;
+            }
         }).finally(() => $scope.$apply($scope.loading = false));
     };
 

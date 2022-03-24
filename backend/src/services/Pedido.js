@@ -41,25 +41,6 @@ export default {
 			}]
 		});
 
-		// const pedido = await Pedido.findOne({
-		// 	where: {
-		// 		id
-		// 	},
-		// 	paranoid: false,
-		// 	attributes: ['fornecedor_id', 'situation'],
-		// 	include: [{
-		// 		model: Fornecedor,
-		// 		as: 'fornecedor',
-		// 		paranoid: false,
-		// 		attributes: ['id', 'nome']
-		// 	}, {
-		// 		model: Produto,
-		// 		as: 'produtos',
-		// 		attributes: ['id', 'nome', 'preço'],
-		// 		paranoid: false
-		// 	}]
-		// });
-
 	if(!pedido) {
 		throw { message: 'Pedido não encontrado.' }
 	}
@@ -84,7 +65,7 @@ listAll: async fornecedor_id => {
 			model: Produto,
 			as: 'produtos',
 			paranoid: false,
-			attributes: ['id', 'nome', 'preço']
+			attributes: ['id', 'nome', 'preco']
 		}]
 	});
 
@@ -111,7 +92,7 @@ listAll: async fornecedor_id => {
 				model: Produto,
 				as: 'produtos',
 				paranoid: false,
-				attributes: ['nome', 'preço']
+				attributes: ['nome', 'preco']
 			}]
 		});
 

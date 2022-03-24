@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Produto Form</title>
+</head>
+
+<body>
+  <section class="container">
+    <h1 style="text-align: center;">Formulário FULL dos Produtos</h1><br>
+    <div ng-show="loading" style="display: flex; justify-content: center;">
+      <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+    </div> <!-- div do reload -->
+    <form name="fornecedorForm">
+        <h4>Nome*</h4> <input type="text" class="form-control" placeholder="nome" name="nome" ng-model="produto.nome"
+        ng-required="true">
+        <h4>Preço*</h4> <input type="text" class="form-control" placeholder="preço" name="preco" ng-model="produto.preco"
+        ng-required="true">
+    </form>
+    <button ng-disabled="loading" type="submit" class="btn btn-primary" ng-click="redirectTo('menu')">Menu</button>
+    <button type="submit" class="btn btn-primary btn-block" ng-click="submit(produto)">{{msg}}</button><br>
+    <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
+  </section>
+</body>
+
+</html>

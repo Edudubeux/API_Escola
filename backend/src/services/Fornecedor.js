@@ -30,7 +30,7 @@ export default {
                     model: Produto,
 				    as: 'produtos',
 				    paranoid: false,
-				    attributes: ['nome', 'preço']
+				    attributes: ['nome', 'preco']
                 }]
             }]
         });

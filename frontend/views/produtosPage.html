@@ -14,45 +14,33 @@
     <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
   </div> <!-- div do reload -->
   <div class="card text-white bg-dark mb-3"
-    style="width: 88%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
+    style="width: 70%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
     <div class="card-header" style="font-weight: bold; display: flex;">
-      {{title}}
-      <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px;" placeholder="Pesquise aqui">
-      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 50%;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
+      <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px; width: 500px;" placeholder="Pesquise aqui">
+      <button ng-click="redirectTo('addProduto')" style="cursor: pointer; margin-left: 50%; margin-right: 20px;" type="button" class="btn btn-dark">Adicione um produto</button>
+      <button ng-disabled="loading" type="submit" class="btn btn-primary" ng-click="redirectTo('menu')">Menu</button>
     </div>
   </div>
-  <table class="table" style="width: 88%; margin-left: 79.5px;">
+  <table class="table" style="width: 70%; margin-left: 79.5px;">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Nome</th>
-        <th scope="col">Email</th>
-        <th scope="col">CNPJ</th>
-        <th scope="col">CEP</th>
-        <th scope="col">Rua</th>
-        <th scope="col">Bairro</th>
-        <th scope="col">Cidade</th>
-        <th scope="col">UF</th>
-        <th scope="col">Ações</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Ação</th>
       </tr>
     </thead>
-    <tbody ng-repeat="fornecedor in fornecedores | filter: filterText">
+    <tbody ng-repeat="produto in produtos | filter: filterText">
       <tr>
-        <td>{{fornecedor.nome}}</td>
-        <td>{{fornecedor.email}}</td>
-        <td>{{fornecedor.cnpj}}</td>
-        <td>{{fornecedor.cep}}</td>
-        <td>{{fornecedor.rua}}</td>
-        <td>{{fornecedor.bairro}}</td>
-        <td>{{fornecedor.cidade}}</td>
-        <td>{{fornecedor.uf | uppercase}}</td>
+        <td>{{produto.nome}}</td>
+        <td>{{produto.preco | currency}}</td>
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Selecione
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" ng-click="redirectTo('editFornecedor', fornecedor.id)">Editar</a>
-              <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
+              <a class="dropdown-item" ng-click="redirectTo('editProduto', produto.id)">Editar</a>
+              <a class="dropdown-item" id="remove" ng-click="removeProduto(produto.id)">Remover</a>
             </div>
           </div>
         </td>

@@ -4,7 +4,7 @@ class Produto extends Model {
 	static init(sequelize) {
 		super.init({
 			nome: DataTypes.STRING(255),
-			preço: DataTypes.FLOAT,
+			preco: DataTypes.FLOAT,
 			created_at: {
 				type: DataTypes.DATE,
 				defaultValue: DataTypes.NOW,

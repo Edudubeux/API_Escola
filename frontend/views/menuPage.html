@@ -18,7 +18,8 @@
     <div class="card-header" style="font-weight: bold; display: flex;">
       {{title}}
       <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px;" placeholder="Pesquise aqui">
-      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 50%;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
+      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 50%; margin-right: 15px;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
+      <button class="btn btn-primary" style="cursor: pointer;" ng-click="redirectTo('produtos')">Produtos</button>
     </div>
   </div>
   <table class="table" style="width: 88%; margin-left: 79.5px;">
@@ -55,7 +56,6 @@
               <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
             </div>
           </div>
-          <button class="btn btn-primary" ng-click="redirectTo('produto/')">Produtos</button>
         </td>
       </tr>
     </tbody>
