@@ -16,10 +16,10 @@
   <div class="card text-white bg-dark mb-3"
     style="width: 88%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
     <div class="card-header" style="font-weight: bold; display: flex;">
-      {{title}}
-      <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px;" placeholder="Pesquise aqui">
-      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 50%; margin-right: 15px;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
-      <button class="btn btn-primary" style="cursor: pointer;" ng-click="redirectTo('produtos')">Produtos</button>
+      <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px; width: 200px;" placeholder="Pesquise aqui">
+      <button ng-click="redirectTo('addFornecedor')" style="cursor: pointer; margin-left: 32%; margin-right: 15px;" type="button" class="btn btn-dark">Adicione um fornecedor</button>
+      <button class="btn btn-dark" style="cursor: pointer; margin-right: 15px;" ng-click="redirectTo('produtos')">Produtos</button>
+      <button class="btn btn-dark" style="cursor: pointer;" ng-click="redirectTo('pedidos')">Seus Pedidos</button>
     </div>
   </div>
   <table class="table" style="width: 88%; margin-left: 79.5px;">
@@ -52,6 +52,7 @@
               Selecione
             </button>
             <div class="dropdown-menu">
+              <a class="dropdown-item" ng-click="redirectTo('addPedido',fornecedor.id)">Criar pedido</a>
               <a class="dropdown-item" ng-click="redirectTo('editFornecedor', fornecedor.id)">Editar</a>
               <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
             </div>

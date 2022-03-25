@@ -1,6 +1,5 @@
 angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, fornecedorService, $timeout) {
     $scope.app = "Base de fornecedores FULL";
-    $scope.title = "Fornecedores:";
 
     const redirectTo = (page, id = null) => {
         if (id) {

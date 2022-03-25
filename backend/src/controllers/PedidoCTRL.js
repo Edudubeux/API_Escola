@@ -16,13 +16,13 @@ class PedidoCTRL {
 
 	async index (req, res) {
 		try {
-			if(req.filter.fornecedor_id) {
-				const pedidos = await PedidoService.listAll(req.filter.fornecedor_id);
-				return res.json(pedidos);
+			if(req.filter.id) {
+				const pedido = await PedidoService.find(req.filter.id);
+				return res.json(pedido);
 			}
 			
-			const pedido = await PedidoService.find(req.filter.id);
-			return res.json(pedido);
+			const pedidos = await PedidoService.listAll();
+			return res.json(pedidos);
 		} catch (error) {
 			return res.status(400).json({ error: error.message })
 		};

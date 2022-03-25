@@ -48,32 +48,34 @@ export default {
 	return pedido;
 },
 
-listAll: async fornecedor_id => {
-	const pedidos = await Pedido.findAll({
-		where: {
-			fornecedor_id
-		},
-		paranoid: false,
-		attributes: ['fornecedor_id', 'situation'],
-		include: [{
-			model: Fornecedor,
-			as: 'fornecedor',
+listAll: async () => {
+		const pedidos = await Pedido.findAll({
 			paranoid: false,
-			attributes: ['id', 'nome']
-		},
-		{
-			model: Produto,
-			as: 'produtos',
-			paranoid: false,
-			attributes: ['id', 'nome', 'preco']
-		}]
-	});
+			attributes: ['fornecedor_id', 'situation'],
+			include: [{
+				model: Fornecedor,
+				as: 'fornecedor',
+				paranoid: false,
+				attributes: ['id', 'nome']
+			}]
+		});
 
-	if (!pedidos) {
-		throw { message: 'Não existem pedidos desse fornecedor.' }
-	}
-
-	return pedidos;
+		if (!pedidos) {
+			throw { message: 'Não existem pedidos desse fornecedor.' }
+		}
+	
+		return pedidos;
+	// {
+	// 	model: ProdutoPedido,
+	// 	as: 'pedidos',
+	// 	paranoid: false,
+	// 	include: [{
+	// 		model: Produto,
+	// 		as: 'produtos',
+	// 		paranoid: false,
+	// 		attributes: ['id', 'nome', 'preco']
+	// 	}]
+	// }
 },
 
 	update: async (data, id) => {

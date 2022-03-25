@@ -34,4 +34,14 @@ angular.module('Ecommerce').config(function ($routeProvider, $locationProvider) 
     templateUrl: "views/produtosFormPage.html",
     controller: "produtoCtrl",
   });
+
+  $routeProvider.when("/pedidos", {
+    templateUrl: "views/pedidosPage.html",
+    controller: "pedidoCtrl",
+  });
+
+  $routeProvider.when("/addPedido/:id", {
+    templateUrl: "views/addPedidosPage.html",
+    controller: "pedidoCtrl",
+  });
 });

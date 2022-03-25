@@ -75,7 +75,12 @@ angular.module('Ecommerce').controller('produtoCtrl', function($scope, produtoSe
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
                 $scope.error = "Please, fill the fields.";
                 return;
-            };
+            }
+
+            if (error.data && error.data.error && error.data.error === "Validation failed") {
+                $scope.error = error.data.error;
+                return;
+            }
         }).finally(() => $scope.$apply($scope.loading = false));
     };
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Create Pedidos</title>
+</head>
+
+<body>
+  <section class="container">
+    <h1 style="text-align: center;">Selecione seu(s) produto(s)</h1><br>
+    <div ng-show="loading" style="display: flex; justify-content: center;">
+      <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
+    </div> <!-- div do reload -->
+    <h4 style="margin-left: 79.5px; font-weight: bold;">Fornecedor: {{fornecedor_id}}</h4><br>
+    <table class="table" style="width: 70%; margin-left: 79.5px;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Selecione</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="produto in produtos | filter: filterText">
+        <tr>
+          <td><input class="form-check" type="checkbox" ng-model="produto.selected"></td>
+          <td>{{produto.nome}}</td>
+          <td>{{produto.preco | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button ng-disabled="loading" type="submit" class="btn btn-primary" ng-click="redirectTo('menu')">Menu</button>
+    <button type="submit" class="btn btn-primary btn-block" ng-click="createPedido(produtos)">{{msg}}</button><br>
+    <div class="alert alert-danger" ng-if="error" style="font-weight: bold;">{{error}}</div>
+  </section>
+</body>
+
+</html>

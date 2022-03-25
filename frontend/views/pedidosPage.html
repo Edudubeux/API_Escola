@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Produtos</title>
+  <title>Pedidos</title>
 </head>
 
 <body>
@@ -14,33 +14,34 @@
     <img src="/frontend/uploads/loading-buffering.gif" alt="" style="width: 60px; height: 60px;">
   </div> <!-- div do reload -->
   <div class="card text-white bg-dark mb-3"
-    style="width: 88%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
+    style="width: 70%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
     <div class="card-header" style="font-weight: bold; display: flex;">
       <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px; width: 500px;" placeholder="Pesquise aqui">
-      <button ng-click="redirectTo('addProduto')" style="cursor: pointer; margin-left: 40%; margin-right: 15px;" class="btn btn-dark">Adicione um produto</button>
+      <button ng-click="redirectTo('addPedido')" style="cursor: pointer; margin-left: 50%; margin-right: 20px;" type="button" class="btn btn-dark">Adicione um pedido</button>
       <button ng-disabled="loading" type="submit" class="btn btn-dark" ng-click="redirectTo('menu')">Menu</button>
     </div>
   </div>
-  <table class="table" style="width: 88%; margin-left: 79.5px;">
+  <pre>{{pedidos}}</pre>
+  <table class="table" style="width: 70%; margin-left: 79.5px;">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Preço</th>
+        <th scope="col">Situation</th>
+        <th scope="col">Fornecedor</th>
         <th scope="col">Ação</th>
       </tr>
     </thead>
-    <tbody ng-repeat="produto in produtos | filter: filterText">
+    <tbody ng-repeat="pedido in pedidos | filter: filterText">
       <tr>
-        <td>{{produto.nome}}</td>
-        <td>{{produto.preco | currency}}</td>
+        <td>{{pedido.situation}}</td>
+        <td>{{pedido.fornecedor.nome}}</td>
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Selecione
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" ng-click="redirectTo('editProduto', produto.id)">Editar</a>
-              <a class="dropdown-item" id="remove" ng-click="removeProduto(produto.id)">Remover</a>
+              <a class="dropdown-item" ng-click="changeSituation(situation, pedido.id)">Editar</a>
+              <a class="dropdown-item" id="remove" ng-click="removePedido(pedido.id)">Remover</a>
             </div>
           </div>
         </td>

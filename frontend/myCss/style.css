@@ -53,3 +53,8 @@ a#edit:hover, a#delete:hover{
   background-color: rgb(218, 124, 124);
   color: #fff
 }
+
+.btn.btn-dark:hover {
+  background-color: #fff;
+  color: #000000;
+}
