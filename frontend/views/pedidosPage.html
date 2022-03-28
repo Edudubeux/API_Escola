@@ -35,13 +35,13 @@
         <td>{{pedido.situation}}</td>
         <td>{{pedido.fornecedor.nome}}</td>
         <td>
-          <div class="btn-group">
+          <div class="btn-group" ng-show="pedido.isOpen">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Selecione
+            Situation
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" ng-click="changeSituation(situation, pedido.id)">Editar</a>
-              <a class="dropdown-item" id="remove" ng-click="removePedido(pedido.id)">Remover</a>
+              <a class="dropdown-item" ng-click="changeSituation('DONE', pedido.fornecedor_id, pedido.id)">DONE</a>
+              <a class="dropdown-item" id="remove" ng-click="changeSituation('CANCELED', pedido.fornecedor_id, pedido.id)">CANCELED</a>
             </div>
           </div>
         </td>

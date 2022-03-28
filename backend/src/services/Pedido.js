@@ -32,7 +32,7 @@ export default {
 				id
 			},
 			paranoid: false,
-			attributes: ['fornecedor_id', 'situation'],
+			attributes: ['id', 'fornecedor_id', 'situation'],
 			include: [{
 				model: Fornecedor,
 				as: 'fornecedor',
@@ -48,10 +48,10 @@ export default {
 	return pedido;
 },
 
-listAll: async () => {
+	listAll: async () => {
 		const pedidos = await Pedido.findAll({
 			paranoid: false,
-			attributes: ['fornecedor_id', 'situation'],
+			attributes: ['id', 'fornecedor_id', 'situation'],
 			include: [{
 				model: Fornecedor,
 				as: 'fornecedor',
@@ -84,17 +84,13 @@ listAll: async () => {
 				fornecedor_id: data.fornecedor_id,
 				id
 			},
+			paranoid: false,
 			attributes: ['id', 'fornecedor_id', 'situation'],
 			include: [{
 				model: Fornecedor,
 				as: 'fornecedor',
 				paranoid: false,
 				attributes: ['id', 'nome']
-			}, {
-				model: Produto,
-				as: 'produtos',
-				paranoid: false,
-				attributes: ['nome', 'preco']
 			}]
 		});
 
@@ -106,7 +102,7 @@ listAll: async () => {
 			throw { message: 'Pedido finalizado ou cancelado.' }
 		}
 
-		return pedido.update(data)
+		return pedido.update(data);
 	},
 
 		destroy: async id => {

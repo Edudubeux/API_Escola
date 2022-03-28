@@ -27,7 +27,7 @@ class Produto extends Model {
 	}
 
 	static associate(models) {
-		this.belongsToMany(models.Pedido, { foreignKey: 'pedido_id', as: 'pedidos', through: 'produtos_pedidos' });
+		this.belongsToMany(models.Pedido, { foreignKey: 'pedido_id', through: 'produtos_pedidos' });
 	};
 };
 

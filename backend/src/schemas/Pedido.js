@@ -15,7 +15,7 @@ export default {
     update: {
         body: yup.object().shape({
             fornecedor_id: yup.number().min(1).required(),
-            situation: yup.string().oneOf([ 'OPEN', 'DONE', 'CANCELED' ])
+            situation: yup.string().oneOf([ 'OPEN', 'DONE', 'CANCELED' ]).required()
         }),
         params: yup.object().shape({
             id: yup.number().required()
