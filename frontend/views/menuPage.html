@@ -49,12 +49,12 @@
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Selecione
+              Selecione ou crie um pedido
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" ng-click="redirectTo('addPedido',fornecedor.id)">Criar pedido</a>
-              <a class="dropdown-item" ng-click="redirectTo('editFornecedor', fornecedor.id)">Editar</a>
-              <a class="dropdown-item" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
+              <a class="dropdown-item" style="cursor: pointer;" ng-click="redirectTo('addPedido',fornecedor.id)">Criar pedido</a>
+              <a class="dropdown-item" style="cursor: pointer;" ng-click="redirectTo('editFornecedor', fornecedor.id)">Editar</a>
+              <a class="dropdown-item" style="cursor: pointer;" id="remove" ng-click="removeFornecedor(fornecedor.id)">Remover</a>
             </div>
           </div>
         </td>

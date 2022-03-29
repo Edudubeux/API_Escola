@@ -1,4 +1,4 @@
-angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams) {
+angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, fornecedorService, cepService, $location, $routeParams, $timeout) {
     $scope.app = 'Formulário FULL dos Fornecedores'
     $scope.cepField = false;
     $scope.cepMask = '99999-999';
@@ -60,7 +60,7 @@ angular.module('Ecommerce').controller('fornecedorCtrl', function ($scope, forne
                 title: `Fornecedor ${msg}`,
                 showConfirmButton: false,
                 timer: 1500
-              }).then(() => redirectTo('menu'))
+              }).then(() => $timeout(() => redirectTo('menu')));
         }).catch(error => {
             if (error.data && error.data.error && error.data.error === "REQUIRED_FIELDS") {
                 $scope.error = "Please, fill the fields.";

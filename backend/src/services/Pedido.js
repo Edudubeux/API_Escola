@@ -1,5 +1,4 @@
 import Pedido from '../models/Pedido';
-import Produto from '../models/Produto';
 import Fornecedor from '../models/Fornecedor';
 import ProdutoPedido from '../models/ProdutosPedidos'
 

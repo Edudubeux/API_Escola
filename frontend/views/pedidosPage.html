@@ -17,11 +17,10 @@
     style="width: 70%; margin-left: 79.5px; font-size: 23px; display: flex; margin-top: 100px;">
     <div class="card-header" style="font-weight: bold; display: flex;">
       <input class="form form-control" type="text" ng-model="filterText" style="margin-left: 15px; width: 500px;" placeholder="Pesquise aqui">
-      <button ng-click="redirectTo('addPedido')" style="cursor: pointer; margin-left: 50%; margin-right: 20px;" type="button" class="btn btn-dark">Adicione um pedido</button>
+      <button ng-click="redirectTo('menu')" style="cursor: pointer; margin-left: 50%; margin-right: 20px;" type="button" class="btn btn-dark">Adicione um pedido</button>
       <button ng-disabled="loading" type="submit" class="btn btn-dark" ng-click="redirectTo('menu')">Menu</button>
     </div>
   </div>
-  <pre>{{pedidos}}</pre>
   <table class="table" style="width: 70%; margin-left: 79.5px;">
     <thead class="thead-dark">
       <tr>
@@ -43,6 +42,9 @@
               <a class="dropdown-item" ng-click="changeSituation('DONE', pedido.fornecedor_id, pedido.id)">DONE</a>
               <a class="dropdown-item" id="remove" ng-click="changeSituation('CANCELED', pedido.fornecedor_id, pedido.id)">CANCELED</a>
             </div>
+          </div>
+          <div ng-hide="pedido.isOpen">
+            Order {{pedido.situation}}
           </div>
         </td>
       </tr>

@@ -1,4 +1,4 @@
-const cep = require('cep-promise'); //ver onde eu vou usar
+const cep = require('cep-promise');
 
 const cepValidator = CEP => {
     cep(CEP).then(value => {

@@ -40,10 +40,11 @@ angular.module('Ecommerce').controller("menuCtrl", function ($scope, $location, 
                     'Fornecedor deletado.',
                     'success'
                 ).then(() => {
-                    fornecedorService.destroyFornecedor(id);
+                    fornecedorService.destroyFornecedor(id)
+                    .then(() => $timeout(() => showFornecedores()));
                 })
             }
-        }).finally(() => showFornecedores());
+        });
     };
 
     showFornecedores();
